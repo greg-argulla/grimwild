@@ -388,6 +388,12 @@ function App() {
             onClick={() => {
               setTab("chat");
               setUnreadCount(0);
+              setTimeout(() => {
+                var objDiv = document.getElementById("chatbox");
+                if (objDiv) {
+                  objDiv.scrollTop = objDiv.scrollHeight;
+                }
+              }, 100);
             }}
           >
             Chat {unreadCount ? `(${unreadCount})` : ""}
