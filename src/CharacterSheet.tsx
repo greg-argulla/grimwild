@@ -311,9 +311,9 @@ export const BondField = ({
   );
 };
 
-const computeLevel = (value: number) => {};
+// const computeLevel = (value: number) => {};
 
-const computeExp = (value: number) => {};
+// const computeExp = (value: number) => {};
 
 export const CharacterSheet = ({
   player,

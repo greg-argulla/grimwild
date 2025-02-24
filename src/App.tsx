@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import { CharacterSheet } from "./CharacterSheet";
-import { PathList, Talent, Tracker } from "./PathSheet";
+import { PathList, Talent } from "./PathSheet";
 import OBR, { Metadata } from "@owlbear-rodeo/sdk";
 import { ChatBoard } from "./ChatBoard";
 import { CharacterList } from "./CharacterList";
