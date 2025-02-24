@@ -164,7 +164,7 @@ export const addRoll = async (
 };
 
 const RollInstance = ({ chat, name }: { chat: Chat; name: string }) => {
-  if (chat.dice.length || (chat.thorns && chat.thorns.length)) {
+  if ((chat.dice && chat.dice.length) || (chat.thorns && chat.thorns.length)) {
     return (
       <div style={{ textAlign: chat.user === name ? "right" : "left" }}>
         <div className={style.chatSender}>{chat.user}</div>
@@ -217,11 +217,14 @@ const RollInstance = ({ chat, name }: { chat: Chat; name: string }) => {
 };
 
 const ChatInstance = ({ chat, name }: { chat: Chat; name: string }) => {
-  if (chat.message) {
+  if (chat.message || chat.description) {
     return (
       <div style={{ textAlign: chat.user === name ? "right" : "left" }}>
         <div className={style.chatSender}>{chat.user}</div>
         <span>{chat.message}</span>
+        {chat.description && (
+          <div dangerouslySetInnerHTML={{ __html: chat.description }} />
+        )}
       </div>
     );
   }

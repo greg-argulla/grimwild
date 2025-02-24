@@ -470,7 +470,7 @@ export const PathList = ({
     const newMessage = {
       id: Date.now(),
       user: talent.name,
-      message: talent.description.replace(/(<([^>]+)>)/gi, ""),
+      description: talent.description,
     };
     const newChat = [...myChat, newMessage];
 
