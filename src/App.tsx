@@ -314,7 +314,7 @@ function App() {
 
       OBR.action.onOpenChange(async (isOpen) => {
         // React to the action opening or closing
-        if (isOpen && tab === "chat") {
+        if (isOpen && tab === "chat" && player) {
           setUnreadCount(0);
         }
       });
@@ -387,9 +387,10 @@ function App() {
             })}
             onClick={() => {
               setTab("chat");
+              setUnreadCount(0);
             }}
           >
-            Chat {unreadCount ? unreadCount : ""}
+            Chat ({unreadCount ? unreadCount : ""})
           </button>
           <button
             className={classNames(styles.menuButton)}
