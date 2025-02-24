@@ -49,8 +49,9 @@ import rogueData from "./classes/rogue.json";
 import sorcererData from "./classes/sorcerer.json";
 import warlockData from "./classes/warlock.json";
 import wizardData from "./classes/wizard.json";
-import { Player } from "./App";
+import { Chat, Player } from "./App";
 import { useState } from "react";
+import OBR from "@owlbear-rodeo/sdk";
 
 const dataMapping = {
   artificer: artificerData,
@@ -88,11 +89,13 @@ const Talent = ({
   onSelect,
   onRemove,
   onChangeTracker,
+  onBroadcast,
 }: {
   talent: Talent;
   onSelect?: () => void;
   onRemove?: () => void;
   onChangeTracker: (tracker: Tracker, index: number) => void;
+  onBroadcast: () => void;
 }) => {
   return (
     <div className={classNames(style.fieldColumn, style.statContainer)}>
@@ -104,6 +107,58 @@ const Talent = ({
         }}
       >
         <div className={style.header}>{talent.name}</div>
+
+        {onRemove && (
+          <div style={{ marginLeft: "auto" }}>
+            <button
+              onClick={() => {
+                onRemove();
+              }}
+            >
+              ×
+            </button>
+          </div>
+        )}
+      </div>
+
+      {talent.trackers
+        ?.filter((tracker) => tracker.type === "fieldSmallLong")
+        .map((tracker, index) => (
+          <div
+            className={classNames(
+              style.fieldStatContainerSmallRow,
+              style.statDetail
+            )}
+            key={tracker.name + index}
+          >
+            <div
+              className={style.fieldStatLabel}
+              style={{ marginLeft: "0.25rem" }}
+            >
+              {tracker.name}
+            </div>
+            <div className={style.fieldRowNoSpread} style={{ gap: "0.25rem" }}>
+              <input
+                className={style.fieldSmallLong}
+                value={tracker.value1}
+                onChange={(e) => {
+                  onChangeTracker(
+                    {
+                      ...tracker,
+                      value1: e.target.value,
+                    },
+                    index
+                  );
+                }}
+              ></input>
+            </div>
+          </div>
+        ))}
+
+      <img src={line2} />
+      <div dangerouslySetInnerHTML={{ __html: talent.description }} />
+      <img src={line2} />
+      <div>
         <div className={style.statDetail}>
           <div className={style.fieldRowNoSpread} style={{ gap: 0 }}>
             {talent.trackers
@@ -196,65 +251,26 @@ const Talent = ({
                               index
                             );
                           }}
-                          style={{ width: "2.75rem" }}
+                          style={{ width: "4rem" }}
                         ></input>
                       </>
                     )}
                   </div>
                 </div>
               ))}
+
+            <div style={{ marginLeft: "auto" }}>
+              <button
+                onClick={() => {
+                  onBroadcast();
+                }}
+              >
+                ➤
+              </button>
+            </div>
           </div>
         </div>
-        {onRemove && (
-          <div style={{ marginLeft: "auto" }}>
-            <button
-              onClick={() => {
-                onRemove();
-              }}
-            >
-              ×
-            </button>
-          </div>
-        )}
       </div>
-
-      {talent.trackers
-        ?.filter((tracker) => tracker.type === "fieldSmallLong")
-        .map((tracker, index) => (
-          <div
-            className={classNames(
-              style.fieldStatContainerSmallRow,
-              style.statDetail
-            )}
-            key={tracker.name + index}
-          >
-            <div
-              className={style.fieldStatLabel}
-              style={{ marginLeft: "0.25rem" }}
-            >
-              {tracker.name}
-            </div>
-            <div className={style.fieldRowNoSpread} style={{ gap: "0.25rem" }}>
-              <input
-                className={style.fieldSmallLong}
-                value={tracker.value1}
-                onChange={(e) => {
-                  onChangeTracker(
-                    {
-                      ...tracker,
-                      value1: e.target.value,
-                    },
-                    index
-                  );
-                }}
-              ></input>
-            </div>
-          </div>
-        ))}
-
-      <img src={line2} />
-      <div dangerouslySetInnerHTML={{ __html: talent.description }} />
-
       {onSelect && (
         <>
           <img src={line2} />
@@ -274,9 +290,11 @@ const Talent = ({
 export const PathSheet = ({
   player,
   updatePlayer,
+  broadcast,
 }: {
   player: Player;
   updatePlayer: (player: Player) => void;
+  broadcast: (talent: Talent) => void;
 }) => {
   if (player.path === "") return "";
   const data = dataMapping[player.path];
@@ -311,6 +329,9 @@ export const PathSheet = ({
             updatePlayer({ ...player, coreTalent: coreTalent });
           }
         }}
+        onBroadcast={() => {
+          broadcast(data.coreTalent);
+        }}
       />
       <img src={line2} />
       <div className={style.header}>DETAILS</div>
@@ -320,6 +341,9 @@ export const PathSheet = ({
             talent={detail}
             key={detail.name}
             onChangeTracker={() => {}}
+            onBroadcast={() => {
+              broadcast(detail);
+            }}
           />
         );
       })}
@@ -380,11 +404,13 @@ const TalentList = ({
   player,
   updatePlayer,
   onClose,
+  broadcast,
 }: {
   player: Player;
   path: Player["path"];
   updatePlayer: (player: Player) => void;
   onClose: () => void;
+  broadcast: (talent: Talent) => void;
 }) => {
   if (path === "") return "";
   const data = dataMapping[path];
@@ -416,6 +442,9 @@ const TalentList = ({
               onClose();
             }}
             onChangeTracker={() => {}}
+            onBroadcast={() => {
+              broadcast(talent);
+            }}
           />
         );
       })}
@@ -426,12 +455,45 @@ const TalentList = ({
 export const PathList = ({
   player,
   updatePlayer,
+  myChat,
+  id,
 }: {
   player: Player;
   updatePlayer: (player: Player) => void;
+  myChat: Chat[];
+  id: string;
 }) => {
   const [openPath, setOpenPath] = useState(false);
   const [selectedPath, setSelectedPath] = useState("");
+
+  const broadcast = async (talent: Talent) => {
+    const newMessage = {
+      id: Date.now(),
+      user: talent.name,
+      message: talent.description.replace(/(<([^>]+)>)/gi, ""),
+    };
+    const newChat = [...myChat, newMessage];
+
+    const metadataGet = await OBR.scene.getMetadata();
+    const metadata = metadataGet["grimwild.extension/metadata"] as Record<
+      string,
+      any
+    >;
+
+    let metadataChange = { ...metadata };
+    metadataChange[id] = newChat;
+
+    OBR.scene.setMetadata({
+      "grimwild.extension/metadata": metadataChange,
+    });
+
+    setTimeout(() => {
+      var objDiv = document.getElementById("chatbox");
+      if (objDiv) {
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }
+    }, 100);
+  };
 
   if (openPath && selectedPath === "") {
     return (
@@ -473,6 +535,7 @@ export const PathList = ({
             setSelectedPath("");
           }}
           player={player}
+          broadcast={broadcast}
         />
       </div>
     );
@@ -494,7 +557,11 @@ export const PathList = ({
               </button>
             </div>
           </div>
-          <PathSheet player={player} updatePlayer={updatePlayer} />
+          <PathSheet
+            player={player}
+            updatePlayer={updatePlayer}
+            broadcast={broadcast}
+          />
         </>
       ) : (
         <>
@@ -524,6 +591,9 @@ export const PathList = ({
                 talentsList[index].trackers[index2] = tracker;
                 updatePlayer({ ...player, talents: talentsList });
               }
+            }}
+            onBroadcast={() => {
+              broadcast(talent);
             }}
           />
         );

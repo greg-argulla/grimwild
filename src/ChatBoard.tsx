@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { Chat, Pool } from "./App";
+import type { Chat, Player, Pool } from "./App";
 import OBR from "@owlbear-rodeo/sdk";
 
 import style from "./App.module.css";
@@ -23,11 +23,11 @@ import classNames from "classnames";
 
 type Props = {
   chat: Chat[];
-  name: string;
   role: string;
   myChat: Chat[];
   id: string; // Player Id
   pools: Pool[];
+  player: Player;
 };
 
 const diceImg = [d61, d62, d63, d64, d65, d66];
@@ -58,8 +58,113 @@ const getRollColor = (outcome: string) => {
   return color;
 };
 
+const generateRandomNumber = (end: number) => {
+  var range = end;
+  var randomNum = Math.floor(Math.random() * range) + 1;
+
+  return randomNum;
+};
+
+export const addRoll = async (
+  diceCount: number,
+  thornCount: number,
+  myChat: Chat[],
+  id: string, //playerId
+  player: Player,
+  odds?: string
+) => {
+  const dice = [];
+  const thorns = [];
+
+  let perfect = 0;
+  let messy = 0;
+  let thorn = 0;
+
+  for (let i = 0; i < diceCount; i++) {
+    const value = generateRandomNumber(6);
+    dice.push(value);
+    if (value === 6) {
+      perfect++;
+    } else if (value > 3) {
+      messy++;
+    }
+  }
+
+  for (let i = 0; i < thornCount; i++) {
+    const value = generateRandomNumber(8);
+    thorns.push(value);
+    if (value > 6) {
+      thorn++;
+    }
+  }
+
+  let outcome = "Grim"; // Default
+  if (perfect > 1) {
+    outcome = "Critical"; // Set to "Crit" if two 6's are rolled
+  } else if (perfect > 0) {
+    outcome = "Perfect";
+  } else if (messy > 0) {
+    outcome = "Messy";
+  }
+
+  let thornEffect = []; //String to store what happened.
+  let initialOutcome = outcome; // to show the base number
+
+  for (let i = 0; i < thorn; i++) {
+    if (outcome === "Messy") {
+      outcome = "Grim";
+      thornEffect.push("(Messy -> Grim)");
+    } else if (outcome === "Perfect") {
+      outcome = "Messy"; //Or Grim you can choose.
+      thornEffect.push("\n(Perfect -> Messy)");
+    } else if (outcome === "Grim") {
+      outcome = "Disaster";
+      thornEffect.push("(Grim -> Disaster)");
+    }
+  }
+
+  if (odds) {
+    thornEffect.push(odds);
+  }
+
+  if (dice.length === 0 && thorns.length === 0) return;
+
+  const newMessage = {
+    id: Date.now(),
+    user: player.name,
+    dice,
+    thorns,
+    initialOutcome,
+    outcome,
+    thornEffect,
+  };
+
+  const newChat = [...myChat, newMessage];
+
+  const metadataGet = await OBR.scene.getMetadata();
+  const metadata = metadataGet["grimwild.extension/metadata"] as Record<
+    string,
+    any
+  >;
+  let metadataChange = { ...metadata };
+  metadataChange[id] = newChat;
+
+  OBR.scene.setMetadata({
+    "grimwild.extension/metadata": metadataChange,
+  });
+  // setTab("chat");
+  // setUnreadCount(0);
+
+  setTimeout(() => {
+    var objDiv = document.getElementById("chatbox");
+    if (objDiv) {
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }
+  }, 100);
+};
+
 const RollInstance = ({ chat, name }: { chat: Chat; name: string }) => {
-  if (chat.dice.length) {
+  if (chat.dice.length || (chat.thorns && chat.thorns.length)) {
     return (
       <div style={{ textAlign: chat.user === name ? "right" : "left" }}>
         <div className={style.chatSender}>{chat.user}</div>
@@ -90,17 +195,22 @@ const RollInstance = ({ chat, name }: { chat: Chat; name: string }) => {
               );
             })}
         </div>
-        <div style={{ fontSize: 16 }}>
-          {chat.thornEffect.map((value, index) => {
-            return <div key={index}>{value}</div>;
-          })}
-        </div>
-        <div
-          className={style.header}
-          style={{ color: getRollColor(chat.outcome), fontSize: 14 }}
-        >
-          {chat.outcome}
-        </div>
+
+        {chat.dice.length > 0 && (
+          <>
+            <div style={{ fontSize: 16 }}>
+              {chat.thornEffect.map((value, index) => {
+                return <div key={index}>{value}</div>;
+              })}
+            </div>
+            <div
+              className={style.header}
+              style={{ color: getRollColor(chat.outcome), fontSize: 14 }}
+            >
+              {chat.outcome}
+            </div>
+          </>
+        )}
       </div>
     );
   }
@@ -170,7 +280,7 @@ export const PoolInstance = ({
   );
 };
 
-export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
+export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
   const [text, setText] = useState<string>("");
   const [diceCount, setDiceCount] = useState<number | null>(0);
   const [thornsCount, setThornCount] = useState<number | null>(0);
@@ -190,7 +300,11 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
         }
       }
 
-      const newMessage = { id: Date.now(), user: name, message: text.trim() };
+      const newMessage = {
+        id: Date.now(),
+        user: player.name,
+        message: text.trim(),
+      };
       const newChat = [...myChat, newMessage];
 
       const metadataGet = await OBR.scene.getMetadata();
@@ -215,13 +329,6 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
         }
       }, 100);
     }
-  };
-
-  const generateRandomNumber = (end: number) => {
-    var range = end;
-    var randomNum = Math.floor(Math.random() * range) + 1;
-
-    return randomNum;
   };
 
   const addPool = async (value?: number) => {
@@ -269,11 +376,11 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
     }
   };
 
-  const rollPool = async (pool: Pool) => {
+  const poolRoll = async (diceCount: number) => {
     let toDrop = 0;
     let dice = [];
 
-    for (let i = 0; i < pool.value; i++) {
+    for (let i = 0; i < diceCount; i++) {
       const value = generateRandomNumber(6);
       dice.push(value);
       if (value < 4) {
@@ -281,19 +388,17 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
       }
     }
 
-    const newValue = pool.value - toDrop;
+    const newValue = diceCount - toDrop;
 
-    const thornEffect = [pool.name];
+    if (dice.length === 0) return;
 
     const newMessage = {
       id: Date.now(),
-      user: name,
+      user: player.name,
       dice,
-      thornEffect,
-      outcome: `${pool.value} ➜ ${newValue}`,
+      thornEffect: [],
+      outcome: `${diceCount} ➜ ${newValue}`,
     };
-
-    updatePool({ ...pool, value: newValue });
 
     const newChat = [...myChat, newMessage];
 
@@ -317,74 +422,31 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
     }, 100);
   };
 
-  const addRoll = async (
-    diceCount: number,
-    thornCount: number,
-    odds?: string
-  ) => {
-    const dice = [];
-    const thorns = [];
+  const rollPool = async (pool: Pool) => {
+    let toDrop = 0;
+    let dice = [];
 
-    let perfect = 0;
-    let messy = 0;
-    let thorn = 0;
-
-    for (let i = 0; i < diceCount; i++) {
+    for (let i = 0; i < pool.value; i++) {
       const value = generateRandomNumber(6);
       dice.push(value);
-      if (value === 6) {
-        perfect++;
-      } else if (value > 3) {
-        messy++;
+      if (value < 4) {
+        toDrop++;
       }
     }
 
-    for (let i = 0; i < thornCount; i++) {
-      const value = generateRandomNumber(8);
-      thorns.push(value);
-      if (value > 6) {
-        thorn++;
-      }
-    }
+    const newValue = pool.value - toDrop;
 
-    let outcome = "Grim"; // Default
-    if (perfect > 1) {
-      outcome = "Critical"; // Set to "Crit" if two 6's are rolled
-    } else if (perfect > 0) {
-      outcome = "Perfect";
-    } else if (messy > 0) {
-      outcome = "Messy";
-    }
-
-    let thornEffect = []; //String to store what happened.
-    let initialOutcome = outcome; // to show the base number
-
-    for (let i = 0; i < thorn; i++) {
-      if (outcome === "Messy") {
-        outcome = "Grim";
-        thornEffect.push("(Messy -> Grim)");
-      } else if (outcome === "Perfect") {
-        outcome = "Messy"; //Or Grim you can choose.
-        thornEffect.push("\n(Perfect -> Messy)");
-      } else if (outcome === "Grim") {
-        outcome = "Disaster";
-        thornEffect.push("(Grim -> Disaster)");
-      }
-    }
-
-    if (odds) {
-      thornEffect.push(odds);
-    }
+    const thornEffect = [pool.name];
 
     const newMessage = {
       id: Date.now(),
-      user: name,
+      user: player.name,
       dice,
-      thorns,
-      initialOutcome,
-      outcome,
       thornEffect,
+      outcome: `${pool.value} ➜ ${newValue}`,
     };
+
+    updatePool({ ...pool, value: newValue });
 
     const newChat = [...myChat, newMessage];
 
@@ -399,8 +461,6 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
     OBR.scene.setMetadata({
       "grimwild.extension/metadata": metadataChange,
     });
-    // setTab("chat");
-    // setUnreadCount(0);
 
     setTimeout(() => {
       var objDiv = document.getElementById("chatbox");
@@ -493,7 +553,21 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
                 <div className={style.fieldStatContainerSmall}>
                   <button
                     onClick={() => {
-                      addRoll(diceCount ?? 0, thornsCount ?? 0);
+                      poolRoll(diceCount ?? 0);
+                    }}
+                    style={{ width: "4rem" }}
+                  >
+                    Pool
+                  </button>
+                  <button
+                    onClick={() => {
+                      addRoll(
+                        diceCount ?? 0,
+                        thornsCount ?? 0,
+                        myChat,
+                        id,
+                        player
+                      );
                     }}
                     style={{ width: "4rem" }}
                   >
@@ -509,7 +583,7 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
                   <button
                     className={style.storyButton}
                     onClick={() => {
-                      addRoll(3, 0, "Good Odds");
+                      addRoll(3, 0, myChat, id, player, "Good Odds");
                     }}
                   >
                     Good
@@ -517,7 +591,7 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
                   <button
                     className={style.storyButton}
                     onClick={() => {
-                      addRoll(2, 0, "Even Odds");
+                      addRoll(2, 0, myChat, id, player, "Even Odds");
                     }}
                   >
                     Even
@@ -525,7 +599,7 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
                   <button
                     className={style.storyButton}
                     onClick={() => {
-                      addRoll(1, 0, "Bad Odds");
+                      addRoll(1, 0, myChat, id, player, "Bad Odds");
                     }}
                   >
                     Bad
@@ -588,7 +662,11 @@ export const ChatBoard = ({ chat, myChat, role, id, name, pools }: Props) => {
               ? chat
                   .sort((a, b) => a.id - b.id)
                   .map((chat) => (
-                    <ChatInstance chat={chat} key={chat.id} name={name} />
+                    <ChatInstance
+                      chat={chat}
+                      key={chat.id}
+                      name={player.name}
+                    />
                   ))
               : ""}
           </div>

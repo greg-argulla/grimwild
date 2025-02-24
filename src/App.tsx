@@ -103,7 +103,7 @@ export type Pool = {
 function App() {
   const [isOBRReady, setIsOBRReady] = useState<boolean>(false);
   const [unreadCount, setUnreadCount] = useState<number>(0);
-  const [name, setName] = useState<string>("");
+  const [_, setName] = useState<string>("");
   const [id, setId] = useState<string>("");
   const [role, setRole] = useState<string>("PLAYER");
   const [chat, setChat] = useState<Chat[]>([]);
@@ -390,7 +390,7 @@ function App() {
               setUnreadCount(0);
             }}
           >
-            Chat ({unreadCount ? unreadCount : ""})
+            Chat {unreadCount ? `(${unreadCount})` : ""}
           </button>
           <button
             className={classNames(styles.menuButton)}
@@ -405,11 +405,24 @@ function App() {
       )}
 
       {tab === "character" && player && (
-        <CharacterSheet player={player} updatePlayer={updatePlayer} />
+        <CharacterSheet
+          player={player}
+          updatePlayer={updatePlayer}
+          myChat={myChat}
+          id={id}
+          onRoll={() => {
+            setTab("chat");
+          }}
+        />
       )}
 
       {tab === "path" && player && (
-        <PathList player={player} updatePlayer={updatePlayer} />
+        <PathList
+          player={player}
+          updatePlayer={updatePlayer}
+          myChat={myChat}
+          id={id}
+        />
       )}
 
       {!player && (
@@ -428,8 +441,8 @@ function App() {
           role={role}
           myChat={myChat}
           id={id}
-          name={name}
           pools={poolList}
+          player={player}
         />
       )}
     </div>

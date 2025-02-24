@@ -208,7 +208,7 @@ select {
   border-radius: 0.25rem;
   width: 5rem;
   height: 1.5rem;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
   background-color: #edeae3;
   color: #9d2024;
@@ -363,7 +363,7 @@ select {
 
 .chatSender {
   color: #9d2024;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 0.5rem;
 }
 

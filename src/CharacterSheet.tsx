@@ -3,7 +3,8 @@ import style from "./App.module.css";
 import { ChangeEvent } from "react";
 import line from "./assets/line.webp";
 import line2 from "./assets/line2.webp";
-import { Bond, Player } from "./App";
+import { Bond, Chat, Player } from "./App";
+import { addRoll } from "./ChatBoard";
 
 export const Field = ({
   label,
@@ -61,12 +62,20 @@ export const FieldStat = ({
   onChangeMark,
   value,
   marked,
+  myChat,
+  id,
+  onRoll,
+  player,
 }: {
   label: string;
   value: number;
   marked: boolean;
+  myChat: Chat[];
+  id: string;
   onChangeValue: (value: string) => void;
   onChangeMark: (value: boolean) => void;
+  onRoll: () => void;
+  player: Player;
 }) => {
   return (
     <div className={style.fieldStatContainer}>
@@ -90,7 +99,16 @@ export const FieldStat = ({
           }}
         />
       </div>
-      <button className={style.statButton}>Roll</button>
+      <button
+        className={style.statButton}
+        onClick={() => {
+          addRoll(value, marked ? 1 : 0, myChat, id, player);
+          onChangeMark(false);
+          onRoll();
+        }}
+      >
+        Roll
+      </button>
     </div>
   );
 };
@@ -311,16 +329,46 @@ export const BondField = ({
   );
 };
 
-// const computeLevel = (value: number) => {};
+const calculateTalents = (experience: number) => {
+  const thresholds = [2, 5, 9, 14, 20, 27]; // Cumulative XP needed for each talent
+  let talents = 1;
+
+  for (let i = 0; i < thresholds.length; i++) {
+    if (experience >= thresholds[i]) {
+      talents++;
+    } else {
+      break;
+    }
+  }
+
+  return talents;
+};
+
+const calculateXPLeft = (experience: number) => {
+  const thresholds = [2, 5, 9, 14, 20, 27]; // Cumulative XP needed for each talent
+
+  for (let i = 0; i < thresholds.length; i++) {
+    if (experience < thresholds[i]) {
+      return thresholds[i] - experience;
+    }
+  }
+  return 0;
+};
 
 // const computeExp = (value: number) => {};
 
 export const CharacterSheet = ({
   player,
   updatePlayer,
+  myChat,
+  id,
+  onRoll,
 }: {
   player: Player;
   updatePlayer: (player: Player) => void;
+  myChat: Chat[];
+  id: string;
+  onRoll: () => void;
 }) => {
   return (
     <div className={classNames(style.Sheet, style.scrollable)}>
@@ -370,6 +418,10 @@ export const CharacterSheet = ({
                 const num = parseInt(value.charAt(value.length - 1));
                 updatePlayer({ ...player, brawn: !isNaN(num) ? num : 0 });
               }}
+              myChat={myChat}
+              id={id}
+              onRoll={onRoll}
+              player={player}
             />
             <FieldStat
               label={"Agility"}
@@ -382,6 +434,10 @@ export const CharacterSheet = ({
                 const num = parseInt(value.charAt(value.length - 1));
                 updatePlayer({ ...player, agility: !isNaN(num) ? num : 0 });
               }}
+              myChat={myChat}
+              id={id}
+              onRoll={onRoll}
+              player={player}
             />
             <FieldStat
               label={"Wits"}
@@ -394,6 +450,10 @@ export const CharacterSheet = ({
                 const num = parseInt(value.charAt(value.length - 1));
                 updatePlayer({ ...player, wits: !isNaN(num) ? num : 0 });
               }}
+              myChat={myChat}
+              id={id}
+              onRoll={onRoll}
+              player={player}
             />
             <FieldStat
               label={"Presence"}
@@ -406,6 +466,10 @@ export const CharacterSheet = ({
                 const num = parseInt(value.charAt(value.length - 1));
                 updatePlayer({ ...player, presence: !isNaN(num) ? num : 0 });
               }}
+              myChat={myChat}
+              id={id}
+              onRoll={onRoll}
+              player={player}
             />
           </div>
           <div className={classNames(style.fieldRow)}>
@@ -473,8 +537,6 @@ export const CharacterSheet = ({
               }}
             />
           </div>
-
-          <button className={style.statButton}>Rest</button>
         </div>
         <div className={classNames(style.fieldColumn)}>
           <div className={classNames(style.fieldColumn, style.statContainer)}>
@@ -543,11 +605,15 @@ export const CharacterSheet = ({
                 }}
               ></input>
               <div className={style.fieldStatLabel}>Each session, take 1xp</div>
-              <div className={style.talentCount}>3</div>
+              <div className={style.talentCount}>
+                {calculateTalents(player.experience)}
+              </div>
               <div className={style.fieldStatLabel}>
                 Level & Non-Core Talents Unlocked
               </div>
-              <div className={style.talentCount}>3</div>
+              <div className={style.talentCount}>
+                {calculateXPLeft(player.experience)}
+              </div>
               <div className={style.fieldStatLabel}>XP to next level</div>
             </div>
           </div>
