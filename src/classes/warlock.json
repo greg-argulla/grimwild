@@ -1,0 +1,54 @@
+{
+  "name": "WARLOCK",
+  "description": "ALSO: Blessed One, Cursed One, Occultist",
+  "quote": "You have made a pact with a greater being—power in exchange for service, a pact that may prove to be a double-edged sword.",
+  "coreTalent": {
+    "name": "PACT",
+    "description": "<b>CORE TALENT</b><br><br>Create your patron <i>(below)</i>, a powerful otherworldly being you've made a pact with to gain <b>gifts</b> in exchange for <b>obligations</b>.<br><br><b>Gifts:</b> Your patron actively or passively meddles in your affairs. Before each session, roll 2d and write these results down as Gifts. During the session, you can replace <i>any</i> rolled d6 <i>(by anyone)</i> with one of your gift results, then erase the Gift.<br><br>You can also cast cantrips with your patron's trappings as touchstones, useful as <i>set dressing</i> and <i>cantrip utility</i> <i>(pg. 18)</i>. <b>You gain a bonus talent</b>, and each of your talents is infused with their trappings.<br><br><b>Obligations:</b> Each patron has different demands. You have an extra story arc to represent their demands. Some patrons expect meaningful progress, while others ask only for the lightest of service. You define what this means. Before each session, discuss this story arc. Your patron has an <b>8d Patience</b> pool. Roll it if your patron was not satisfied with your progress last session. At 0d, your patron will give you a visit in some form to <i>clear up the issue</i>, replenishing the pool.<br><br><b>GROWTH:</b> Every 3 levels, gain a bonus talent, but decrease max Patience by 2d.",
+    "trackers": [
+      { "name": "Patience", "type": "field" },
+      { "name": "Gifts", "type": "field" },
+      { "name": "", "type": "field" }
+    ]
+  },
+  "details": [
+    {
+      "name": "PATRON CREATION",
+      "description": "<b>PATRON CREATION:</b> Roll or choose 2 natures and 2 desires below, then assign a distinct color or visual signature to your patron's influence. Decide how they communicate <i>(visions, messenger, mind-speak)</i> and how many followers they have <i>(many, few, just you)</i>. These are their <b>trappings</b>. Give this powerful, otherworldly being a name and describe what you know of them. Establish your patron's bond with you and your bond with them. Work with the GM to create a faction for them and run it together.<br><br><b>PATRON CRUCIBLE</b> Roll 2 on each table, smash them together, and interpret.<br><br><b>NATURES TABLE</b><table><tr><td><i>Cogs</i></td><td><i>Abyss</i></td><td><i>Scourge</i></td><td><i>Shadow</i></td><td><i>Veil</i></td><td><i>Hollow</i></td></tr><tr><td><i>Chimera</i></td><td><i>Serpent</i></td><td><i>Flame</i></td><td><i>Green</i></td><td><i>Outsider</i></td><td><i>Balance</i></td></tr><tr><td><i>Void</i></td><td><i>Forge</i></td><td><i>Phoenix</i></td><td><i>Whisper</i></td><td><i>Trickster</i></td><td><i>Fiend</i></td></tr><tr><td><i>Dead god</i></td><td><i>Thorn</i></td><td><i>Depths</i></td><td><i>Reaper</i></td><td><i>Tempest</i></td><td><i>Storm</i></td></tr><tr><td><i>Eternal</i></td><td><i>Harbinger</i></td><td><i>Tide</i></td><td><i>Prism</i></td><td><i>Leviathan</i></td><td><i>Dragon</i></td></tr><tr><td><i>Shroud</i></td><td><i>Echo</i></td><td><i>Starborn</i></td><td><i>Dreamer</i></td><td><i>Light</i></td><td><i>Shadow</i></td></tr></table><br><b>DESIRES TABLE</b><table><tr><td><i>Chaos</i></td><td><i>Beauty</i></td><td><i>Minds</i></td><td><i>Wealth</i></td><td><i>Rarities</i></td><td><i>Destruction</i></td></tr><tr><td><i>Secrets</i></td><td><i>Fun</i></td><td><i>Control</i></td><td><i>Magic</i></td><td><i>Everything</i></td><td><i>Monuments</i></td></tr><tr><td><i>Power</i></td><td><i>Victory</i></td><td><i>Judgment</i></td><td><i>Unity</i></td><td><i>Souls</i></td><td><i>Biomass</i></td></tr><tr><td><i>Worshippers</i></td><td><i>Adoration</i></td><td><i>Fear</i></td><td><i>Fame</i></td><td><i>Revenge</i></td><td><i>Knowledge</i></td></tr><tr><td><i>Promises</i></td><td><i>Purity</i></td><td><i>Progress</i></td><td><i>Oddities</i></td><td><i>Truth</i></td><td><i>Treasure</i></td></tr><tr><td><i>Influence</i></td><td><i>Life</i></td><td><i>Territory</i></td><td><i>Perfection</i></td><td><i>Order</i></td><td><i>Entropy</i></td></tr></table>"
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "ELDRITCH WEAPONRY",
+      "description": "On a perfect when using <i>cantrip utility</i> as a weapon, you can <b>push yourself</b> to also inflict a spell-level effect with your patron's trappings as the touchstone. This effect can’t deal more damage—the cantrip already covers that.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "HEX",
+      "description": "You can roll Presence to hex someone with: <i>dread—clumsiness—confusion—forgetfulness—misfortune—sleepiness</i>. Decide when it takes effect: <i>now—soon—much later—specific trigger</i>. This is a cosmic effect. It's magic, but not fully under your control."
+    },
+    {
+      "name": "KNOWING GAZE",
+      "description": "When given time, you can stare into someone's eyes and learn: <i>their greatest desire—what they're hiding—what they want to protect—who they serve</i>. This is <b>highly disconcerting</b> and only works on someone once. You can <b>push yourself</b> to do this on the spot.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "OTHERWORLDLY FORM",
+      "description": "You can turn into a floating, dispersed form, flavored after your patron's trappings <i>(swarm of bats, blowing leaves)</i>. Choose three things you can do in this form: <i>appear barely visible—fly high in the sky—interact with objects—move swiftly—slip through small gaps—speak</i>."
+    },
+    {
+      "name": "RITUALIST",
+      "description": "You take +1d when working towards overcoming a ritual's challenge and can replace any one of a ritual's anchors with yourself."
+    },
+    {
+      "name": "VISIONS",
+      "description": "You can roll Presence to ask your patron for forbidden knowledge, like <i>tightly held secrets or that which should not be known</i>. Ask the GM a specific question. The answer may be cryptic or twisted to suit your patron’s desires, but it will never be an outright lie. On a messy or grim, roll the Patience pool."
+    },
+    {
+      "name": "WAYFARER",
+      "description": "You can <b>push yourself</b> to teleport. The further or less familiar the destination, the less precise the teleport is. The maximum range is two days' ride away. Anything within clear eyesight with no obstruction requires no roll, otherwise make a story roll. You can bring others, taking +1 per person.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    }
+  ],
+  "other": null
+}

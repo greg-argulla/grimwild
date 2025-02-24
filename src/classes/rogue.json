@@ -1,0 +1,60 @@
+{
+  "name": "ROGUE",
+  "description": "ALSO: Assassin, Cutpurse, Infiltrator",
+  "quote": "You live and operate in the margins, striking unseen and disappearing before anyone knows you were there.",
+  "coreTalent": {
+    "name": "EXPERTISE",
+    "description": "Choose a skillset below as your expertise:<br><br> <b>Skullduggery:</b> Take +1d at stealth, picking locks, lying, and sleight of hand.<br><br> <b>Assassination:</b> Take +1d at stealth, tracking people, opening strikes, and disguises.<br><br> Each session, you have a <i>3d Contingency</i> resource pool, always planning ahead. You can roll the pool as bonus dice after any roll that falls within your expertise.<br><br> <b>GROWTH:</b> Every 2 levels, increase Contingency by 1d.",
+    "trackers": [{ "name": "Contingency", "type": "field" }]
+  },
+  "details": [
+    {
+      "name": "THIEVES GUILD [OPTIONAL]",
+      "description": "Many rogues learned their trade from a thieves' guild, criminal ring, or underground network. These are all one form of a guild or another, whether formal or not.<br><br><table><tr><td><b>THIEVES GUILD:</b> Choose 2 that describe your guild and 1 that really doesn't.</td></tr></table><br><table><tr><td>○ Like family</td><td>○ Turf-obsessed</td><td>○ Mystics</td><td>○ Scoundrels</td></tr><tr><td>○ Elite training</td><td>○ Heroes</td><td>○ Outsiders</td><td>○ In the open</td></tr><tr><td>○ Cultish</td><td>○ Mercenaries</td><td>○ Renegades</td><td>○ Wardens</td></tr></table>"
+    },
+    {
+      "name": "CRIMINAL HISTORY [OPTIONAL]",
+      "description": "Given their skillset, a rogue either learned their trade by way of crime or possess the skills to make an excellent criminal, for which there's no lack of opportunities. As you start your adventuring career, it's likely you have some lingering criminal history, a past that can come back to haunt you in quite fun, dramatic ways.<br><br>Create one or more past crimes by setting the <b>crime</b> (severity & nature), your <b>reputation</b> from it, and your own <b>reaction</b> about the crime.<br><br><table><tr><td colspan='2'><b>THE CRIME</b></td><td><b>REPUTATION</b></td></tr><tr><td>petty</td><td>theft, fraud, spying</td><td>barely remembered</td></tr><tr><td>low-level</td><td>smuggling, banditry, kidnapping</td><td>small bounty</td></tr><tr><td>moderate</td><td>vandalism, gambling, bribery</td><td>known name</td></tr><tr><td>serious</td><td>extortion, arms dealing, arson</td><td>hunted</td></tr><tr><td>severe</td><td>treason, robbery, assassination</td><td>infamous</td></tr><tr><td>legendary</td><td>heist, impersonation, necromancy</td><td>most wanted</td></tr></table><br><br><b>REACTION:</b> I did what I had to do—I was set up—<i>It was a misunderstanding</i>—I'd do it again in a heartbeat—I completely forgot I did that—<b>I've made peace with it</b>—Never again. Or write one!"
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "ACCORDING TO PLAN",
+      "description": "You gain 1 story per session and can spend story to flashback to utilizing subterfuge in a way that's immediately relevant, like swiping some keys, paying off a guard, or preparing an escape route. Make a montage roll, taking +1d for Expertise. The GM always takes suspense in place of an impact move.",
+      "trackers": [{ "name": "Story", "type": "checkbox" }]
+    },
+    {
+      "name": "ELDRITCH AFFINITY",
+      "description": "You have spellcasting, as the Sorcery talent (<i>pg. 72</i>). You roll Presence to cast and choose 3 from magic paths and techniques that serve as touchstones. You can't cast potent spells, nor do you risk a wild surge. <b>[PROHIBITED: SORCERER]</b>",
+      "trackers": [
+        { "name": "Magic Paths & Techniques", "type": "fieldSmallLong" }
+      ]
+    },
+    {
+      "name": "LURKER",
+      "description": "On a perfect sneaking past or secretly observing sentient creatures, they: <i>let a secret slip—give you a golden opportunity</i>. If caught sneaking, you can <b>push yourself</b> to stay completely still and avoid detection, but must leave the area immediately after.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "OPPORTUNIST",
+      "description": "When someone nearby rolls defense, you take +1d on an immediate follow-up. On a critical by a nearby ally, you can <b>push yourself</b> to add another critical bonus.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "POISONER",
+      "description": "Each session, you have a <b>4d Poisons</b> resource pool. You have access to the following poisons: <i>hallucinations—knockout—memory loss—nausea—paralysis—truth serum</i>. They each take a bit of time to work and are most effective if ingested.",
+      "trackers": [{ "name": "Poisons", "type": "field" }]
+    },
+    {
+      "name": "TRAP SENSE",
+      "description": "You always get a <b>hint</b> or <b>reveal</b> on vigilance against traps. When you avoid or disable a trap, <b>take spark</b>."
+    },
+    {
+      "name": "WEASEL",
+      "description": "If caught in a lie or red-handed, you can <b>push yourself</b> to weasel your way out of the situation—for now. You get an exit, but they definitely realize what happened soon after.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    }
+  ],
+
+  "other": "<b>THIEVES' CANT [ADVICE]</b>: Every rogue worth their salt knows Thieves' Cant—a secret language of symbols used to share plans, warnings, and secrets right under everyone else’s nose. Here are 25, and there's a full list of 42 with symbols on <i>pg. 144</i>!<br><br><table><tr><td>valuables inside</td><td>fence</td><td>trust person inside</td><td>well guarded</td><td>entry underground</td></tr><tr><td>wealthy</td><td>heist planned</td><td>safe for guild</td><td>get out fast</td><td>meeting place</td></tr><tr><td>no guard patrol</td><td>guild territory</td><td>do not trust inside</td><td>magic caster here</td><td>hidden door</td></tr><tr><td>worth robbing</td><td>guild protected</td><td>danger inside</td><td>protected by magic</td><td>escape route</td></tr><tr><td>can be bribed</td><td>safe house</td><td>guards patrol here</td><td>monsters inside</td><td>safe this way</td></tr></table>"
+}

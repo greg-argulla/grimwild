@@ -1,0 +1,57 @@
+{
+  "name": "CLERIC",
+  "description": "ALSO: Priest, Zealot, Chosen One",
+  "quote": "You serve as a conduit for the divine, channeling holy power to safeguard the faithful and do your god's bidding.",
+  "coreTalent": {
+    "name": "CHANNEL DIVINITY",
+    "description": "Your god grants you spellcasting ability. You roll a domain pool to cast and that domain pool and your god's epithet serve as touchstones.<br><br>Create your god (<i>below</i>). You have <b>1 major domain</b>, a 6d power pool, and <b>2 minor domains</b>, each a 4d power pool. These pools replenish each session. You can drop 1d and roll the domain to cast a <b>potent spell</b>.<br><br><b>GROWTH:</b> Every 2 levels, increase one domain pool by 1d (max 8d).",
+    "trackers": [
+      { "name": "Major", "type": "fieldTwo" },
+      { "name": "Minor", "type": "fieldTwo" },
+      { "name": "Minor", "type": "fieldTwo" }
+    ]
+  },
+  "details": [
+    {
+      "name": "CREATE YOUR GOD",
+      "description": "<b>CREATE YOUR GOD</b><br>Create your god by naming them and giving them a thematic epithet (e.g., Zerenda, Goddess of Storms). You are expected to follow its tenets, though not a strict requirement. Choose 1 major domain and 2 minor domains from below, or make your own:<br><br><table><tr><td><b>BLESSING</b> • Enhance with buffs, provide utility, and bring good fortune.<br><i>Tenets:</i> Pick up the weak and vulnerable. Create happiness when none exists.<br><i>Magic:</i> Bless a battlehammer. Walk on water. Fill the forlorn duke’s heart with hope.</td></tr><tr><td><b>DIVINATION</b> • Unveil secrets, provide foresight, and commune with spirits.<br><i>Tenets:</i> Uncover and share hidden truths. Respect and act on divine signs.<br><i>Magic:</i> Find a safe path. Reveal where the thief is hiding. Know tomorrow’s weather.</td></tr><tr><td><b>DOMINION</b> • Influence, command, and control sentient creatures.<br><i>Tenets:</i> Enforce peace and stability. Inspire others through your actions.<br><i>Magic:</i> Convince someone to help you. Make someone forget something. Calm an angry mob.</td></tr><tr><td><b>HEALING</b> • Heal wounds, cure diseases, and wash away mental anguish.<br><i>Tenets:</i> Bring healing to those truly in need. Comfort the distressed.<br><i>Magic:</i> Heal a broken bone. Relieve someone of stress. Stop the bleeding.</td></tr><tr><td><b>RADIANCE</b> • Dispel darkness with light and purge evil with holy fire.<br><i>Tenets:</i> Burn out corruption at its source. Point out the error in someone’s ways.<br><i>Magic:</i> Cauterize a wound. Destroy a skeleton. Reveal an invisible enemy.</td></tr><tr><td><b>WARDING</b> • Provide protection and defense for those in need.<br><i>Tenets:</i> Protect those who cannot defend themselves & strengthen communities.<br><i>Magic:</i> Shield an ally from harm. Block a doorway. Create sentries.</td></tr><tr><td><b>WRATH</b> • Inflict damage and curses upon those deserving.<br><i>Tenets:</i> Deliver punishment to those deserving it, keeping your mercy for the rare few worth saving.<br><i>Magic:</i> Shatter the killer’s weapon. Blind a traitor. Curse a thief with misfortune.</td></tr></table>"
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "BLESSED",
+      "description": "Once per session, you can re-roll a roll you just made as your god attempts to intervene. The re-roll is made without any thorns on it. On a perfect, <b>take spark</b>.",
+      "trackers": [{ "name": "Used", "type": "checkbox" }]
+    },
+    {
+      "name": "DEVOUT",
+      "description": "Intelligent creatures recognize you as a person of deep honesty and only your most hated enemies would treat you with a lack of respect or doubt your word. You are never seriously injured or killed by an enemy, unless they have no choice. Any creature with speech will always hear you out. This aura is upheld by your unwavering commitment—you must <b>push yourself</b> to act in bad faith <i>(no free activation)</i>."
+    },
+    {
+      "name": "HEALER",
+      "description": "When you heal someone, through treatment or magic, they drop 2d before rolling the pool. If it depletes from your care, <b>take spark</b>."
+    },
+    {
+      "name": "IRON WILL",
+      "description": "Each session, you have a <b>3d Iron Will</b> resource pool. When you get rattled or take vex, roll the pool. If dice remain, ignore the damage. If the situation allows for it, you can also lash out at the cause or a bystander and: <i>instill dread in their heart—sow doubt in their mind</i>.",
+      "trackers": [{ "name": "Iron Will", "type": "field" }]
+    },
+    {
+      "name": "RINGS FALSE",
+      "description": "You always know when someone is lying, though not necessarily the truth. You take +1d on a follow-up if you reveal you know they're lying."
+    },
+    {
+      "name": "SERMONS",
+      "description": "When given time, you can pull off <b>potent feats of persuasion in the name of your beliefs</b>, like <i>commanding a crowd to bring the duke for judgment or showing the goblins the glory of your god</i>. You can also <b>push yourself</b> to do it on the spot. One time only, you can make this a ritual-level act.",
+      "trackers": [
+        { "name": "Push", "type": "checkbox" },
+        { "name": "Ritual", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "SHEPHERD",
+      "description": "When you assist an ally on a defense roll that would leave them rattled or with vex, you can <b>invoke your bond</b> to take +1d on the roll. On a perfect, you both <b>take spark</b>."
+    }
+  ],
+  "other": "<b>HOLY SYMBOL [ADVICE]</b>: Deities and the religions that grow around them will almost universally express their following with a recognizable symbol. Draw your own on your sheet using those below as inspiration, or choose one of these!"
+}

@@ -1,0 +1,69 @@
+{
+  "name": "MONK",
+  "description": "ALSO: Martial Artist, Mystic, Wanderer",
+  "quote": "Your body is a vessel through which you channel your discipline into grace, precision, and the never-ending journey towards perfection.",
+  "coreTalent": {
+    "name": "DISCIPLINE",
+    "description": "Your body itself is a weapon, and <i>anything</i> in your hands is merely an extension of it. You never suffer thorns due to weapon matchups. Once per session, you can <b>interrupt</b> with a: <i>philosophical point—quick reaction—stunning strike</i>. Each scene, you have <b>4 flow</b>. You can spend it to:<br><br>◆ Ignore difficulty thorns from: <i>being outnumbered—a single powerful opponent.</i><br>◆ Attempt a <b>fluid maneuver</b>. Before rolling, declare you want to also: <i>disarm them—redirect momentum—reposition you, them, or both</i>. On a perfect or messy, it happens.<br>◆ Pull off a <b>potent feat of mystical grace</b>, like <i>running across water</i> or <i>falling harmlessly from a great height</i>. <i>For 1 more flow, extend this to those you're touching.</i><br><br><b>GROWTH:</b> Every 3 levels, increase flow by 1 per scene and interrupts by 1 per session.",
+    "trackers": [
+      { "name": "Flow", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "Inter.", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" }
+    ]
+  },
+  "details": [
+    {
+      "name": "MARTIAL ARTS STYLE [OPTIONAL]",
+      "description": "<b>Is based on the concept of...</b> [choose 1 or 2]<br><br> <table> <tr> <td><b>Primal</b></td> <td><b>Elemental</b></td> <td><b>Powerful</b></td> <td><b>Idealistic</b></td> <td><b>Philosophical</b></td> <td><b>Stylistic</b></td> </tr> <tr> <td>tiger<br>crane<br>snake<br>wolf<br>mantis<br>raven</td> <td>fire<br>water<br>air<br>earth<br>lightning<br>heart</td> <td>thunderstorm<br>avalanche<br>tsunami<br>whirlwind<br>earthquake<br>volcano</td> <td>harmony<br>destruction<br>tranquility<br>justice<br>chaos<br>freedom</td> <td>foundation<br>flourishing<br>refinement<br>adaptation<br>endurance<br>transformation</td> <td>ferocity<br>deception<br>grace<br>brutality<br>precision<br>patience</td> </tr> </table><br> <b>It features stances and moves like...</b> [choose 3]<br><br> <table> <tr> <td>open palm</td> <td>elbow strike</td> <td>circular step</td> <td>high kick</td> <td>crane stance</td> <td>mantis grab</td> </tr> <tr> <td>spinning kick</td> <td>aerial leaps</td> <td>knee strike</td> <td>tiger claw</td> <td>side kick</td> <td>close punch</td> </tr> <tr> <td>low stance</td> <td>breath control</td> <td>joint lock</td> <td>heavy strike</td> <td>swift parry</td> <td>leaping elbow</td> </tr> <tr> <td>finger jabs</td> <td>redirecting grab</td> <td>pressure point</td> <td>dual strikes</td> <td>rooted stance</td> <td>snap kick</td> </tr> <tr> <td>iron forearm</td> <td>chop strike</td> <td>whipping attack</td> <td>jumps & rolls</td> <td>soft redirect</td> <td>wide sweep</td> </tr> <tr> <td>flowing step</td> <td>iron grip</td> <td>steady gaze</td> <td>palm heel</td> <td>backfist strike</td> <td>crescent kick</td> </tr> </table><br> <b>It often or occasionally makes use of weapons like...</b> [choose 2]<br><br> <table> <tr> <td><b>Blunt</b></td> <td><b>Flexible</b></td> <td><b>Edged</b></td> <td><b>Reach</b></td> <td><b>Thrown</b></td> <td><b>Specialized</b></td> </tr> <tr> <td>bo staff<br>three-part staff<br>half-staff<br>nunchaku<br>short sticks<br>batons</td> <td>chain whip<br>rope dart<br>sickle & chain<br>weighted & chain<br>whip blade<br>scarf</td> <td>sai<br>kama<br>butterfly sword<br>hook sword<br>straight sword<br>curved sword</td> <td>monk spade<br>spear<br>naginata<br>longhandle blade<br>trident<br>scythe</td> <td>shuriken<br>throwing spikes<br>chakram<br>boomerang<br>darts<br>throwing axes</td> <td>tiger claws<br>spiked boots<br>war fan<br>iron knuckles<br>crescent knives<br>backfist rings</td> </tr> </table>"
+    }
+  ],
+
+  "pathTalent": [
+    {
+      "name": "Flow State",
+      "description": "After an action or defense roll, you can always keep the spotlight to prevent the GM from spending suspense. This continues as long as you keep taking action and don't roll a grim."
+    },
+    {
+      "name": "Healing Hands",
+      "description": "You can heal the bloodied pool of an ally. When you do, roll Presence as a defense roll against being bloodied—you take their pain onto yourself and must fend it off."
+    },
+    {
+      "name": "Lightning Reflexes",
+      "description": "You can always act first, unless completely surprised. You also ignore difficulty thorns on Agility defense rolls."
+    },
+    {
+      "name": "Mind Over Matter",
+      "description": "When you take a physical mark, you can instead choose to take a mental mark. When you clear any mark by rolling it, <b>take spark</b>."
+    },
+    {
+      "name": "Primordial Forces",
+      "description": "Choose an element: Air—Earth—Fire—Water. You can cast cantrips with that element, useful as <i>set dressing</i> and <i>cantrip utility</i>. On a critical using your element, charge it (mark its box). Spend it to pull off a <b>potent feat of force or movement</b> empowered by the element.<br><br><i>Special: You can take this again, gaining all elements. On a critical, charge two elements.</i>",
+      "trackers": [
+        { "name": "Air", "type": "checkbox" },
+        { "name": "Earth", "type": "checkbox" },
+        { "name": "Fire", "type": "checkbox" },
+        { "name": "Water", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "Tether",
+      "description": "Once per session, you can touch someone to link your spirits. You can sense their feelings and always know where they are. You can <b>push yourself</b> to: <i>assist them—speak into their mind—take mental damage for them—teleport to them.</i> If they get dropped, so do you. You must touch again or rest for the link to end. When it does, change (or create) your bond with them.",
+      "trackers": [
+        { "name": "Tether", "type": "checkbox" },
+        { "name": "Push", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "There Is No Try",
+      "description": "When putting your life or something you hold equally dear on the line, <b>5s count as 6s, but 4s count as 1s</b>. This generally occurs with dire stakes or after being bloodied in battle."
+    }
+  ],
+  "other": null
+}

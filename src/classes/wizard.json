@@ -1,0 +1,60 @@
+{
+  "name": "WIZARD",
+  "description": "ALSO: Diviner, Summoner, Witch",
+  "quote": "You wield arcane power through precise knowledge, casting spells from an ever-expanding repertoire, your studies endless.",
+  "coreTalent": {
+    "name": "SPELLCRAFT",
+    "description": "You have spellcasting ability. You roll Wits to cast and the spell theorem you are casting serves as its touchstone. You know 4 spell theorems inscribed in your spellbook, created using the Spell Crucible <i>(below)</i>. Each session, you can cast 4 spells and 2 potent spells. You choose which spell theorem to use when you cast.<br><br>You can learn new spell theorems from studying and experimenting with scrolls, which you might find as treasure or obtain from other wizards. This consumes the scroll.<br><br><b>GROWTH:</b> Every 2 levels, increase the castings of spells and potent spells per session by 1 and create 1 new spell theorem with the Spell Crucible.",
+    "trackers": [
+      { "name": "Spells", "type": "field" },
+      { "name": "Potent Spells", "type": "field" },
+      { "name": "Theorems", "type": "fieldSmallLong" },
+      { "name": "Theorems", "type": "fieldSmallLong" }
+    ]
+  },
+  "details": [
+    {
+      "name": "SPELL CRUCIBLE",
+      "description": "<b>Roll style, essence, and form. Choose 2, then assign a school.</b><br><br><b>STYLE</b><br><table><tr><td>Binding</td><td>Oozing</td><td>Shimmering</td><td>Shielding</td><td>Curious</td><td>Shadowy</td></tr><tr><td>Flaming</td><td>Slow</td><td>Wrathful</td><td>Petrifying</td><td>Hungry</td><td>Majestic</td></tr><tr><td>Charming</td><td>Silent</td><td>Dazzling</td><td>Piercing</td><td>Jovial</td><td>Frenzied</td></tr><tr><td>Cryptic</td><td>Withering</td><td>Primal</td><td>Screaming</td><td>Thunderous</td><td>Prismatic</td></tr><tr><td>Freezing</td><td>Seeping</td><td>Ferocious</td><td>Grasping</td><td>Venomous</td><td>Sickening</td></tr><tr><td>Mesmerising</td><td>Unseen</td><td>Expanding</td><td>Swift</td><td>Phantom</td><td>Terrible</td></tr></table><br><b>ESSENCE</b><br><table><tr><td>Oil</td><td>Earth</td><td>Lore</td><td>Lightning</td><td>Ash</td><td>Thorn</td></tr><tr><td>Crystal</td><td>Air</td><td>Fire</td><td>Spirit</td><td>Acid</td><td>Vine</td></tr><tr><td>Slime</td><td>Fungus</td><td>Death</td><td>Stasis</td><td>Sound</td><td>Water</td></tr><tr><td>Light</td><td>Hex</td><td>Blight</td><td>Terror</td><td>Mind</td><td>Draught</td></tr><tr><td>Doom</td><td>Smoke</td><td>Sight</td><td>Mist</td><td>Vermin</td><td>Wood</td></tr><tr><td>Pain</td><td>Energy</td><td>Feeling</td><td>Bone</td><td>Flesh</td><td>Worm</td></tr></table><br><b>FORM</b><br><table><tr><td>Beacon</td><td>Servant</td><td>Vision</td><td>Sentinel</td><td>Ray</td><td>Poison</td></tr><tr><td>Ring</td><td>Crown</td><td>Disk</td><td>Web</td><td>Guide</td><td>Embers</td></tr><tr><td>Chains</td><td>Word</td><td>Fang</td><td>Gate</td><td>Wall</td><td>Dark</td></tr><tr><td>Eye</td><td>Aura</td><td>Gust</td><td>Whispers</td><td>Wings</td><td>Wave</td></tr><tr><td>Cascade</td><td>Shield</td><td>Swarm</td><td>Pillar</td><td>Claw</td><td>Dream</td></tr><tr><td>Bubble</td><td>Hand</td><td>Dance</td><td>Explosion</td><td>Mask</td><td>Rot</td></tr></table><br><b>MAGIC SCHOOLS</b><br>◆ <b>ABJURATION:</b> Protects, blocks, dispels, or banishes.<br>◆ <b>CONJURATION:</b> Summons creatures, objects, and teleports.<br>◆ <b>DIVINATION:</b> Reveals information, predicts the future, and reads minds.<br>◆ <b>ENCHANTMENT:</b> Charms, influences, and curses sentient creatures.<br>◆ <b>EVOCATION:</b> Creates and controls elemental and magical forces.<br>◆ <b>ILLUSION:</b> Generates false images and sensory deceptions.<br>◆ <b>NECROMANCY:</b> Manipulates life, death, and the undead.<br>◆ <b>TRANSMUTATION:</b> Transforms matter and alters physical properties."
+    },
+    {
+      "name": "CREATING SPELL THEOREMS",
+      "description": "Roll for style, essence, and form, then choose two of the words to form a phrase. Next, assign it a school of magic. You interpret these as the spell's touchstones when you cast. Here are some examples:<br><br>◆ <b>Roll:</b> <i>Terrible, Spirit, Gate</i> → <b>Spirit Gate</b> sounds fun! You could assign it to Divination to speak to the dead or Conjuration to summon spirit warriors.<br><br>◆ <b>Roll:</b> <i>Flaming, Thorn, Aura</i> → <b>Thorn Aura</b> sounds fun! You could assign it Evocation to create a stabby shield or Enchantment to make someone a pariah."
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "ALCHEMIST",
+      "description": "Each session, you have a <b>4d Potions</b> resource pool. You can have a minor potion and roll the pool, or drop 1 and roll for a major potion. You know recipes for your spell theorems, plus two more rolled on the Spell Crucible. Learn new recipes by sacrificing potions.",
+      "trackers": [{ "name": "Potions", "type": "field" }]
+    },
+    {
+      "name": "ARCANE SPECIALTY",
+      "description": "Choose your specialty school. All of your spell theorems now have it plus another school. When casting, choose which school to use. On a critical with your specialty school, <b>take spark</b>."
+    },
+    {
+      "name": "ARCANIST",
+      "description": "Take +1d when rolling an arcana's pool and ignore the first die that would be dropped. You also gain <b>3 minor arcana</b> and <b>1 major arcana</b> that you've either created or found."
+    },
+    {
+      "name": "COLLEAGUES",
+      "description": "In every city, some towns, and the occasional dungeon, you can find a <i>powerful, eccentric</i> wizardly colleague who owes you a favor—or maybe you owe them one. If you go out of your way to meet and catch up, <b>take spark</b>."
+    },
+    {
+      "name": "FAMILIAR",
+      "description": "You manifest a small magical creature, an extension of yourself. You can communicate telepathically and send it on simple tasks, making a story roll to see how it goes. By entering a trance, you can use its senses. You can also <b>push yourself</b> to cast a spell through it. If your familiar takes damage, it vanishes and reappears at the start of the next session.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "MASTERED THEOREM",
+      "description": "Choose one of your spell theorems. You take +1d when casting it and gain 1 extra <b>potent spell</b> casting of it per session. Your name becomes linked to it and it begins to spread in popularity throughout wizardry—track its spread with campaign pools.",
+      "trackers": [{ "name": "Potent", "type": "checkbox" }]
+    },
+    {
+      "name": "PREPARED SPELL",
+      "description": "You gain 1 story per session and can spend story to flashback to casting a spell with specific triggers. If you need to roll a montage to get access to a place, the GM always takes suspense in place of an impact move. Roll for the spell's effectiveness now.",
+      "trackers": [{ "name": "Story", "type": "checkbox" }]
+    }
+  ],
+  "other": null
+}

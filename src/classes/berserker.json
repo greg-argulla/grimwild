@@ -1,0 +1,70 @@
+{
+  "name": "BERSERKER",
+  "description": "ALSO: Juggernaut, Reaver, Warbringer",
+  "quote": "You don’t just fight—you crush anything and everything in your path until nothing stands before you.",
+  "coreTalent": {
+    "name": "FRENZY",
+    "description": "Once per session, or when you get bloodied or take vex, you can enter a <b>frenzy</b> for a scene. During the frenzy, you can only take aggressive actions. You also:<br><br>◆ Take +1d for each mark you have and ignore all thorns from harm and marks.<br>◆ Inflict <b>collateral damage</b> on each action roll, regardless of the outcome. You must choose one: <i>send something flying—smash mooks—throw insults—wreck something.</i><br>◆ Always get a final action when dropped. On a critical, ignore getting dropped.<br><br>You can only exit a frenzy when <i>no challenger stands before you</i>, you get dropped, or you <b>push yourself</b> to calm down.<br><br><b>GROWTH:</b> Every 3 levels, gain 1 free activation of this per session.",
+    "trackers": [
+      { "name": "Frenzy", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" }
+    ]
+  },
+
+  "details": [
+    {
+      "name": "FRENZY SOURCE [OPTIONAL]",
+      "description": "Where does your wild power and ability to withstand pain come from? Choose 2 and smash them together to form the source and 1 that you have disdain for.<br><br><table><tr><td>◆ <i>Ritualistic preparation</i></td><td>◆ <i>Visions of horrific or heroic scenes</i></td></tr><tr><td>◆ <i>Trained tolerance to pain</i></td><td>◆ <i>Deep meditative focus</i></td></tr><tr><td>◆ <i>Long consumption of strange substances</i></td><td>◆ <i>Blood pact with a kindred force</i></td></tr><tr><td>◆ <i>Drawing power from ancestral spirits</i></td><td>◆ <i>Countless battles, countless injuries</i></td></tr><tr><td>◆ <i>Drawing primal power from the wild</i></td><td>◆ <i>Binding your spirit to a physical totem</i></td></tr><tr><td>◆ <i>Channeling memories you'll never forget</i></td><td>◆ <i>You really don’t know why you’re like this</i></td></tr></table>"
+    },
+    {
+      "name": "SCARS [OPTIONAL]",
+      "description": "Your ability to ignore pain has led you to take far more damage than most warriors. What scars do you bear that show your reckless nature? Choose 3 that you can show off.<br><br><table><tr><td>◆ <i>Crookedly broken nose</i></td><td>◆ <i>Wild, ripped hair</i></td><td>◆ <i>Torn earlobe or eartips</i></td></tr><tr><td>◆ <i>Web of deep cut scars</i></td><td>◆ <i>Muscles knotted like iron</i></td><td>◆ <i>Deep, cauterized wound</i></td></tr><tr><td>◆ <i>Permanently split knuckles</i></td><td>◆ <i>Several missing fingers</i></td><td>◆ <i>Cracked jawline</i></td></tr><tr><td>◆ <i>Empty eye socket</i></td><td>◆ <i>Jagged burn lines</i></td><td>◆ <i>Crushed foot</i></td></tr><tr><td>◆ <i>Smashed teeth</i></td><td>◆ <i>Gouged claw marks</i></td><td>◆ <i>Busted in skull</i></td></tr><tr><td>◆ <i>Cauliflower ears</i></td><td>◆ <i>Runic scarring from magic</i></td><td>◆ <i>Not a scratch on you</i></td></tr></table>"
+    }
+  ],
+
+  "pathTalent": [
+    {
+      "name": "Fearsome",
+      "description": "Your presence instills fear in others. The GM judges an NPC's response, or you can spend story to set it: <i>hostile—nervous—respectful—scared</i>. You can <b>push yourself</b> to pull off a potent <i>feat of intimidation</i>, like staring down a dragon or demanding to see the king.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "Flesh Wounds",
+      "description": "When you take physical damage, only a disaster can drop you. You can get bloodied multiple times. Each extra time inflicts +1t on rolls and increases your heal pool by 3d. These extra thorns can never be ignored (<i>e.g., Frenzy and Oathsworn talents</i>).",
+      "trackers": [
+        { "name": "Wounds", "type": "checkbox" },
+        { "name": "", "type": "checkbox" },
+        { "name": "", "type": "checkbox" },
+        { "name": "", "type": "checkbox" },
+        { "name": "", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "Into the Fray",
+      "description": "When you're the first into an intense situation, <b>5s count as 6s, but 4s count as 1s</b> on your first roll. You also <b>setup</b> the first person following you regardless of your roll outcome."
+    },
+    {
+      "name": "Joyful Warrior",
+      "description": "On a critical or when bloodied in battle, you <b>take spark</b> and can: <b>heal an ally's rattled pool</b>—<i>bring a dropped (not dead) ally back into the scene</i>."
+    },
+    {
+      "name": "Mighty",
+      "description": "When given time, you can pull off <b>potent feats of raw strength</b>, like <i>uprooting a tree</i> or <i>breaking through a castle gate</i>. You can <b>push yourself</b> to do it on the spot.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "Overkill",
+      "description": "On a critical when bringing violence, threats, or destruction to bear, you can: <i>cause an extra secondary effect</i>—<b>roll a task pool twice</b>."
+    },
+    {
+      "name": "Warsongs",
+      "description": "Each session, you can sing 2 bardsongs (<i>pg. 54</i>). Write down the composition of the only 3 songs you know. <br><br> <b>[PROHIBITED: BARD]</b>",
+      "trackers": [
+        { "name": "Warsong", "type": "checkbox" },
+        { "name": "", "type": "checkbox" }
+      ]
+    }
+  ],
+  "other": null
+}

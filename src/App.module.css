@@ -1,0 +1,484 @@
+.global {
+  background-image: url("./assets/bg.jpg");
+  background-size: cover;
+  font-family: "Crimson Pro", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  overflow: hidden;
+  height: 600px;
+}
+
+.scrollable {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 540px;
+  width: 500px;
+}
+
+.chatScrollable {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 460px;
+}
+
+@font-face {
+  font-family: "Tiller";
+  font-weight: bold;
+  src: url("./assets/tiller-bold.otf") format("opentype");
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom checkbox appearance */
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 1.25px solid #4c3b29;
+  border-radius: 0.25rem;
+  background-color: #edeae3;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #9d2024;
+  border-radius: 0.25rem;
+}
+
+input[type="checkbox"]:focus {
+  outline: none !important;
+}
+
+button {
+  border: 1.25px solid #4c3b29;
+  border-radius: 0.25rem;
+  background-color: #edeae3;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ffffff;
+}
+
+button:active {
+  background-color: #dddddd;
+}
+
+table {
+  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+:is(td, th) {
+  padding: 0.25rem;
+  border-style: solid;
+  border-color: #4c3b29;
+  border-width: 1px;
+}
+
+tr:nth-of-type(odd) {
+  background: #f2ecdf;
+}
+
+select {
+  all: unset;
+  border-radius: 0.25rem;
+  background-color: #edeae3;
+  border: 1.25px solid #4c3b29;
+  padding: 0.25rem;
+  color: #9d2024;
+  font-weight: 500;
+}
+
+.header {
+  font-family: "Tiller";
+  text-transform: uppercase;
+}
+
+.Sheet {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldFullWidth {
+  flex-grow: 1;
+}
+
+.fieldRow {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-evenly;
+}
+
+.fieldRowNoSpread {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.fieldColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldFullColumn {
+  display: flex;
+}
+
+.fieldContainer {
+  background: #e3dfd3;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 0.25rem #4c3b29 solid;
+}
+
+.fieldContainerRow {
+  background: #e3dfd3;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  border-left: 0.25rem #4c3b29 solid;
+  align-items: center;
+}
+
+.fieldLabel {
+  font-size: 14px;
+}
+
+.field {
+  all: unset;
+  color: #9d2024;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.fieldConditions {
+  all: unset;
+  color: #9d2024;
+  font-weight: 500;
+  font-size: 18px;
+  background-color: #edeae3;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  border: 1.25px #4c3b29 solid;
+}
+
+.fieldStat {
+  all: unset;
+  border-radius: 0.25rem;
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  background-color: #edeae3;
+  color: #9d2024;
+  font-family: "Tiller";
+  border: 1.25px #4c3b29 solid;
+}
+
+.fieldSmall {
+  all: unset;
+  border-radius: 0.25rem;
+  width: 5rem;
+  height: 1.5rem;
+  font-size: 10px;
+  text-align: center;
+  background-color: #edeae3;
+  color: #9d2024;
+  font-family: "Tiller";
+  border: 1.25px #4c3b29 solid;
+}
+
+.fieldSmallLong {
+  all: unset;
+  border-radius: 0.25rem;
+  width: 23.5rem;
+  height: 1.5rem;
+  font-size: 10px;
+  text-align: center;
+  background-color: #edeae3;
+  color: #9d2024;
+  font-family: "Tiller";
+  border: 1.25px #4c3b29 solid;
+}
+
+.fieldStatSmall {
+  all: unset;
+  border-radius: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1rem;
+  text-align: center;
+  background-color: #edeae3;
+  color: #9d2024;
+  font-family: "Tiller";
+  border: 1.25px #4c3b29 solid;
+}
+
+.fieldStatContainerSmall .fieldStat {
+  all: unset;
+  border-radius: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: #edeae3;
+  color: #9d2024;
+  font-family: "Tiller";
+  border: 1.25px #4c3b29 solid;
+}
+
+.fieldStatContainerSmallRow .fieldStat {
+  all: unset;
+  border-radius: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: #edeae3;
+  color: #9d2024;
+  font-family: "Tiller";
+  border: 1.25px #4c3b29 solid;
+}
+
+.fieldStatContainerSmall {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.fieldStatContainerSmallRow {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.fieldStatContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.fieldStatLabel {
+  font-weight: 400;
+  text-align: center;
+}
+
+.fieldStatContainerSmall .fieldStatLabel {
+  font-size: 12px;
+}
+
+.statContainer {
+  border-radius: 0.25rem;
+  background-color: #e3dfd3;
+  border-left: 0.25rem #4c3b29 solid;
+  border-right: 0.25rem #4c3b29 solid;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.statButton {
+  all: unset;
+  display: flex;
+  width: auto;
+  height: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  border: 1.25px #4c3b29 solid;
+  background-color: #edeae3;
+}
+
+.statDetail {
+  font-size: 14px;
+}
+
+.fieldRollerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.talentCount {
+  color: #9d2024;
+  font-family: "Tiller";
+  font-size: 18px;
+}
+
+.chatBox {
+  background: #e3dfd3;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 0.25rem #4c3b29 solid;
+  border-right: 0.25rem #4c3b29 solid;
+  width: 250px;
+}
+
+.chatField {
+  all: unset;
+  border-radius: 0.25rem;
+  width: 100%;
+  height: 1.5rem;
+  font-size: 1rem;
+  background-color: #edeae3;
+  color: #000;
+  border: 1.25px #4c3b29 solid;
+}
+
+.chatSender {
+  color: #9d2024;
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+
+.poolField {
+  all: unset;
+  color: #9d2024;
+  font-weight: 500;
+  font-size: 16px;
+  width: 120px;
+}
+
+.poolButtons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.poolContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 326px;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.rollResult {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.storyButton {
+  width: 3rem;
+  font-size: 12px;
+}
+
+.logo {
+  width: 6rem;
+}
+
+.characterRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.fixedMenu {
+  position: sticky;
+  border-radius: 0.25rem;
+  background-color: #e3dfd3;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 1rem;
+  margin-bottom: 0;
+  border: 2px #4c3b29 solid;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 99;
+}
+
+.menuButton {
+  border: none;
+  height: 2rem;
+  width: 5rem;
+}
+
+.menuButtonSelected {
+  background-color: darkgoldenrod;
+}
+
+.menuButtonSelected:hover {
+  background-color: goldenrod;
+}
+
+.pathList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.pathItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 8rem;
+  height: 8rem;
+  gap: 1rem;
+  margin-top: 1rem;
+  border: 2px #4c3b29 solid;
+  border-radius: 0.25rem;
+}
+
+.pathItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 8.5rem;
+  height: 8.5rem;
+  padding: 0.5rem;
+  gap: 1rem;
+  margin-top: 1rem;
+  border: 2px #4c3b29 solid;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  background-color: #e3dfd3;
+}
+
+.pathItem:hover {
+  background: #fff;
+}

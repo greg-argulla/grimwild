@@ -1,0 +1,60 @@
+{
+  "name": "ARTIFICER",
+  "description": "ALSO: Inventor, Mechanist, Tinkerer",
+  "quote": "You shape the world with your creations, blending ingenuity, technology, and just a touch of magic to forge wonders from the mundane.",
+  "coreTalent": {
+    "name": "INGENUITY",
+    "description": "You harness the power of creativity. Begin play with <b>1 minor arcana</b> and <b>1 major arcana</b>, chosen from those on <i>pg. 150</i> onwards or work with the GM to create your own arcana. You do not have talents—instead choose a <b>gadget</b> from your path list or reflavor a non-path talent as a gadget. Others can use your gadgets but take +1t and must always roll to use them.<br><br>When given time, you can pull off <b>potent feats of mechanical ingenuity</b> like <i>crafting a temporary device without proper materials or combining arcana and gadgets for wild effects</i>. You can <b>push yourself</b> to do it on the spot.<br><br><b>Engineering:</b> Take +1d at creating, repairing, or destroying mechanisms and arcana.<br><br><b>GROWTH:</b> Every 2 levels, gain a new minor and major arcana.",
+    "trackers": []
+  },
+  "details": [
+    {
+      "name": "Making Up Gadgets - Advice",
+      "description": "Reflavor your arcana, toss in some magitech buzzwords that <i>almost</i> make sense, and use them to sound like you know what you’re talking about—perfect for baffling the less inventive.<br><br> <b>MAGITECHNOBABBLE</b> <i>Roll 1 on each table, smash them together, and ramble on.</i><br><br> <table> <tr> <td>alche-</td> <td>tink-</td> <td>zapp-</td> <td>blun-</td> <td>fum-</td> <td>dab-</td> </tr> <tr> <td>fizzi-</td> <td>glim-</td> <td>boond-</td> <td>gogg-</td> <td>sput-</td> <td>splin-</td> </tr> <tr> <td>clank-</td> <td>cogg-</td> <td>whim-</td> <td>philz-</td> <td>miz-</td> <td>bung-</td> </tr> <tr> <td>mag-</td> <td>quib-</td> <td>wob-</td> <td>zind-</td> <td>cran-</td> <td>rat-</td> </tr> <tr> <td>whizz-</td> <td>griz-</td> <td>scran-</td> <td>quirk-</td> <td>jig-</td> <td>quab-</td> </tr> </table> <br> <table> <tr> <td>-nic</td> <td>-crank</td> <td>-nar</td> <td>-tome</td> <td>-nox</td> <td>-lash</td> </tr> <tr> <td>-tor</td> <td>-mage</td> <td>-gram</td> <td>-phage</td> <td>-press</td> <td>-hinge</td> </tr> <tr> <td>-al</td> <td>-flux</td> <td>-plex</td> <td>-tron</td> <td>-scope</td> <td>-ring</td> </tr> <tr> <td>-con</td> <td>-bolt</td> <td>-lock</td> <td>-spark</td> <td>-spire</td> <td>-shift</td> </tr> <tr> <td>-fuse</td> <td>-meter</td> <td>-gear</td> <td>-lume</td> <td>-turn</td> <td>-stone</td> </tr> <tr> <td>-matic</td> <td>-ator</td> <td>-cog</td> <td>-craft</td> <td>-drum</td> <td>-knob</td> </tr> </table> <br> <b>IT'S A...</b> metal, wood, crystal, cloth, glass, stone<br><br> <b>GADGET POWERED BY...</b> clockwork, burnables, steam, sunshine, kinetics, lightning<br><br> <b>THAT...</b> explodes, scans, builds, destroys, moves, protects<br><br> <b>BUT IS...</b> noisy, fragile, glowing, smelly, unstable, fidgety"
+    }
+  ],
+
+  "pathTalent": [
+    {
+      "name": "ANCHORSHOT",
+      "description": "You have a hook, harpoon, and rope contraption that anchors large monsters to the ground. With it, you have <b>potency</b> to hinder the movement of anything elephant-sized or larger. When hit, the target becomes <b>4d Tethered</b>. It anchors to the ground so you can leave it.",
+      "trackers": [{ "name": "Anchor", "type": "field" }]
+    },
+    {
+      "name": "AUTOMATONS",
+      "description": "You have three small helpers you created. Each has a different descriptor, an adjective that determines what tasks they can do. Each session, each has a <b>2d power pool</b> you roll to perform tasks. When assisting, they roll 1d of their pool. They can follow simple commands, without which they will simply search for you."
+    },
+    {
+      "name": "DOUBLE-BARRELED BLUNDERBUSS",
+      "description": "You have a firearm that fires specialized, crafted ammo. You get one shot of each per session. When you shoot, choose the ammo: <i>blast core—drill shot—inferno shot—scatter shot—shrapnel burst—tangler shot</i>. Each shot has a <i>secondary</i> or <i>collateral effect</i> related to the type. You can fire two ammo types at the same time for a <b>potent shot</b>.",
+      "trackers": [
+        { "name": "B", "type": "checkbox" },
+        { "name": "D", "type": "checkbox" },
+        { "name": "I", "type": "checkbox" },
+        { "name": "SC", "type": "checkbox" },
+        { "name": "SH", "type": "checkbox" },
+        { "name": "T", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "GRENADES",
+      "description": "Each session, you have a <b>4d Grenades</b> resource pool. You have access to the following bombs: <i>choking—flashbang—glue—smoke—stink</i>. Bombs can affect multiple targets or an area even without <b>potency</b>. You can drop 1 and roll the pool to have a <b>potent grenade</b>.",
+      "trackers": [{ "name": "Grenades", "type": "field" }]
+    },
+    {
+      "name": "MECHANICAL MOUNT",
+      "description": "You have a small mechanical vehicle, like a <i>steamwork spider</i> or <i>smoke-belching cart</i>. It has three features: <i>all-terrain—armored—burrowing—grappling hook—submergible—turbo boost</i>. You can activate each perk once per session to pull off a <b>potent feat of piloting</b>. It also has one drawback: <i>conspicuous—horrifying—slow—unreliable</i>."
+    },
+    {
+      "name": "STEAMHAMMER",
+      "description": "You have a large steam-infused warhammer. Each session, you have a <b>6d Steamhammer</b> power pool. You can roll the pool to pull off <b>potent feats of pulverizing force</b>. You can also not expend its steam to use it as a normal warhammer.",
+      "trackers": [{ "name": "Steam", "type": "field" }]
+    },
+    {
+      "name": "SWIFTWING",
+      "description": "You have <i>highly maneuverable</i> wings that allow you to glide (<i>not fly</i>). You gain a <b>3d power pool</b> while aloft, or <b>4d</b> if you have extreme height or speed. You must roll the pool as bonus dice with any physical roll made while aloft, including defenses. At 0d, you coast back to the ground.",
+      "trackers": [{ "name": "Wing", "type": "field" }]
+    }
+  ],
+  "other": "<i>If a gadget or arcana is ever lost, you can re-create one of them during any downtime. They take effort, but you remember the schematics.</i>"
+}

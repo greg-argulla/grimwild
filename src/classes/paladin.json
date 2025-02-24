@@ -1,0 +1,65 @@
+{
+  "name": "PALADIN",
+  "description": "ALSO: Crusader, Champion, Justiciar",
+  "quote": "You have sworn an oath and your unwavering dedication gives you powerful conviction, which you can wield to better this world.",
+  "coreTalent": {
+    "name": "OATHSWORN",
+    "description": "You draw power from an oath you swear to uphold until you die. Your oath is comprised of <b>three core tenets</b> (below) which dictate your behavior. You don't take thorns from bloodied or rattled, instead taking +1d on rolls with the related physical or mental stats. Each session, you also have <b>3 smite</b>. When attacking someone in combat or argument, you can spend it 1-for-1 to drop dice from a task pool <i>after</i> rolling it.<br><br> <b>Affirmation:</b> Each session, you can <b>give spark to one player</b> who joined a scene involving your tenets, whether they followed them or tried leading you astray. When a tenet is in violation, discuss the toll that has had on you and think on a chance for atonement. <b>Take 1 less smite</b> for each tenet in violation. When you atone, <b>take spark</b>.<br><br> <b>GROWTH:</b> Every 2 levels, increase smite by 1.",
+    "trackers": [
+      { "name": "Smite", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "Tenent #1", "type": "fieldSmallLong" },
+      { "name": "Tenent #2", "type": "fieldSmallLong" },
+      { "name": "Tenent #3", "type": "fieldSmallLong" }
+    ]
+  },
+  "details": [
+    {
+      "name": "SWEAR YOUR OATH",
+      "description": "At character creation, or over the first few sessions, detail the <b>THREE TENETS</b> that form the core of your oath. Write your own specific tenets (<i>below</i>), or use the table (<i>next page</i>) to create flexible ones that you can refine and explore through play. To write your own tenets:<br><br>◆ <b>Choose a character detail or two</b>, such as a trait, bond, or background.<br>◆ <b>Link it to a short, actionable phrase.</b> It should naturally arise from the fiction occasionally and present you with dilemmas. Work with the GM to ensure this as you write it.<br><br><b>Rank the tenets in order of importance.</b> If they ever conflict, following a higher one avoids violating a lower one.<br><br><b><i>You must uphold your tenets, or risk violation.</i></b> They are absolutes, but <i>they can evolve</i> as it makes sense or best serves the fiction (and game at the table). When you <b>violate</b> a tenet, slash its box. For a second or severe violation, fill in the box—it is in <b>heavy violation</b>.<br><br><b><i>You break a tenet</i></b> when you violate it again while in heavy violation (<i>filled box</i>). You can no longer atone for that tenet. Breaking two tenets makes you an <b>Oathbreaker</b> (<i>below</i>).<br><br><b>Atonement for tenets in violation require great deeds.</b> The deed must outweigh the severity of the violation itself—ask the other players if unsure. Once completed, clear the box.<br><br><b>OATHBREAKER:</b> You lose your Oathsworn core talent, but gain hidden potential. You may choose a new non-core talent or the Warlock's Pact core talent in its place.<br><br><b>Redemption</b> requires an appropriately epic <i>Ritual of Atonement</i> at a sacred place or a mythic deed to atone for your transgressions. Success restores your core talent while allowing you to keep the talent gained from breaking your oath. Redemption is possible only once."
+    },
+    {
+      "name": "TENET BUILDER ",
+      "description": "<i>[ROLL, THEN CHOOSE AN OPTION. REWRITE FOR CLARITY.]</i><table><tr><th>I SWEAR TO BRING</th><th>TO—FOR THE</th><th>DESPITE—BECAUSE OF</th></tr><tr><td>honor—valor</td><td>forgotten—powerless</td><td>my desire for ~</td></tr><tr><td>justice—revenge</td><td>redeemable—irredeemable</td><td>my trait, ~</td></tr><tr><td>faith—doubt</td><td>reformers—traditionalists</td><td>my arc to ~</td></tr><tr><td>mercy—judgement</td><td>devout—faithless</td><td>my background of ~</td></tr><tr><td>strength—compassion</td><td>evil—defiled</td><td>my bond with ~</td></tr><tr><td>truth—wisdom</td><td>leaders—people</td><td>my lack of ~</td></tr></table>"
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "AEGIS",
+      "description": "You take +1d when defending with a shield and can use it to make a defense roll in a nearby ally's place. You can <b>push yourself</b> to defend multiple allies from a single attack, like <i>blocking dragonfire</i>. On a perfect, everyone you protected takes spark.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "AUTHORITY",
+      "description": "Your presence fills the air with authority. The GM judges an NPC's response, or you can spend story to set it: <b>admiration—obedience—respect—defiance</b>. You can <b>push yourself</b> to pull off a <b>potent feat of righteous command</b>, like <i>ordering a demon to kneel</i> or <i>silencing a riot with a word</i>.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "CHALLENGE",
+      "description": "You can <b>push yourself</b> to challenge a foe. You take +1d on all rolls against them, but give them 1 suspense. If they do anything besides confront you, you can <b>interrupt</b> it. On a perfect, the challenge continues. If an ally engages your foe, the challenge ends.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "DAUNTLESS",
+      "description": "<b>Take spark</b> when one of your rolls is cut. You also take +1d on the story roll when dropped. On a perfect, ignore getting dropped."
+    },
+    {
+      "name": "DIVINE BLESSING",
+      "description": "You have spellcasting as the Channel Divinity talent (<i>pg. 58</i>). Detail your god and choose one minor domain, a <b>4d power pool</b>. You can drop 1 and roll the pool to cast a potent spell. It replenishes each session.",
+      "trackers": [{ "name": "Domain", "type": "fieldTwo" }]
+    },
+    {
+      "name": "GUARDIAN",
+      "description": "You take +1d when you assist on a defense roll. If your own roll comes up as a 6, you both <b>take spark</b>."
+    },
+    {
+      "name": "REBUKE",
+      "description": "When the GM spends suspense to prompt an impact move, you take +1d on any follow-up action against the source. On a critical, <b>take spark</b>."
+    }
+  ],
+  "other": null
+}

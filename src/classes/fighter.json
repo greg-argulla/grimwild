@@ -1,0 +1,63 @@
+{
+  "name": "FIGHTER",
+  "description": "ALSO: Blademaster, Duelist, Sergeant",
+  "quote": "You become one with your weapon, and through it, you find your real purpose in this life.",
+  "coreTalent": {
+    "name": "WEAPON MASTERY",
+    "description": "Choose a fighting style that you have mastered: <i>brawling—dual-wielding—one-handed weapons—ranged weapons—thrown weapons—two-handed weapons</i>. You have a <b>mastery die</b>, a special d6. When you fight in your style, take +1d (<i>the mastery die</i>) on the roll. If the mastery die is a 6, it counts as a critical. If it's already a critical, <b>take spark</b>.<br><br><b>GROWTH:</b> Every 3 levels, your mastery die increases by +1d.",
+    "trackers": [{ "name": "Fighting Style", "type": "fieldSmall" }]
+  },
+  "details": [
+    {
+      "name": "WEAPON ORIGIN [OPTIONAL]",
+      "description": "For many fighters, their weapon is an important part of their past. Give your weapon some character and it will become a character itself in the story. Roll d66 twice on the table below to give your weapon, or each of your weapons, its own small story. You can also choose, or make up your own.<br><br> <table><tr><td>etched with words of loss</td><td>with an odd word etched into it</td><td>marked by secret society</td></tr><tr><td>gift from a childhood mentor</td><td>stitched with parent’s pattern</td><td>marked for each village visited</td></tr><tr><td>telling why you can’t return</td><td>covered in burn marks</td><td>with hidden compartment</td></tr><tr><td>given by your father</td><td>torn by an animal attack</td><td>notched each time it saved you</td></tr><tr><td>stolen from a family member</td><td>stamped with employer’s logo</td><td>worn from long usage</td></tr><tr><td>taken off a dead body</td><td>etched with a battle prayer</td><td>inscribed with book quote</td></tr><tr><td>found in your first dungeon</td><td>carved with lover’s initials</td><td>stolen from your first job</td></tr><tr><td>marred with blade nicks</td><td>stained with coal from a mine</td><td>embedded with an arrow</td></tr><tr><td>made from rare material</td><td>with a faded family crest</td><td>peace offering gift</td></tr><tr><td>with a scratched out insignia</td><td>taken as spoils of war</td><td>belonged to a gambler</td></tr><tr><td>picked up during a storm</td><td>with a best friend's initials</td><td>patched many times</td></tr><tr><td>marked from a lucky escape</td><td>scratched from fierce battle</td><td>with directions to a special place</td></tr></table>"
+    },
+    {
+      "name": "WEAPON KNOWLEDGE [ADVICE]",
+      "description": "As a fighter, bring your mastery of battle into play. You've likely trained in various weapons and understand their matchups. Weapons don't have specific rules differentiating them, but they do carry fictional weight which can impact vantage. Highlight favorable matchups or embrace bad ones for interesting tangles. Take spark by accepting the risks or retreating from a likely loss.<br><br>You don't need to be a weapon expert—lean into the cinematic. Basic details <i>(spears in a narrow hall, flails wrapping around shields)</i> can add a lot to the scene. Use your wises creatively, and remember, combat is freeform, so stretch your imagination."
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "ARCANE TRAINING",
+      "description": "You have spellcasting as the Spellcraft talent <i>(pg. 76)</i>. You roll Wits and can cast 3 spells and 1 potent spell per session. You know 3 spell theorems, created with the Spell Crucible, and can learn new spells from scrolls.",
+      "trackers": [
+        { "name": "Spells", "type": "checkbox" },
+        { "name": "", "type": "checkbox" },
+        { "name": "", "type": "checkbox" },
+        { "name": "Potent", "type": "checkbox" },
+        { "name": "Theorems", "type": "fieldSmallLong" }
+      ]
+    },
+    {
+      "name": "BULWARK",
+      "description": "Each session, you have a <b>3d Bulwark</b> resource pool from armor or other defenses. When you get bloodied or dropped from physical damage, roll the pool. If dice remain, ignore the damage.",
+      "trackers": [{ "name": "Bulwark", "type": "field" }]
+    },
+    {
+      "name": "CONTROL",
+      "description": "You can <b>push yourself</b> to declare a zone that enemies cannot cross without dealing with you. If they attempt to move past you, you can <b>interrupt</b> them. On a perfect, <b>take spark</b>.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "GOT YOUR BACK",
+      "description": "You can <b>push yourself</b> to assist an ally after they roll a grim. The ally can also roll 1d. On a perfect, you both <b>take spark</b>.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "MEASURED TONES",
+      "description": "When you speak in measured tones, people always stop and listen—you can declare <b>tame stakes</b> if desired. Unless completely surprised, you can <b>push yourself</b> to <b>interrupt</b> an impact move initiating aggression. If you change their mind, <b>take spark</b>.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "SWIFT RECOVERY",
+      "description": "On a perfect roll with an unmarked stat, clear a mark on another stat."
+    },
+    {
+      "name": "TACTICIAN",
+      "description": "During an intense action sequence, you can <b>push yourself</b> to tag 3 scene elements right away and 1 later in the sequence. When an ally interacts with a tagged element, you assist without risk on the roll. If no roll is needed, they <b>take spark</b>.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    }
+  ],
+  "other": "<b>COMBAT MANEUVERS [ADVICE]</b> Action rolls let you flavor combat however you like—don’t just swing a sword or jab a spear. Lean into the dramatic flowing nature of combat. On a critical, use setups and secondary effects to remove thorns or shift the fight. Don’t tunnel vision on the kill—change the battle to end it faster! Of course, anyone can try these, but as a fighter, you should master them.<br><br>◆ <b>Disarm:</b> Take their weapon to leave them vulnerable.<br>◆ <b>Knockdown:</b> Put them on the ground to gain the upper hand.<br>◆ <b>Pin Down:</b> Trap them in a position to keep them from acting or escaping.<br>◆ <b>Pull:</b> Drag them into danger or out of position.<br>◆ <b>Push:</b> Shove them away to protect allies or disrupt their own lines.<br>◆ <b>Sunder:</b> Break their gear to limit their options or get around their defenses."
+}

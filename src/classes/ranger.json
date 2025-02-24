@@ -1,0 +1,60 @@
+{
+  "name": "RANGER",
+  "description": "ALSO: Beastmaster, Pathfinder, Trapper",
+  "quote": "You stalk relentlessly, moving unseen through the wilderness, tracking your prey with deadly precision, and striking them at their weakest point.",
+  "coreTalent": {
+    "name": "HUNTER’S MARK",
+    "description": "Twice per session, you can declare a weakness in a non-humanoid creature. Describe what you know or see, tagging it with a <b>2d Weakness</b> pool. When anyone targets the weakness specifically, you roll the pool as bonus dice on their roll. As it depletes, the creature learns to hide its weakness, causing it to shift its behavior. <b>Take spark</b> when a Weakness die rolls a perfect (not the overall result).<br><br><b>Prowess:</b> Take +1d at stealth, traversal, setting traps, and tracking.<br><br><b>Growth:</b> Every 2 levels, you can use Hunter's Mark one more time per session.",
+    "trackers": [
+      { "name": "Weakness", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" },
+      { "name": "", "type": "checkbox" }
+    ]
+  },
+  "details": [
+    {
+      "name": "FAVORITE TRAPS [OPTIONAL]",
+      "description": "Combine and interpret an effect, trigger, and the word \"trap\" (<i>poisonous bait trap</i>) to make three traps you commonly use while hunting or scouting. These aren't limitations, just options ready to use when you need to lay a trap.<br><br> <table> <tr> <td>stunning<br>falling<br>noisy<br>poisonous<br>entangling<br>injuring</td> <td>+</td> <td>tripwire<br>pressure plate<br>snare loop<br>bait<br>hidden<br>proximity</td> <td>+</td> <td><b>\"TRAP\"</b></td> </tr> </table>"
+    },
+    {
+      "name": "TELL-TALE SIGNS OF WEAKNESS [ADVICE]",
+      "description": "When you use your hunter's mark, detail a weakness, how you notice it, and how you can exploit it. This increases your ranger's competency and adds a level of detail to the hunt.<br><br> ◆ <b>Fire Sensitivity:</b> Flinches near flames, avoids heat, dry or cracked skin.<br> ◆ <b>Bright Light Weakness:</b> Cloudy eyes, avoids light, panics near flashes.<br> ◆ <b>Vulnerable Anatomy:</b> Exposed weak points, awkward movement, protects soft areas.<br> ◆ <b>Poison Susceptibility:</b> Sluggish breathing, avoids carrion, soft or delicate skin.<br> ◆ <b>Tunnel Vision:</b> Fixates on a single target, oblivious to surroundings, struggles to adapt.<br> ◆ <b>Poor Mobility:</b> Heavy tracks, slow movement, struggles on uneven terrain.<br> ◆ <b>Sound Sensitivity:</b> Winces at noises, large twitching ears, avoids loud terrain.<br> ◆ <b>Slow-minded:</b> Delayed reactions, struggles to recognize threats, easily tricked by decoys.<br> ◆ <b>Predictable Instincts:</b> Easily baited or lured, reacts predictably to threats, overcommits."
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "ANIMAL COMPANION",
+      "description": "You're accompanied by a fiercely loyal animal. Each PC adds a reciprocal bond with it. Choose <b>3 tricks</b> that it knows and <b>2 flaws</b> that it has:<br><br><b>Tricks:</b> <i>distract—fight—guard—perform—rescue—retrieve—scout—search—track—warn.</i><br><b>Flaws:</b> <i>aggressive—clumsy—grumpy—insatiable—jumpy—noisy—overprotective—scary—unruly.</i><br><br>You roll 3d for anything it knows a trick for and 1d on everything else. It has only two damage boxes, <b>marked</b> (for any mark) and <b>hurt</b> (for bloodied or rattled). You can always have it exit a scene when hurt. If lost, you can bond with a new animal or select a new talent.<br><br><i>Special:</i> You can take this talent again to grant it 3 more tricks and another marked box."
+    },
+    {
+      "name": "KEEN SENSES",
+      "description": "Your senses are twice as sharp as normal. You can pull off <i>potent feats of tracking</i> and can always get a <b>hint</b> or <b>reveal</b> on vigilance against living creatures."
+    },
+    {
+      "name": "RELENTLESS",
+      "description": "You can pull off <i>potent feats of traversal</i> and can always move at full speed, unhindered by what's in your way."
+    },
+    {
+      "name": "SCOUT AHEAD",
+      "description": "You gain 1 story per session and can spend story to flashback to scouting ahead and: <i>sabotage something—set a trap—survey the area (ask 2 questions)—take out a danger—set up an <b>interrupt</b></i>. Make a montage roll, taking +1d for prowess. The GM always takes suspense in place of an impact move.",
+      "trackers": [{ "name": "Story", "type": "checkbox" }]
+    },
+    {
+      "name": "SEASONED HUNTER",
+      "description": "You always know where a monster's lair will be. Once per session, you can tell all to Look Out! and declare how a monstrous challenge spends 1 of its suspense on a move to attack your party. Anyone involved takes +1d on a defense roll and follow-up action rolls.",
+      "trackers": [{ "name": "Look Out!", "type": "checkbox" }]
+    },
+    {
+      "name": "SHARPSHOOTER",
+      "description": "When given time, you can pull off <i>potent feats of ranged precision</i>, like shooting <i>just beyond maximum range</i> or into <i>near complete cover</i>. You can also <b>push yourself</b> to do it on the spot.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    },
+    {
+      "name": "TROPHIES",
+      "description": "When you play a key part in slaying a <i>powerful monster</i>, you can harvest a <b>trophy</b> from it. This acts as a wand (pg. 23) that only you can use. <b>Minor trophies</b> require no roll to harvest. <b>Major trophies</b> require a Wits action roll. The monster’s name, ability, and body part are the touchstone. You also gain one <b>major trophy</b> when you take this—detail it. Some examples:<br><br>▶ <i>Eye of the Basilisk:</i> 4d Stoneflesh wand. A minor wand slows someone. A major wand turns them to a statue.<br>▶ <i>Horns of a Minotaur:</i> 4d Powerful Charge wand. A minor wand is a speed boost. A major wand gives potency.<br>▶ <i>Heart of a Troll:</i> 4d Regeneration wand. A minor wand removes small ailments. A major wand removes marks."
+    }
+  ],
+  "other": null
+}

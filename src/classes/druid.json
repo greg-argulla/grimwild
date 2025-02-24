@@ -1,0 +1,65 @@
+{
+  "name": "DRUID",
+  "description": "ALSO: Shapeshifter, Grovekeeper, Wildling",
+  "quote": "You embrace and embody the untamed power of the natural world, transforming into beasts and channeling the spirit of the wild.",
+  "coreTalent": {
+    "name": "WILD SHAPE",
+    "description": "You can shift into the form of any beast you're familiar with. You have a <b>4d Wild Shape</b> resource pool, rolled when you shift—at 0d, you fail to turn into that form. The pool replenishes after each scene.<br><br>You take on the form's physical qualities and feral instincts. Move your stat points around to represent this, with a min. of 1 and max. of 3 in a stat. You lose access to any talent related to your own physical form.<br><br>Some forms are more difficult to shift into. For each <b>wild talent</b> (max 2) a form has, drop 1d from the pool before rolling it. These are things like <i>aquatic, smaller than a cat, bigger than a bear, venomous,</i> and <i>flight</i>. It can also be a specific talent from a path, or anything that would require a heritage talent. The GM judges the <b>gray zone</b>.<br><br><b>GROWTH:</b> Every 2 levels, increase your Wild Shape pool by 1d.",
+    "trackers": [{ "name": "Wild Shape", "type": "field" }]
+  },
+  "details": [
+    {
+      "name": "DRUIDIC TELLS [OPTIONAL]",
+      "description": "Druids often exhibit tells—sometimes several—that reflect their deep connection with nature, such as animalistic traits or plant-like appearances. Even in a fantasy world, someone so attuned to nature is bound to attract attention, offering potential new vantage, outside assistance, or even opportunities for tangles. Below are some ideas for <i>features</i>:<br><br><table><tr><td>thorns</td><td>blossoming</td><td>feathered</td><td>bristled</td><td>roots</td><td>fluffy</td></tr><tr><td>moss</td><td>bark</td><td>earthen</td><td>hoofed</td><td>vibrant</td><td>silken</td></tr><tr><td>vines</td><td>glowing</td><td>translucent</td><td>tangled</td><td>crystalline</td><td>smokey</td></tr><tr><td>tusked</td><td>velvet</td><td>murky</td><td>speckled</td><td>verdant</td><td>willowy</td></tr><tr><td>shimmering</td><td>antlered</td><td>ashen</td><td>spiny</td><td>gnarled</td><td>fragrant</td></tr><tr><td>scaly</td><td>longtoothed</td><td>dewy</td><td>breezy</td><td>misty</td><td>petals</td></tr></table>"
+    },
+    {
+      "name": "WILD TALENTS [EXAMPLES]",
+      "description": "Below are some examples of beasts that have wild talents. Already existing talents are listed with a page number reference. Others are made for that beast.<table><tr><td><b>Chimpanzee:</b> Relentless (pg. 69)</td><td><b>Eagle:</b> Flight</td></tr><tr><td><b>Wolf:</b> Keen Senses (pg. 69)</td><td><b>Snake:</b> Poisoner (pg. 71)</td></tr><tr><td><b>Rhino:</b> Bulwark (pg. 63)</td><td><b>Lion:</b> Fearsome (pg. 57)</td></tr><tr><td><b>Octopus:</b> Shape & color mimicking</td><td><b>Dolphin:</b> Fast swimmer</td></tr><tr><td><b>Cheetah:</b> Incredibly fast sprinting.</td><td><b>Crocodile:</b> Swamp camouflage</td></tr><tr><td><b>Bear:</b> Mighty (pg. 57)</td><td><b>Honey Badger:</b> Iron Will (pg. 59)</td></tr></table>"
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "HERBALISM",
+      "description": "Before each session, use the Herbalism Crucible to make two herb names (<i>snakeberry, blastbane</i>). You have <i>1 minor potion of one and 1 major potion of the other</i>. The name is the touchstone. They lose effect after the session. One time only, you can have 1 mythic potion (<i>choose after rolling</i>).<br><br><table><tr><td>choke</td><td>pearl</td><td>white</td><td>dream</td><td>mist</td><td>zap</td></tr><tr><td>sticky</td><td>stone</td><td>sun</td><td>feather</td><td>coal</td><td>blood</td></tr><tr><td>black</td><td>moon</td><td>devil</td><td>wild</td><td>freeze</td><td>blast</td></tr><tr><td>smoke</td><td>snake</td><td>honey</td><td>mirror</td><td>sting</td><td>ink</td></tr><tr><td>shriek</td><td>mimic</td><td>goat</td><td>worm</td><td>steel</td><td>stink</td></tr><tr><td>giggle</td><td>needle</td><td>night</td><td>swell</td><td>faerie</td><td>flame</td></tr></table><br><table><tr><td>cap</td><td>lily</td><td>thistle</td><td>pod</td><td>stem</td><td>petal</td></tr><tr><td>wort</td><td>reed</td><td>bell</td><td>bud</td><td>shoot</td><td>pear</td></tr><tr><td>rose</td><td>flower</td><td>leaf</td><td>tongue</td><td>bark</td><td>tuber</td></tr><tr><td>bush</td><td>root</td><td>wood</td><td>berry</td><td>funnel</td><td>vine</td></tr><tr><td>shroom</td><td>spine</td><td>grass</td><td>lace</td><td>moss</td><td>seed</td></tr><tr><td>sprout</td><td>shade</td><td>thorn</td><td>bane</td><td>branch</td><td>weed</td></tr></table>",
+      "trackers": [
+        { "name": "Herb 1", "type": "fieldSmall" },
+        { "name": "", "type": "checkbox" },
+        { "name": "Herb 2", "type": "fieldSmall" },
+        { "name": "", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "KINDRED SPIRITS",
+      "description": "You can speak with animals and spirits of the wild, their personalities shaped by their instincts. <b>You are known to them</b>—when you meet, roll their bond with you <i>(pg. 14)</i> or spend story to establish it. When you call, those nearby will answer."
+    },
+    {
+      "name": "PRIMORDIAL BONDS",
+      "description": "You have a bond with each of the primordial elements, <b>Air, Earth, Fire,</b> and <b>Water</b>. Roll the bonds <i>(pg. 14)</i>, then change one to <b>deep</b>. You have spellcasting, rolling Presence to call on an element, which serves as the touchstone. You can call on each element once per session, or twice if your bond is <b>deep</b>. You can mark two usages of a single element to cast a potent spell. You can combine usages of two elements to take +1d and use both as a touchstone. Bonds change, <i>for better or worse</i>—pursue great deeds and rituals to <b>deepen</b> them.",
+      "trackers": [
+        { "name": "Air", "type": "checkbox" },
+        { "name": "Earth", "type": "checkbox" },
+        { "name": "Fire", "type": "checkbox" },
+        { "name": "Water", "type": "checkbox" },
+        { "name": "Deep Bond", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "REGROWTH",
+      "description": "When you heal bloodied, drop 1d then roll it. You can also give yourself treatment if you have <b>time</b>, no roll required."
+    },
+    {
+      "name": "TRUE SHAPE",
+      "description": "Choose 1 beast form. If it has no wild talents, you can shift into it without rolling wild shape, even at 0d. If it has wild talents, you drop 1d less than normal when you shift."
+    },
+    {
+      "name": "VERDANT WHISPERS",
+      "description": "You can commune with plants, their personalities as odd and unique as their forms. <b>Roll Wits to decipher their messages</b>, as they remember all but speak in ways truly hard to understand. You always get a <b>hint</b> or <b>reveal</b> on vigilance in places teeming with plant life."
+    },
+    {
+      "name": "WINDCALLER",
+      "description": "Your voice carries on the winds over great distances. You can <b>push yourself</b> to summon or dismiss, but not control: <i>dense fog—diving temperatures—heavy rain—snowfall—strong winds—thunder</i>. You can perform weather rituals without ritual anchors.",
+      "trackers": [{ "name": "Push", "type": "checkbox" }]
+    }
+  ],
+  "other": null
+}

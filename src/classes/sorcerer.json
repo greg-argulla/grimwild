@@ -1,0 +1,58 @@
+{
+  "name": "SORCERER",
+  "description": "ALSO: Channeler, Elementalist, Stormcaller",
+  "quote": "You are a conduit for ancient and unpredictable forces, shaping spells out of the raw magic that flows through you.",
+  "coreTalent": {
+    "name": "SORCERY",
+    "description": "You have spellcasting ability. You roll Presence to cast and your magic paths and techniques serve as touchstones. Choose any 4 below (or make a magic path up with the GM), with at least 1 magic path and 1 technique:<br><br><b>Magic paths:</b> <i>blood—decay—flame—frost—lux—shadow—stone—tempest.</i><br><b>Techniques:</b> <i>attack—create—defend—enhance—hinder—influence—transform—traverse.</i><br><br>You can cast spells at-will, though they always carry risk and require a roll. When you cast, each spell must combine at least one magic path and one technique as touchstones. You can <b>push yourself</b> to cast a <b>potent spell</b>, but gain no free activation of it.<br><br>When casting, rolling two or more 1s (including thorns) triggers a secondary <b>wild surge</b>—raw magic spirals out of your control. <b>Make a 2d story roll</b> to see what happens. The effect might stem from your touchstones, raw magical essence, or something chaotically random. Use the GM crucible or ask around your group for ideas.<br><br><b>GROWTH:</b> Every 2 levels, gain a new technique or magic path.",
+    "trackers": [
+      { "name": "Magic Paths & Techniques", "type": "fieldSmallLong" }
+    ]
+  },
+  "details": [
+    {
+      "name": "RANDOM WILD SURGES [OPTIONAL]",
+      "description": "<b>For truly wild surges,</b> you can let it be completely random instead of deciding as a group. Roll these all at once: 2d (story roll), 2d (wild surge crucible below), and 2d8. The d8 determine a sorcery path and sorcery technique.<br><br>To randomly select a target, roll an additional 2d. Assign numbers to each PC and use remaining numbers for NPCs or the environment. On doubles, it targets that thing as if a critical or disaster. On an actual critical, it targets everything.<br><br><b>WILD SURGE CRUCIBLE</b> Roll 1 on each table, smash them together, and interpret.<br><br><table><tr><td><b>skin</b></td><td><b>temperature</b></td><td><b>icy</b></td><td><b>smoke</b></td><td><b>rain</b></td><td><b>lightning</b></td></tr><tr><td>gust</td><td>sparks</td><td>rattle</td><td>tremor</td><td>color</td><td>scent</td></tr><tr><td>ground</td><td>fire</td><td>water</td><td>light</td><td>debris</td><td>flicker</td></tr><tr><td>creatures</td><td>growth</td><td>boom</td><td>effect</td><td>steps</td><td>levitation</td></tr><tr><td>cloud</td><td>invisibility</td><td>gloom</td><td>distortion</td><td>metal</td><td>eye</td></tr><tr><td>shadow</td><td>clock</td><td>twist</td><td>laughter</td><td>breath</td><td>hum</td></tr></table><br><table><tr><td><b>birds</b></td><td><b>whispers</b></td><td><b>glowing</b></td><td><b>illusion</b></td><td><b>rapid</b></td><td><b>whirlwind</b></td></tr><tr><td>smell</td><td>static</td><td>hunger</td><td>image</td><td>emotion</td><td>glimmer</td></tr><tr><td>lifted</td><td>change</td><td>phrase</td><td>shock</td><td>sound</td><td>echo</td></tr><tr><td>shattering</td><td>scatter</td><td>feeling</td><td>pop</td><td>brief</td><td>shimmer</td></tr><tr><td>shift</td><td>size</td><td>surface</td><td>agitation</td><td>apparition</td><td>sparkle</td></tr><tr><td>notes</td><td>vision</td><td>voice</td><td>mark</td><td>glow</td><td>dazzle</td></tr></table>"
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "ELDRITCH GROWTH",
+      "description": "The maelstrom of magic has twisted your body. You gain a permanent physical feature like <i>metal-rending claws, venomous fangs, leathery wings,</i> or <i>thrashing tentacles</i>. In addition to its obvious benefits, it now serves as a touchstone."
+    },
+    {
+      "name": "MAELSTROM",
+      "description": "You open yourself fully to the maelstrom of raw magic. When you cast a <b>potent spell</b>, 5s count as 6s, but 4s count as 1s. These 4s also count as 1s towards <b>wild surge</b>."
+    },
+    {
+      "name": "MAGIC SENSE",
+      "description": "You always get a <b>hint</b> or <b>reveal</b> on vigilance involving magic. When you avoid or disrupt it, <b>take spark</b>."
+    },
+    {
+      "name": "SPELLEATER",
+      "description": "Each session, you have a <b>3d Spelleater</b> resource pool. When you suffer from magic, roll the pool. If dice remain, ignore the effect and bank <b>essence</b> (max 2). You can spend essence to increase a spellcasting die result by 1, but it triggers <b>wild surge</b>.",
+      "trackers": [
+        { "name": "Spelleater", "type": "field" },
+        { "name": "Essence", "type": "checkbox" },
+        { "name": "", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "SUBTLE CASTING",
+      "description": "You can always cast spells subtly, able to conceal that you were the one that cast it. This doesn't defeat common sense, of course."
+    },
+    {
+      "name": "WISPS",
+      "description": "Two small spheres of your magic path float around you. Give them 2 traits: <i>annoying—capricious—malevolent—mesmerizing—whimsical</i>. They serve as touchstones. You can sacrifice one to: <b>assist without risk—distract someone—send a brief message far away—suffer vex in your stead</b>. Make story rolls to determine effects if sacrificed. They return each session.",
+      "trackers": [
+        { "name": "Sacrificed", "type": "checkbox" },
+        { "name": "", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "WRATH",
+      "description": "When you or a nearby ally gets bloodied, rattled, or dropped, you take +1d and <b>potency</b> on your next spell if you immediately lash out."
+    }
+  ],
+  "other": null
+}

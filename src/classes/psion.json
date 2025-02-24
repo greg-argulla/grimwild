@@ -1,0 +1,54 @@
+{
+  "name": "PSION",
+  "description": "ALSO: Mentalist, Seer, Telepath",
+  "quote": "You unlock the limitless power of the mind, bending thought, will, and reality through focus and discipline.",
+  "coreTalent": {
+    "name": "AWAKENED MIND",
+    "description": "You have spellcasting ability. Choose 2 bastions below, which act as touchstones for your psionic magic. You roll two stats combined to cast, forming the roll by adding the bastion's key stats <i>(below)</i> and subtracting two <i>(3 Brawn and 2 Wits = 3d)</i>.<br><br>Each session, you have <b>8 power points</b>. Spend 1 power point to cast a spell. You can <b>augment</b> it by spending 1 or more points to: <i>cast a potent spell—take +1d (max once) on the roll—ignore thorns from damage—add another of your bastions as a touchstone</i>.<br><br><b>GROWTH:</b> Every 2 levels, learn a new bastion and gain 2 power points per session.",
+    "trackers": [
+      { "name": "Power Points", "type": "field" },
+
+      { "name": "Bastions", "type": "fieldSmallLong" }
+    ]
+  },
+  "details": [
+    {
+      "name": "BASTIONS",
+      "description": "Within your mind lie bastions of psionic power. As you grow stronger, you break down their walls, unlocking your true potential. These powers take shape as visions, psychic phenomena, and even physical manifestations in the form of <i>ectoplasm—pure essence of creation</i>.<br><br><table><tr><td><b>BIODYNAMICS</b> • Altering and enhancing your own body.</td></tr><tr><td><b>Key Stat:</b> Brawn + Agility.</td></tr><tr><td><b>Power:</b> <i>Heal your broken arm. Hold your breath for hours. Run faster than a horse.</i></td></tr></table><br><table><tr><td><b>CLAIRSENTIENCE</b> • Gaining knowledge and visions from the collective unconscious.</td></tr><tr><td><b>Key Stat:</b> Wits + Presence.</td></tr><tr><td><b>Power:</b> <i>Sense a hidden truth. See into someone's dreams. Find the way home.</i></td></tr></table><br><table><tr><td><b>METACREATION</b> • Creating objects from ectoplasm, pure mental energy.</td></tr><tr><td><b>Key Stat:</b> Brawn + Presence.</td></tr><tr><td><b>Power:</b> <i>Forge a glowing sword. Build a bridge of thought. Shape armor from pure will.</i></td></tr></table><br><table><tr><td><b>PSYCHOKINESIS</b> • Manipulating energy and force.</td></tr><tr><td><b>Key Stat:</b> Brawn + Wits.</td></tr><tr><td><b>Power:</b> <i>Shatter a boulder. Push an enemy back. Lift a heavy object with your mind.</i></td></tr></table><br><table><tr><td><b>TELEPATHY</b> • Mind-to-mind communication, manipulation, and control.</td></tr><tr><td><b>Key Stat:</b> Wits + Presence.</td></tr><tr><td><b>Power:</b> <i>Read someone's surface thoughts. Calm an angry mob. Implant a fleeting suggestion.</i></td></tr></table><br><table><tr><td><b>TRANSPOSITION</b> • Movement and manipulation of space.</td></tr><tr><td><b>Key Stat:</b> Agility + Wits.</td></tr><tr><td><b>Power:</b> <i>Teleport across a room. Switch places with an ally. Freeze someone in place.</i></td></tr></table>"
+    }
+  ],
+  "pathTalent": [
+    {
+      "name": "DISTURBED MIND",
+      "description": "Your presence is highly disturbing to others. The GM judges an NPC's response, or you can spend story to set it: <i>agitated—fractured—paranoid—repulsed</i>. Once per session when you would take vex, a nearby sentient creature—even an ally—must instead take a vex response.",
+      "trackers": [{ "name": "Vex", "type": "checkbox" }]
+    },
+    {
+      "name": "MIND SEED",
+      "description": "When you plant thoughts or alter memories in someone's head, you can always choose to have them take effect exactly when you want them to. You can decide this at any time later. Once per session, you can use this for an <b>interrupt</b>.",
+      "trackers": [{ "name": "Interrupt", "type": "checkbox" }]
+    },
+    {
+      "name": "MIND THIEF",
+      "description": "On a critical on a bastion roll, refund the power points spent and gain 3 power points. This causes mental <b>collateral damage</b> around you: <i>confusion—hallucinations—headaches—panic</i>. One time only, you can make this a ritual-level effect, affecting all within miles."
+    },
+    {
+      "name": "PSYCHIC WARRIOR",
+      "description": "On a perfect with a feat of martial prowess, spend no power points and take +1d on an immediate follow-up with a bastion. You can't follow-up with a bastion you just used."
+    },
+    {
+      "name": "READER",
+      "description": "You gain 1 story per session and can spend story when you first meet someone to know their foremost surface thought—they are like an open book to you. If you follow-up on it, it counts as a <b>setup</b>.",
+      "trackers": [{ "name": "Story", "type": "checkbox" }]
+    },
+    {
+      "name": "TUMULTUOUS MIND",
+      "description": "You can spend 2 power points to gain potency on any Wits or Presence defense roll. Regardless of the roll, if the attacker is sentient, you can <b>interrupt</b> their next impact move."
+    },
+    {
+      "name": "WILDER",
+      "description": "Your powers are inherently chaotic, either by nature or nurture, and you struggle to control them. Take +1d, but also +1t, on all psionic bastion rolls. You can never ignore thorns from any source, including by using your core talent. On a critical, regain the power points you just spent."
+    }
+  ],
+  "other": null
+}
