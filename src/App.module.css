@@ -347,7 +347,6 @@ select {
   gap: 0.25rem;
   border-left: 0.25rem #4c3b29 solid;
   border-right: 0.25rem #4c3b29 solid;
-  width: 250px;
 }
 
 .chatField {
@@ -363,7 +362,7 @@ select {
 
 .chatSender {
   color: #9d2024;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 0.5rem;
 }
 

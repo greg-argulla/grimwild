@@ -3,7 +3,7 @@ import styles from "./App.module.css";
 import { CharacterSheet } from "./CharacterSheet";
 import { PathList, Talent } from "./PathSheet";
 import OBR, { Metadata } from "@owlbear-rodeo/sdk";
-import { ChatBoard } from "./ChatBoard";
+import { ChatBoard, PoolBoard } from "./ChatBoard";
 import { CharacterList } from "./CharacterList";
 import classNames from "classnames";
 
@@ -79,6 +79,7 @@ export type Player = {
   bonds: Bond[];
   talents: Talent[];
   coreTalent: Talent | null;
+  bio: string;
 };
 
 export type Chat = {
@@ -120,9 +121,9 @@ function App() {
   const [cookiesNotEnabled, setCookiesNotEnabled] = useState<boolean>(false);
   const [player, setPlayer] = useState<Player | null>(null);
   const [timeoutID, setTimeoutID] = useState<number | null>(null);
-  const [tab, setTab] = useState<"playerList" | "chat" | "character" | "path">(
-    "chat"
-  );
+  const [tab, setTab] = useState<
+    "playerList" | "chat" | "character" | "path" | "pool"
+  >("chat");
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [poolList, setPoolList] = useState<Pool[]>([]);
 
@@ -459,6 +460,16 @@ function App() {
           </button>
           <button
             className={classNames(styles.menuButton, {
+              [styles.menuButtonSelected]: tab === "pool",
+            })}
+            onClick={() => {
+              setTab("pool");
+            }}
+          >
+            Pools
+          </button>
+          <button
+            className={classNames(styles.menuButton, {
               [styles.menuButtonSelected]: tab === "chat",
             })}
             onClick={() => {
@@ -514,6 +525,17 @@ function App() {
             setTab("character");
             setPlayer(player);
           }}
+        />
+      )}
+
+      {tab === "pool" && player && (
+        <PoolBoard
+          chat={chat}
+          role={role}
+          myChat={myChat}
+          id={id}
+          pools={poolList}
+          player={player}
         />
       )}
 

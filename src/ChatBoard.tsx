@@ -283,7 +283,7 @@ export const PoolInstance = ({
   );
 };
 
-export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
+export const PoolBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
   const [text, setText] = useState<string>("");
   const [diceCount, setDiceCount] = useState<number | null>(0);
   const [thornsCount, setThornCount] = useState<number | null>(0);
@@ -659,6 +659,104 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
             </button>
           </div>
         </div>
+        <div className={style.chatBox}>
+          <div id="chatbox" className={classNames(style.chatScrollable)}>
+            {chat.length
+              ? chat
+                  .sort((a, b) => a.id - b.id)
+                  .filter((chat) => {
+                    return (
+                      (chat.dice && chat.dice.length > 0) ||
+                      (chat.thorns && chat.thorns.length > 0)
+                    );
+                  })
+                  .map((chat) => (
+                    <ChatInstance
+                      chat={chat}
+                      key={chat.id}
+                      name={player.name}
+                    />
+                  ))
+              : ""}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
+  const [text, setText] = useState<string>("");
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      addMessage();
+    }
+  };
+
+  const addMessage = async () => {
+    if (text !== "") {
+      if (role === "GM") {
+        if (text === "/clearchat") {
+          clearChat();
+          setText("");
+          return;
+        }
+      }
+
+      const newMessage = {
+        id: Date.now(),
+        user: player.name,
+        message: text.trim(),
+      };
+      const newChat = [...myChat, newMessage];
+
+      const metadataGet = await OBR.scene.getMetadata();
+      const metadata = metadataGet["grimwild.extension/metadata"] as Record<
+        string,
+        any
+      >;
+
+      let metadataChange = { ...metadata };
+      metadataChange[id] = newChat;
+
+      setMetadata({
+        "grimwild.extension/metadata": metadataChange,
+      });
+
+      setText("");
+
+      setTimeout(() => {
+        var objDiv = document.getElementById("chatbox");
+        if (objDiv) {
+          objDiv.scrollTop = objDiv.scrollHeight;
+        }
+      }, 100);
+    }
+  };
+
+  const clearChat = async () => {
+    const metadataGet = await OBR.scene.getMetadata();
+    const metadata = metadataGet["grimwild.extension/metadata"] as Record<
+      string,
+      any
+    >;
+    const keys = Object.keys(metadata);
+
+    let clearedMetaData = { ...metadata };
+
+    keys.forEach((key) => {
+      clearedMetaData[key] = [];
+    });
+
+    setMetadata({
+      "grimwild.extension/metadata": clearedMetaData,
+    });
+  };
+
+  return (
+    <div className={classNames(style.Sheet)}>
+      <div className={style.fieldRow}>
         <div className={style.chatBox}>
           <div id="chatbox" className={classNames(style.chatScrollable)}>
             {chat.length

@@ -806,6 +806,21 @@ export const CharacterSheet = ({
           value={player.characterArc}
         />
       </div>
+      <img src={line} />
+      <div className={style.fieldRowNoSpread}>
+        <div className={style.header}>OTHER</div>
+        <div className={style.statDetail}>
+          Arcana / Character Notes / Notable Items
+        </div>
+      </div>
+      <img src={line} />
+      <TextArea
+        label={"Arcana / Character Notes / Notable Items"}
+        onChange={(value) => {
+          updatePlayer({ ...player, bio: value });
+        }}
+        value={player.bio}
+      ></TextArea>
     </div>
   );
 };

@@ -103,6 +103,7 @@ const PLAYER = (): Player => {
     bonds: [],
     talents: [],
     coreTalent: null,
+    bio: "",
   };
 };
 
