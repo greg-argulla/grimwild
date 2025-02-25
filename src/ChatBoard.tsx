@@ -283,56 +283,9 @@ export const PoolInstance = ({
   );
 };
 
-export const PoolBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
-  const [text, setText] = useState<string>("");
+export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
   const [diceCount, setDiceCount] = useState<number | null>(0);
   const [thornsCount, setThornCount] = useState<number | null>(0);
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      addMessage();
-    }
-  };
-
-  const addMessage = async () => {
-    if (text !== "") {
-      if (role === "GM") {
-        if (text === "/clearchat") {
-          clearChat();
-          setText("");
-          return;
-        }
-      }
-
-      const newMessage = {
-        id: Date.now(),
-        user: player.name,
-        message: text.trim(),
-      };
-      const newChat = [...myChat, newMessage];
-
-      const metadataGet = await OBR.scene.getMetadata();
-      const metadata = metadataGet["grimwild.extension/metadata"] as Record<
-        string,
-        any
-      >;
-
-      let metadataChange = { ...metadata };
-      metadataChange[id] = newChat;
-
-      setMetadata({
-        "grimwild.extension/metadata": metadataChange,
-      });
-
-      setText("");
-
-      setTimeout(() => {
-        var objDiv = document.getElementById("chatbox");
-        if (objDiv) {
-          objDiv.scrollTop = objDiv.scrollHeight;
-        }
-      }, 100);
-    }
-  };
 
   const addPool = async (value?: number) => {
     const poolGet: Pool = { id: Date.now(), name: "", value: value || 0 };
@@ -471,25 +424,6 @@ export const PoolBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
         objDiv.scrollTop = objDiv.scrollHeight;
       }
     }, 100);
-  };
-
-  const clearChat = async () => {
-    const metadataGet = await OBR.scene.getMetadata();
-    const metadata = metadataGet["grimwild.extension/metadata"] as Record<
-      string,
-      any
-    >;
-    const keys = Object.keys(metadata);
-
-    let clearedMetaData = { ...metadata };
-
-    keys.forEach((key) => {
-      clearedMetaData[key] = [];
-    });
-
-    setMetadata({
-      "grimwild.extension/metadata": clearedMetaData,
-    });
   };
 
   return (
