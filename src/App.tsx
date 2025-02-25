@@ -359,7 +359,7 @@ function App() {
 
   if (!isOBRReady) {
     return (
-      <div>
+      <div className={styles.global}>
         <div>
           <div style={{ color: "red", fontSize: 14 }}>No Scene found.</div>
           <div style={{ fontSize: 14 }}>
