@@ -2,7 +2,7 @@ import classNames from "classnames";
 import style from "./App.module.css";
 import line from "./assets/line.webp";
 import logo from "./assets/logo.webp";
-import { Player } from "./App";
+import { Player, setMetadata } from "./App";
 import OBR from "@owlbear-rodeo/sdk";
 import { logoMapping } from "./PathSheet";
 
@@ -59,9 +59,6 @@ export const Character = ({
 type Props = {
   playerList: Player[];
   onOpen: (player: Player) => void;
-  saveLocal: () => void;
-  loadLocal: () => void;
-  role: string;
 };
 
 const PLAYER = (): Player => {
@@ -109,13 +106,7 @@ const PLAYER = (): Player => {
   };
 };
 
-export const CharacterList = ({
-  playerList,
-  onOpen,
-  loadLocal,
-  saveLocal,
-  role,
-}: Props) => {
+export const CharacterList = ({ playerList, onOpen }: Props) => {
   const addPlayer = async () => {
     const playerGet = PLAYER();
     const metadataData = await OBR.scene.getMetadata();
@@ -125,7 +116,7 @@ export const CharacterList = ({
     let metadataChange = { ...metadata };
     metadataChange[playerGet.id] = playerGet;
 
-    OBR.scene.setMetadata({
+    setMetadata({
       "grimwild.character.extension/metadata": metadataChange,
     });
   };
@@ -140,15 +131,11 @@ export const CharacterList = ({
     if (confirm("Are you sure you want to delete the character?") == true) {
       delete metadataChange[id];
 
-      OBR.scene.setMetadata({
+      setMetadata({
         "grimwild.character.extension/metadata": metadataChange,
       });
     }
   };
-
-  const lastSaved = localStorage.getItem(
-    "grimwild.character.date.extension/metadata"
-  );
 
   return (
     <div
@@ -184,38 +171,6 @@ export const CharacterList = ({
             }}
           />
         ))}
-        {role === "GM" && (
-          <>
-            <img src={line} style={{ marginTop: "8rem" }} />
-
-            <div
-              className={style.statDescription}
-              style={{ color: "darkred", textAlign: "center" }}
-            >
-              Note: Characters are saved at each scene. Use this to transfer
-              your characters to another scene. Beware, that when you load
-              characters, it will replace/overwrite your current scene
-              characters!
-            </div>
-
-            <button
-              onClick={() => {
-                saveLocal();
-              }}
-            >
-              Save characters to local storage (Use this when switching scenes)
-            </button>
-
-            <button
-              onClick={() => {
-                loadLocal();
-              }}
-            >
-              Load characters from local storage{" "}
-              {lastSaved ? `(${new Date(lastSaved).toLocaleString()})` : ""}
-            </button>
-          </>
-        )}
       </div>
     </div>
   );

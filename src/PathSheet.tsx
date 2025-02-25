@@ -49,7 +49,7 @@ import rogueData from "./classes/rogue.json";
 import sorcererData from "./classes/sorcerer.json";
 import warlockData from "./classes/warlock.json";
 import wizardData from "./classes/wizard.json";
-import { Chat, Player } from "./App";
+import { Chat, Player, setMetadata } from "./App";
 import { useState } from "react";
 import OBR from "@owlbear-rodeo/sdk";
 
@@ -483,7 +483,7 @@ export const PathList = ({
     let metadataChange = { ...metadata };
     metadataChange[id] = newChat;
 
-    OBR.scene.setMetadata({
+    setMetadata({
       "grimwild.extension/metadata": metadataChange,
     });
 

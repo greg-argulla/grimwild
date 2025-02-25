@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { Chat, Player, Pool } from "./App";
+import { setMetadata, type Chat, type Player, type Pool } from "./App";
 import OBR from "@owlbear-rodeo/sdk";
 
 import style from "./App.module.css";
@@ -149,7 +149,7 @@ export const addRoll = async (
   let metadataChange = { ...metadata };
   metadataChange[id] = newChat;
 
-  OBR.scene.setMetadata({
+  setMetadata({
     "grimwild.extension/metadata": metadataChange,
   });
   // setTab("chat");
@@ -319,7 +319,7 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
       let metadataChange = { ...metadata };
       metadataChange[id] = newChat;
 
-      OBR.scene.setMetadata({
+      setMetadata({
         "grimwild.extension/metadata": metadataChange,
       });
 
@@ -344,7 +344,7 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
     let metadataChange = { ...metadata };
     metadataChange[poolGet.id] = poolGet;
 
-    OBR.scene.setMetadata({
+    setMetadata({
       "grimwild.pool.extension/metadata": metadataChange,
     });
   };
@@ -359,7 +359,7 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
 
     delete metadataChange[id];
 
-    OBR.scene.setMetadata({
+    setMetadata({
       "grimwild.pool.extension/metadata": metadataChange,
     });
   };
@@ -373,7 +373,7 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
       let metadataChange = { ...metadata };
       metadataChange[pool.id] = { ...pool, lastEdit: id };
 
-      OBR.scene.setMetadata({
+      setMetadata({
         "grimwild.pool.extension/metadata": metadataChange,
       });
     }
@@ -413,7 +413,7 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
     let metadataChange = { ...metadata };
     metadataChange[id] = newChat;
 
-    OBR.scene.setMetadata({
+    setMetadata({
       "grimwild.extension/metadata": metadataChange,
     });
 
@@ -461,7 +461,7 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
     let metadataChange = { ...metadata };
     metadataChange[id] = newChat;
 
-    OBR.scene.setMetadata({
+    setMetadata({
       "grimwild.extension/metadata": metadataChange,
     });
 
@@ -487,7 +487,7 @@ export const ChatBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
       clearedMetaData[key] = [];
     });
 
-    OBR.scene.setMetadata({
+    setMetadata({
       "grimwild.extension/metadata": clearedMetaData,
     });
   };

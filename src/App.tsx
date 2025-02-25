@@ -100,6 +100,14 @@ export type Pool = {
   value: number;
 };
 
+export const setMetadata = (metadata: Metadata) => {
+  const metadataWithDate = {
+    ...metadata,
+    "grimwild.date.extension/metadata": Date.now(),
+  };
+  OBR.scene.setMetadata(metadataWithDate);
+};
+
 function App() {
   const [isOBRReady, setIsOBRReady] = useState<boolean>(false);
   const [unreadCount, setUnreadCount] = useState<number>(0);
@@ -117,7 +125,6 @@ function App() {
   );
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [poolList, setPoolList] = useState<Pool[]>([]);
-  const [lastSave, setLastSave] = useState<string>("");
 
   const createPlayerList = async (metadata: Metadata) => {
     const metadataGet = metadata[
@@ -192,7 +199,7 @@ function App() {
       let metadataChange = { ...metadata };
       metadataChange[playerGet.id] = { ...playerGet, lastEdit: id };
 
-      OBR.scene.setMetadata({
+      setMetadata({
         "grimwild.character.extension/metadata": metadataChange,
       });
       setTimeoutID(null);
@@ -200,41 +207,44 @@ function App() {
   };
 
   const saveLocal = async () => {
-    const metadataData = await OBR.scene.getMetadata();
-    const metadata = metadataData[
-      "grimwild.character.extension/metadata"
-    ] as Record<string, any>;
+    const metadata = await OBR.scene.getMetadata();
 
-    if (
-      confirm(
-        "Are you sure you want to save this character list? It will overwrite your previous locally saved characters!"
-      ) == true
-    ) {
-      localStorage.setItem(
-        "grimwild.character.extension/metadata",
-        JSON.stringify(metadata)
-      );
-      localStorage.setItem(
-        "grimwild.character.date.extension/metadata",
-        new Date().toISOString()
-      );
-      setLastSave(new Date().toISOString());
-    }
+    const metadataToStore = {
+      room: OBR.room.id,
+      dateNow: Date.now(),
+      "grimwild.character.extension/metadata":
+        metadata["grimwild.character.extension/metadata"],
+      "grimwild.pool.extension/metadata":
+        metadata["grimwild.pool.extension/metadata"],
+      "grimwild.extension/metadata": metadata["grimwild.extension/metadata"],
+    };
+
+    localStorage.setItem(
+      "grimwild.extension/metadata",
+      JSON.stringify(metadataToStore)
+    );
   };
 
   const loadLocal = async () => {
-    const savedLocal = localStorage.getItem(
-      "grimwild.character.extension/metadata"
-    );
+    const savedLocal = localStorage.getItem("grimwild.extension/metadata");
+    const metadata = await OBR.scene.getMetadata();
 
     if (savedLocal) {
+      const metadataStored = JSON.parse(savedLocal);
+      const metadataLastUpdate = metadata[
+        "grimwild.date.extension/metadata"
+      ] as number;
       if (
-        confirm(
-          "Are you sure you want to load this character list? It will overwrite your current characters in the scene!"
-        ) == true
+        metadataStored.room === OBR.room.id &&
+        metadataLastUpdate < metadataStored.dateNow
       ) {
-        OBR.scene.setMetadata({
-          "grimwild.character.extension/metadata": JSON.parse(savedLocal),
+        await setMetadata({
+          "grimwild.character.extension/metadata":
+            metadataStored["grimwild.character.extension/metadata"],
+          "grimwild.pool.extension/metadata":
+            metadataStored["grimwild.pool.extension/metadata"],
+          "grimwild.extension/metadata":
+            metadataStored["grimwild.extension/metadata"],
         });
       }
     }
@@ -244,6 +254,10 @@ function App() {
     OBR.onReady(async () => {
       OBR.scene.onReadyChange(async (ready) => {
         if (ready) {
+          if ((await OBR.player.getRole()) === "GM") {
+            await loadLocal();
+          }
+
           const metadata = await OBR.scene.getMetadata();
 
           if (metadata["grimwild.character.extension/metadata"]) {
@@ -285,6 +299,10 @@ function App() {
       });
 
       if (await OBR.scene.isReady()) {
+        if ((await OBR.player.getRole()) === "GM") {
+          await loadLocal();
+        }
+
         const metadata = await OBR.scene.getMetadata();
 
         if (metadata["grimwild.character.extension/metadata"]) {
@@ -352,6 +370,10 @@ function App() {
 
         const poolListGet = await createPoolList(metadata);
         setPoolList(poolListGet);
+
+        if ((await OBR.player.getRole()) === "GM") {
+          saveLocal();
+        }
       });
 
       OBR.action.onOpenChange(async (isOpen) => {
@@ -489,15 +511,11 @@ function App() {
 
       {!player && (
         <CharacterList
-          key={lastSave + "_chararacter-list"}
           playerList={playerList}
           onOpen={(player: Player) => {
             setTab("character");
             setPlayer(player);
           }}
-          saveLocal={saveLocal}
-          loadLocal={loadLocal}
-          role={role}
         />
       )}
 
