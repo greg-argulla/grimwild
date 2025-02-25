@@ -228,12 +228,10 @@ function App() {
   const loadLocal = async () => {
     const savedLocal = localStorage.getItem("grimwild.extension/metadata");
     const metadata = await OBR.scene.getMetadata();
-
     if (savedLocal) {
       const metadataStored = JSON.parse(savedLocal);
-      const metadataLastUpdate = metadata[
-        "grimwild.date.extension/metadata"
-      ] as number;
+      const metadataLastUpdate =
+        (metadata["grimwild.date.extension/metadata"] as number) ?? 0;
       if (
         metadataStored.room === OBR.room.id &&
         metadataLastUpdate < metadataStored.dateNow
