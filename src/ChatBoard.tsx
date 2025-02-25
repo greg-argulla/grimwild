@@ -660,7 +660,11 @@ export const PoolBoard = ({ chat, myChat, role, id, pools, player }: Props) => {
           </div>
         </div>
         <div className={style.chatBox}>
-          <div id="chatbox" className={classNames(style.chatScrollable)}>
+          <div
+            id="chatbox"
+            className={classNames(style.chatScrollable)}
+            style={{ width: 170 }}
+          >
             {chat.length
               ? chat
                   .sort((a, b) => a.id - b.id)
@@ -757,7 +761,7 @@ export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
   return (
     <div className={classNames(style.Sheet)}>
       <div className={style.fieldRow}>
-        <div className={style.chatBox}>
+        <div className={style.chatBox} style={{ width: 460 }}>
           <div id="chatbox" className={classNames(style.chatScrollable)}>
             {chat.length
               ? chat
@@ -772,7 +776,6 @@ export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
               : ""}
           </div>
           <input
-            id="chatbox"
             className={style.chatField}
             value={text}
             onChange={(evt) => {
