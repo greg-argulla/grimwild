@@ -246,11 +246,6 @@ function App() {
         if (ready) {
           const metadata = await OBR.scene.getMetadata();
 
-          console.log("CALL");
-          setPlayerList([]);
-          setPoolList([]);
-          setChatToCheckChanges([]);
-
           if (metadata["grimwild.character.extension/metadata"]) {
             const playerListGet = await createPlayerList(metadata);
             setPlayerList(playerListGet);
@@ -349,10 +344,6 @@ function App() {
   useEffect(() => {
     if (isOBRReady) {
       OBR.scene.onMetadataChange(async (metadata) => {
-        setPlayerList([]);
-        setPoolList([]);
-        setChatToCheckChanges([]);
-
         const currentChat = await createChatArray(metadata);
         setChatToCheckChanges(currentChat);
 
