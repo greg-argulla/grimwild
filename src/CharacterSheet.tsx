@@ -810,12 +810,12 @@ export const CharacterSheet = ({
       <div className={style.fieldRowNoSpread}>
         <div className={style.header}>OTHER</div>
         <div className={style.statDetail}>
-          Arcana / Character Notes / Notable Items
+          Arcana, Character Notes, Notable Items
         </div>
       </div>
       <img src={line} />
       <TextArea
-        label={"Arcana / Character Notes / Notable Items"}
+        label={""}
         onChange={(value) => {
           updatePlayer({ ...player, bio: value });
         }}
