@@ -117,6 +117,7 @@ function App() {
   );
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [poolList, setPoolList] = useState<Pool[]>([]);
+  const [lastSave, setLastSave] = useState<string>("");
 
   const createPlayerList = async (metadata: Metadata) => {
     const metadataGet = metadata[
@@ -198,11 +199,57 @@ function App() {
     }
   };
 
+  const saveLocal = async () => {
+    const metadataData = await OBR.scene.getMetadata();
+    const metadata = metadataData[
+      "grimwild.character.extension/metadata"
+    ] as Record<string, any>;
+
+    if (
+      confirm(
+        "Are you sure you want to save this character list? It will overwrite your previous locally saved characters!"
+      ) == true
+    ) {
+      localStorage.setItem(
+        "grimwild.character.extension/metadata",
+        JSON.stringify(metadata)
+      );
+      localStorage.setItem(
+        "grimwild.character.date.extension/metadata",
+        new Date().toISOString()
+      );
+      setLastSave(new Date().toISOString());
+    }
+  };
+
+  const loadLocal = async () => {
+    const savedLocal = localStorage.getItem(
+      "grimwild.character.extension/metadata"
+    );
+
+    if (savedLocal) {
+      if (
+        confirm(
+          "Are you sure you want to load this character list? It will overwrite your current characters in the scene!"
+        ) == true
+      ) {
+        OBR.scene.setMetadata({
+          "grimwild.character.extension/metadata": JSON.parse(savedLocal),
+        });
+      }
+    }
+  };
+
   useEffect(() => {
     OBR.onReady(async () => {
       OBR.scene.onReadyChange(async (ready) => {
         if (ready) {
           const metadata = await OBR.scene.getMetadata();
+
+          console.log("CALL");
+          setPlayerList([]);
+          setPoolList([]);
+          setChatToCheckChanges([]);
 
           if (metadata["grimwild.character.extension/metadata"]) {
             const playerListGet = await createPlayerList(metadata);
@@ -302,6 +349,10 @@ function App() {
   useEffect(() => {
     if (isOBRReady) {
       OBR.scene.onMetadataChange(async (metadata) => {
+        setPlayerList([]);
+        setPoolList([]);
+        setChatToCheckChanges([]);
+
         const currentChat = await createChatArray(metadata);
         setChatToCheckChanges(currentChat);
 
@@ -447,11 +498,15 @@ function App() {
 
       {!player && (
         <CharacterList
+          key={lastSave + "_chararacter-list"}
           playerList={playerList}
           onOpen={(player: Player) => {
             setTab("character");
             setPlayer(player);
           }}
+          saveLocal={saveLocal}
+          loadLocal={loadLocal}
+          role={role}
         />
       )}
 

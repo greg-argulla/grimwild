@@ -59,6 +59,9 @@ export const Character = ({
 type Props = {
   playerList: Player[];
   onOpen: (player: Player) => void;
+  saveLocal: () => void;
+  loadLocal: () => void;
+  role: string;
 };
 
 const PLAYER = (): Player => {
@@ -106,7 +109,13 @@ const PLAYER = (): Player => {
   };
 };
 
-export const CharacterList = ({ playerList, onOpen }: Props) => {
+export const CharacterList = ({
+  playerList,
+  onOpen,
+  loadLocal,
+  saveLocal,
+  role,
+}: Props) => {
   const addPlayer = async () => {
     const playerGet = PLAYER();
     const metadataData = await OBR.scene.getMetadata();
@@ -136,6 +145,10 @@ export const CharacterList = ({ playerList, onOpen }: Props) => {
       });
     }
   };
+
+  const lastSaved = localStorage.getItem(
+    "grimwild.character.date.extension/metadata"
+  );
 
   return (
     <div
@@ -171,6 +184,38 @@ export const CharacterList = ({ playerList, onOpen }: Props) => {
             }}
           />
         ))}
+        {role === "GM" && (
+          <>
+            <img src={line} style={{ marginTop: "8rem" }} />
+
+            <div
+              className={style.statDescription}
+              style={{ color: "darkred", textAlign: "center" }}
+            >
+              Note: Characters are saved at each scene. Use this to transfer
+              your characters to another scene. Beware, that when you load
+              characters, it will replace/overwrite your current scene
+              characters!
+            </div>
+
+            <button
+              onClick={() => {
+                saveLocal();
+              }}
+            >
+              Save characters to local storage (Use this when switching scenes)
+            </button>
+
+            <button
+              onClick={() => {
+                loadLocal();
+              }}
+            >
+              Load characters from local storage{" "}
+              {lastSaved ? `(${new Date(lastSaved).toLocaleString()})` : ""}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
