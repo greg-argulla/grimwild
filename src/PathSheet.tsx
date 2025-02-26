@@ -298,7 +298,7 @@ export const PathSheet = ({
 }) => {
   if (player.path === "") return "";
   const data = dataMapping[player.path];
-
+  const [hideDescription, setHideDescription] = useState(true);
   return (
     <>
       <div className={style.fieldRowNoSpread}>
@@ -335,25 +335,36 @@ export const PathSheet = ({
       />
       <img src={line2} />
       <div className={style.header}>DETAILS</div>
-      {data.details.map((detail) => {
-        return (
-          <Talent
-            talent={detail}
-            key={detail.name}
-            onChangeTracker={() => {}}
-            onBroadcast={() => {
-              broadcast(detail);
-            }}
-          />
-        );
-      })}
-      <img src={line2} />
-      {data.other !== null ? (
-        <div className={classNames(style.fieldColumn, style.statContainer)}>
-          <div dangerouslySetInnerHTML={{ __html: data.other }} />
-        </div>
-      ) : (
-        ""
+      <button
+        onClick={() => {
+          setHideDescription(!hideDescription);
+        }}
+      >
+        {hideDescription ? "Expand Details " : "Collapse Details"}
+      </button>
+      {!hideDescription && (
+        <>
+          {data.details.map((detail) => {
+            return (
+              <Talent
+                talent={detail}
+                key={detail.name}
+                onChangeTracker={() => {}}
+                onBroadcast={() => {
+                  broadcast(detail);
+                }}
+              />
+            );
+          })}
+          <img src={line2} />
+          {data.other !== null ? (
+            <div className={classNames(style.fieldColumn, style.statContainer)}>
+              <div dangerouslySetInnerHTML={{ __html: data.other }} />
+            </div>
+          ) : (
+            ""
+          )}
+        </>
       )}
     </>
   );
