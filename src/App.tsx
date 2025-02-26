@@ -114,7 +114,7 @@ export const setMetadata = (metadata: Metadata) => {
   OBR.scene.setMetadata(metadataWithDate);
 };
 
-function App({ chatOnly }: { chatOnly: boolean }) {
+function App() {
   const [isOBRReady, setIsOBRReady] = useState<boolean>(false);
   const [unreadCount, setUnreadCount] = useState<number>(0);
   const [name, setName] = useState<string>("");
@@ -127,11 +127,16 @@ function App({ chatOnly }: { chatOnly: boolean }) {
   const [player, setPlayer] = useState<Player | null>(null);
   const [timeoutID, setTimeoutID] = useState<number | null>(null);
   const [gmData, setGMData] = useState<GMData>({ suspense: "0" });
+  const [chatOnly, setChatOnly] = useState<boolean>(false);
   const [tab, setTab] = useState<
     "playerList" | "chat" | "character" | "path" | "pool"
   >("chat");
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [poolList, setPoolList] = useState<Pool[]>([]);
+
+  useEffect(() => {
+    setChatOnly(window.location.href.indexOf("/chat") > 1);
+  }, []);
 
   const createPlayerList = async (metadata: Metadata) => {
     const metadataGet = metadata[
@@ -502,7 +507,6 @@ function App({ chatOnly }: { chatOnly: boolean }) {
     });
   };
 
-  console.log("CHAT ONLY: " + chatOnly);
   return (
     <div className={styles.global}>
       {player && (
