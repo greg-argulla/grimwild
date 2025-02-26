@@ -391,7 +391,7 @@ export const PoolBoard = ({ chat, myChat, id, pools, player, role }: Props) => {
 
     const newMessage = {
       id: Date.now(),
-      user: player.name,
+      user: role === "GM" ? "GM" : player.name,
       dice,
       thornEffect,
       outcome: outcome,
