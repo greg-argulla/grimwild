@@ -501,6 +501,8 @@ function App({ chatOnly }: { chatOnly: boolean }) {
       disableClickAway: true,
     });
   };
+
+  console.log("CHAT ONLY: " + chatOnly);
   return (
     <div className={styles.global}>
       {player && (
