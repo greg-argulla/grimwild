@@ -5,7 +5,7 @@
   "coreTalent": {
     "name": "INGENUITY",
     "description": "You harness the power of creativity. Begin play with <b>1 minor arcana</b> and <b>1 major arcana</b>, chosen from those on <i>pg. 150</i> onwards or work with the GM to create your own arcana. You do not have talents—instead choose a <b>gadget</b> from your path list or reflavor a non-path talent as a gadget. Others can use your gadgets but take +1t and must always roll to use them.<br><br>When given time, you can pull off <b>potent feats of mechanical ingenuity</b> like <i>crafting a temporary device without proper materials or combining arcana and gadgets for wild effects</i>. You can <b>push yourself</b> to do it on the spot.<br><br><b>Engineering:</b> Take +1d at creating, repairing, or destroying mechanisms and arcana.<br><br><b>GROWTH:</b> Every 2 levels, gain a new minor and major arcana.",
-    "trackers": []
+    "trackers": [{ "name": "Push", "type": "checkbox" }]
   },
   "details": [
     {
