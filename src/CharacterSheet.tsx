@@ -10,13 +10,15 @@ export const Field = ({
   label,
   onChange,
   value,
+  className,
 }: {
   label: string;
   onChange: (value: string) => void;
   value: string;
+  className?: string;
 }) => {
   return (
-    <div className={style.fieldContainer}>
+    <div className={classNames(style.fieldContainer, className)}>
       <div className={style.fieldLabel}>{label}</div>
       <input
         className={style.field}
@@ -666,10 +668,7 @@ export const CharacterSheet = ({
       </div>
       <img src={line} />
       <div className={style.fieldRow}>
-        <div
-          className={classNames(style.fieldColumn)}
-          style={{ width: "6.5rem" }}
-        >
+        <div className={classNames(style.fieldColumn, style.fieldFullWidth)}>
           <Field
             label="Background #1"
             onChange={(value) => {
@@ -677,15 +676,7 @@ export const CharacterSheet = ({
             }}
             value={player.background1}
           />
-          <Field
-            label="Background #2"
-            onChange={(value) => {
-              updatePlayer({ ...player, background2: value });
-            }}
-            value={player.background2}
-          />
-        </div>
-        <div className={classNames(style.fieldColumn, style.fieldFullWidth)}>
+
           <Field
             label="Wises"
             onChange={(value) => {
@@ -693,6 +684,19 @@ export const CharacterSheet = ({
             }}
             value={player.wise1}
           />
+        </div>
+      </div>
+      <img src={line2} />
+      <div className={style.fieldRow}>
+        <div className={classNames(style.fieldColumn, style.fieldFullWidth)}>
+          <Field
+            label="Background #2"
+            onChange={(value) => {
+              updatePlayer({ ...player, background2: value });
+            }}
+            value={player.background2}
+          />
+
           <Field
             label="Wises"
             onChange={(value) => {
@@ -702,7 +706,7 @@ export const CharacterSheet = ({
           />
         </div>
       </div>
-
+      <img src={line2} />
       <div className={classNames(style.fieldColumn, style.statContainer)}>
         <b>Traits</b>
         <div className={classNames(style.fieldColumn)} style={{ fontSize: 15 }}>
