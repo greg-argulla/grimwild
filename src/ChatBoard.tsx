@@ -73,6 +73,7 @@ export const addRoll = async ({
   player,
   odds,
   setValue,
+  role,
 }: {
   diceCount: number;
   thornsCount: number;
@@ -81,6 +82,7 @@ export const addRoll = async ({
   player: Player;
   odds?: string;
   setValue?: (value: number) => void;
+  role: string;
 }) => {
   const dice = [];
   const thorns = [];
@@ -153,7 +155,7 @@ export const addRoll = async ({
 
   const newMessage = {
     id: Date.now(),
-    user: player.name,
+    user: role === "GM" ? "GM" : player.name,
     dice,
     thorns,
     initialOutcome,
@@ -305,7 +307,7 @@ export const PoolInstance = ({
   );
 };
 
-export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
+export const PoolBoard = ({ chat, myChat, id, pools, player, role }: Props) => {
   const [diceCount, setDiceCount] = useState<number | null>(0);
   const [thornsCount, setThornCount] = useState<number | null>(0);
 
@@ -492,6 +494,7 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                         setValue: (value) => {
                           setDiceCount(value);
                         },
+                        role: role,
                       });
                     }}
                     style={{ width: "4rem" }}
@@ -506,6 +509,7 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                         myChat: myChat,
                         id: id,
                         player: player,
+                        role: role,
                       });
                     }}
                     style={{ width: "4rem" }}
@@ -529,6 +533,7 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                         id: id,
                         player: player,
                         odds: "Good Odds",
+                        role: role,
                       });
                     }}
                   >
@@ -544,6 +549,7 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                         id: id,
                         player: player,
                         odds: "Even Odds",
+                        role: role,
                       });
                     }}
                   >
@@ -559,6 +565,7 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                         id: id,
                         player: player,
                         odds: "Bad Odds",
+                        role: role,
                       });
                     }}
                   >
@@ -667,7 +674,7 @@ export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
 
       const newMessage = {
         id: Date.now(),
-        user: player.name,
+        user: role === "GM" ? "GM" : player.name,
         message: text.trim(),
       };
       const newChat = [...myChat, newMessage];

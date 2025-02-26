@@ -108,6 +108,7 @@ export const FieldStat = ({
             myChat,
             id,
             player,
+            role: "PLAYER",
           });
           onChangeMark(false);
           onRoll();
