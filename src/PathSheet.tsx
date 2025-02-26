@@ -121,9 +121,9 @@ const Talent = ({
         )}
       </div>
 
-      {talent.trackers
-        ?.filter((tracker) => tracker.type === "fieldSmallLong")
-        .map((tracker, index) => (
+      {talent.trackers?.map((tracker, index) => {
+        if (tracker.type !== "fieldSmallLong") return "";
+        return (
           <div
             className={classNames(
               style.fieldStatContainerSmallRow,
@@ -153,7 +153,8 @@ const Talent = ({
               ></input>
             </div>
           </div>
-        ))}
+        );
+      })}
 
       <img src={line2} />
       <div dangerouslySetInnerHTML={{ __html: talent.description }} />
@@ -161,9 +162,9 @@ const Talent = ({
       <div>
         <div className={style.statDetail}>
           <div className={style.fieldRowNoSpread} style={{ gap: 0 }}>
-            {talent.trackers
-              ?.filter((tracker) => tracker.type !== "fieldSmallLong")
-              .map((tracker, index) => (
+            {talent.trackers?.map((tracker, index) => {
+              if (tracker.type === "fieldSmallLong") return "";
+              return (
                 <div
                   className={style.fieldStatContainerSmallRow}
                   key={tracker.name + index}
@@ -257,7 +258,8 @@ const Talent = ({
                     )}
                   </div>
                 </div>
-              ))}
+              );
+            })}
 
             <div style={{ marginLeft: "auto" }}>
               <button
@@ -299,6 +301,7 @@ export const PathSheet = ({
   if (player.path === "") return "";
   const data = dataMapping[player.path];
   const [hideDescription, setHideDescription] = useState(true);
+
   return (
     <>
       <div className={style.fieldRowNoSpread}>

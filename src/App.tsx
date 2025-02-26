@@ -135,7 +135,6 @@ function App() {
   const [poolList, setPoolList] = useState<Pool[]>([]);
 
   useEffect(() => {
-    console.log(window.location.href);
     setChatOnly(window.location.href.indexOf("/chatpopover") > 1);
   }, []);
 
@@ -538,6 +537,12 @@ function App() {
             })}
             onClick={() => {
               setTab("pool");
+              setTimeout(() => {
+                var objDiv = document.getElementById("chatbox");
+                if (objDiv) {
+                  objDiv.scrollTop = objDiv.scrollHeight;
+                }
+              }, 1);
             }}
           >
             Pools
@@ -554,7 +559,7 @@ function App() {
                 if (objDiv) {
                   objDiv.scrollTop = objDiv.scrollHeight;
                 }
-              }, 100);
+              }, 1);
             }}
           >
             Chat {unreadCount ? `(${unreadCount})` : ""}
