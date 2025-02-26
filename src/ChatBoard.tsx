@@ -559,7 +559,7 @@ export const PoolBoard = ({
               <input
                 className={style.fieldStat}
                 type="number"
-                value={gmData === null ? "" : gmData.suspense}
+                value={gmData && gmData.suspense ? gmData.suspense : ""}
                 onChange={(e) => {
                   updateSuspense(e.target.value);
                 }}
