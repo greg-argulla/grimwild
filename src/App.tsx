@@ -114,10 +114,10 @@ export const setMetadata = (metadata: Metadata) => {
   OBR.scene.setMetadata(metadataWithDate);
 };
 
-function App() {
+function App({ chatOnly }: { chatOnly: boolean }) {
   const [isOBRReady, setIsOBRReady] = useState<boolean>(false);
   const [unreadCount, setUnreadCount] = useState<number>(0);
-  const [_, setName] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [id, setId] = useState<string>("");
   const [role, setRole] = useState<string>("PLAYER");
   const [chat, setChat] = useState<Chat[]>([]);
@@ -453,6 +453,54 @@ function App() {
     );
   }
 
+  if (chatOnly) {
+    return (
+      <div className={styles.global}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "0.5rem",
+          }}
+        >
+          <div className={styles.header}>Chat</div>
+          <button
+            className={styles.chatCloseButton}
+            onClick={() => {
+              OBR.popover.close("chat/popover");
+            }}
+          >
+            Close
+          </button>
+        </div>
+
+        <ChatBoard
+          chat={chat}
+          role={role}
+          myChat={myChat}
+          id={id}
+          pools={poolList}
+          player={player ? player.name : name}
+          gmData={gmData}
+          players={playerList}
+          chatOnly={chatOnly}
+        />
+      </div>
+    );
+  }
+
+  const openChatOnly = async () => {
+    await OBR.popover.open({
+      id: "chat/popover",
+      url: "/chat",
+      height: 600,
+      width: 300,
+      anchorOrigin: { horizontal: "RIGHT", vertical: "BOTTOM" },
+      hidePaper: true,
+      marginThreshold: 0,
+      disableClickAway: true,
+    });
+  };
   return (
     <div className={styles.global}>
       {player && (
@@ -554,23 +602,46 @@ function App() {
           myChat={myChat}
           id={id}
           pools={poolList}
-          player={player}
+          player={player.name}
           gmData={gmData}
           players={playerList}
+          chatOnly={chatOnly}
         />
       )}
 
       {tab === "chat" && player && (
-        <ChatBoard
-          chat={chat}
-          role={role}
-          myChat={myChat}
-          id={id}
-          pools={poolList}
-          player={player}
-          gmData={gmData}
-          players={playerList}
-        />
+        <>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              paddingTop: "0.5rem",
+              paddingLeft: "1.5rem",
+              paddingRight: "1.5rem",
+            }}
+          >
+            <div className={styles.header}>Chat</div>
+            <button
+              className={styles.chatCloseButton}
+              onClick={() => {
+                openChatOnly();
+              }}
+            >
+              Popover
+            </button>
+          </div>
+          <ChatBoard
+            chat={chat}
+            role={role}
+            myChat={myChat}
+            id={id}
+            pools={poolList}
+            player={player.name}
+            gmData={gmData}
+            players={playerList}
+            chatOnly={chatOnly}
+          />
+        </>
       )}
     </div>
   );

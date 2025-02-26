@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GMData, setMetadata, type Chat, type Player, type Pool } from "./App";
 import OBR from "@owlbear-rodeo/sdk";
 
+import line2 from "./assets/line.webp";
 import style from "./App.module.css";
 
 import d61 from "./assets/dice/d61.png";
@@ -27,9 +28,10 @@ type Props = {
   myChat: Chat[];
   id: string; // Player Id
   pools: Pool[];
-  player: Player;
+  player: string;
   gmData: GMData;
   players: Player[];
+  chatOnly: boolean;
 };
 
 const diceImg = [d61, d62, d63, d64, d65, d66];
@@ -112,7 +114,7 @@ export const addRoll = async ({
   thornsCount: number;
   myChat: Chat[];
   id: string; //playerId
-  player: Player;
+  player: string;
   odds?: string;
   setValue?: (value: number) => void;
   role: string;
@@ -198,7 +200,7 @@ export const addRoll = async ({
 
   const newMessage = {
     id: Date.now(),
-    user: role === "GM" ? "GM" : player.name,
+    user: role === "GM" ? "GM" : player,
     dice,
     thorns,
     initialOutcome,
@@ -378,7 +380,7 @@ export const PoolBoard = ({
     const phrase = rollCrucible();
     const newMessage = {
       id: Date.now(),
-      user: role === "GM" ? "GM" : player.name,
+      user: role === "GM" ? "GM" : player,
       description: `- Crucible - <br><b>${phrase}</b>`,
       gmRoll: true,
     };
@@ -402,7 +404,7 @@ export const PoolBoard = ({
     const randomPlayer = players[Math.floor(Math.random() * players.length)];
     const newMessage = {
       id: Date.now(),
-      user: role === "GM" ? "GM" : player.name,
+      user: role === "GM" ? "GM" : player,
       description: `- You've been targeted - <br><b>${randomPlayer.name}</b>`,
       gmRoll: true,
     };
@@ -506,7 +508,7 @@ export const PoolBoard = ({
 
     const newMessage = {
       id: Date.now(),
-      user: role === "GM" ? "GM" : player.name,
+      user: role === "GM" ? "GM" : player,
       dice,
       thornEffect,
       outcome: outcome,
@@ -807,11 +809,7 @@ export const PoolBoard = ({
                     );
                   })
                   .map((chat) => (
-                    <ChatInstance
-                      chat={chat}
-                      key={chat.id}
-                      name={player.name}
-                    />
+                    <ChatInstance chat={chat} key={chat.id} name={player} />
                   ))
               : ""}
           </div>
@@ -821,7 +819,14 @@ export const PoolBoard = ({
   );
 };
 
-export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
+export const ChatBoard = ({
+  chat,
+  myChat,
+  role,
+  id,
+  player,
+  chatOnly,
+}: Props) => {
   const [text, setText] = useState<string>("");
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -842,7 +847,7 @@ export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
 
       const newMessage = {
         id: Date.now(),
-        user: role === "GM" ? "GM" : player.name,
+        user: role === "GM" ? "GM" : player,
         message: text.trim(),
       };
       const newChat = [...myChat, newMessage];
@@ -891,22 +896,26 @@ export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
   };
 
   return (
-    <div className={classNames(style.Sheet)}>
+    <div
+      className={classNames(style.Sheet)}
+      style={chatOnly ? { padding: 0 } : {}}
+    >
       <div className={style.fieldRow}>
-        <div className={style.chatBox} style={{ width: 460 }}>
-          <div id="chatbox" className={classNames(style.chatScrollable)}>
+        <div className={style.chatBox} style={{ width: chatOnly ? 280 : 460 }}>
+          <div
+            id="chatbox"
+            className={classNames(style.chatScrollable)}
+            style={{ height: chatOnly ? 480 : 420 }}
+          >
             {chat.length
               ? chat
                   .sort((a, b) => a.id - b.id)
                   .map((chat) => (
-                    <ChatInstance
-                      chat={chat}
-                      key={chat.id}
-                      name={player.name}
-                    />
+                    <ChatInstance chat={chat} key={chat.id} name={player} />
                   ))
               : ""}
           </div>
+          <img src={line2} />
           <div className={style.chatInputContainer}>
             <input
               className={style.chatField}
@@ -918,6 +927,7 @@ export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
                 handleKeyDown(e);
               }}
             ></input>
+
             {role === "GM" && (
               <button
                 onClick={() => {

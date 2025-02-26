@@ -107,7 +107,7 @@ export const FieldStat = ({
             thornsCount: marked ? 1 : 0,
             myChat,
             id,
-            player,
+            player: player.name,
             role: "PLAYER",
           });
           onChangeMark(false);

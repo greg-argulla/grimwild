@@ -141,7 +141,7 @@ export const CharacterList = ({ playerList, onOpen }: Props) => {
   return (
     <div
       className={classNames(style.Sheet, style.scrollable)}
-      style={{ height: 590 }}
+      style={{ height: 590, padding: "1rem" }}
     >
       <div className={classNames(style.fieldColumn)}>
         <div
