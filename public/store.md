@@ -7,6 +7,7 @@ icon: https://grimwild-extension.onrender.com/logo.png
 tags:
   - combat
 manifest: https://grimwild-extension.onrender.com/manifest.json
+learn-more: https://linktr.ee/odditypress
 ---
 
 The **Grimwild Owlbear Extension** is an extension for the tabletop RPG _Grimwild_ for creating and characters, rolling dice, tracking pools, and checking path abilities.
