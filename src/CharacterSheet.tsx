@@ -46,6 +46,7 @@ export const TextArea = ({
       <div className={style.fieldLabel}>{label}</div>
       <textarea
         className={style.field}
+        style={{ width: 200 }}
         rows={rows}
         onChange={(e) => {
           onChange(e.target.value);
