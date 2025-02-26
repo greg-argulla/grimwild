@@ -482,3 +482,8 @@ select {
 .pathItem:hover {
   background: #fff;
 }
+
+.chatInputContainer {
+  display: flex;
+  gap: 0.25rem;
+}

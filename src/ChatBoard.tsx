@@ -65,24 +65,39 @@ const generateRandomNumber = (end: number) => {
   return randomNum;
 };
 
-export const addRoll = async (
-  diceCount: number,
-  thornCount: number,
-  myChat: Chat[],
-  id: string, //playerId
-  player: Player,
-  odds?: string
-) => {
+export const addRoll = async ({
+  diceCount,
+  thornsCount,
+  myChat,
+  id,
+  player,
+  odds,
+  setValue,
+}: {
+  diceCount: number;
+  thornsCount: number;
+  myChat: Chat[];
+  id: string; //playerId
+  player: Player;
+  odds?: string;
+  setValue?: (value: number) => void;
+}) => {
   const dice = [];
   const thorns = [];
 
   let perfect = 0;
   let messy = 0;
   let thorn = 0;
+  let toDrop = 0;
 
   for (let i = 0; i < diceCount; i++) {
     const value = generateRandomNumber(6);
     dice.push(value);
+
+    if (value < 4) {
+      toDrop++;
+    }
+
     if (value === 6) {
       perfect++;
     } else if (value > 3) {
@@ -90,7 +105,7 @@ export const addRoll = async (
     }
   }
 
-  for (let i = 0; i < thornCount; i++) {
+  for (let i = 0; i < thornsCount; i++) {
     const value = generateRandomNumber(8);
     thorns.push(value);
     if (value > 6) {
@@ -106,6 +121,8 @@ export const addRoll = async (
   } else if (messy > 0) {
     outcome = "Messy";
   }
+
+  const newValue = diceCount - toDrop;
 
   let thornEffect = []; //String to store what happened.
   let initialOutcome = outcome; // to show the base number
@@ -125,6 +142,11 @@ export const addRoll = async (
 
   if (odds) {
     thornEffect.push(odds);
+  }
+
+  if (setValue) {
+    thornEffect.push(`${diceCount} ➜ ${newValue}`);
+    setValue(newValue);
   }
 
   if (dice.length === 0 && thorns.length === 0) return;
@@ -332,55 +354,11 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
     }
   };
 
-  const poolRoll = async (diceCount: number) => {
-    let toDrop = 0;
-    let dice = [];
-
-    for (let i = 0; i < diceCount; i++) {
-      const value = generateRandomNumber(6);
-      dice.push(value);
-      if (value < 4) {
-        toDrop++;
-      }
-    }
-
-    const newValue = diceCount - toDrop;
-
-    if (dice.length === 0) return;
-
-    const newMessage = {
-      id: Date.now(),
-      user: player.name,
-      dice,
-      thornEffect: [],
-      outcome: `${diceCount} ➜ ${newValue}`,
-    };
-
-    const newChat = [...myChat, newMessage];
-
-    const metadataGet = await OBR.scene.getMetadata();
-    const metadata = metadataGet["grimwild.extension/metadata"] as Record<
-      string,
-      any
-    >;
-    let metadataChange = { ...metadata };
-    metadataChange[id] = newChat;
-
-    setMetadata({
-      "grimwild.extension/metadata": metadataChange,
-    });
-
-    setTimeout(() => {
-      var objDiv = document.getElementById("chatbox");
-      if (objDiv) {
-        objDiv.scrollTop = objDiv.scrollHeight;
-      }
-    }, 100);
-  };
-
   const rollPool = async (pool: Pool) => {
     let toDrop = 0;
     let dice = [];
+    let perfect = 0;
+    let messy = 0;
 
     for (let i = 0; i < pool.value; i++) {
       const value = generateRandomNumber(6);
@@ -388,18 +366,33 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
       if (value < 4) {
         toDrop++;
       }
+
+      if (value === 6) {
+        perfect++;
+      } else if (value > 3) {
+        messy++;
+      }
+    }
+
+    let outcome = "Grim"; // Default
+    if (perfect > 1) {
+      outcome = "Critical"; // Set to "Crit" if two 6's are rolled
+    } else if (perfect > 0) {
+      outcome = "Perfect";
+    } else if (messy > 0) {
+      outcome = "Messy";
     }
 
     const newValue = pool.value - toDrop;
 
-    const thornEffect = [pool.name];
+    const thornEffect = [pool.name, `${pool.value} ➜ ${newValue}`];
 
     const newMessage = {
       id: Date.now(),
       user: player.name,
       dice,
       thornEffect,
-      outcome: `${pool.value} ➜ ${newValue}`,
+      outcome: outcome,
     };
 
     updatePool({ ...pool, value: newValue });
@@ -490,7 +483,16 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                 <div className={style.fieldStatContainerSmall}>
                   <button
                     onClick={() => {
-                      poolRoll(diceCount ?? 0);
+                      addRoll({
+                        diceCount: diceCount ?? 0,
+                        thornsCount: thornsCount ?? 0,
+                        myChat: myChat,
+                        id: id,
+                        player: player,
+                        setValue: (value) => {
+                          setDiceCount(value);
+                        },
+                      });
                     }}
                     style={{ width: "4rem" }}
                   >
@@ -498,13 +500,13 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                   </button>
                   <button
                     onClick={() => {
-                      addRoll(
-                        diceCount ?? 0,
-                        thornsCount ?? 0,
-                        myChat,
-                        id,
-                        player
-                      );
+                      addRoll({
+                        diceCount: diceCount ?? 0,
+                        thornsCount: thornsCount ?? 0,
+                        myChat: myChat,
+                        id: id,
+                        player: player,
+                      });
                     }}
                     style={{ width: "4rem" }}
                   >
@@ -520,7 +522,14 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                   <button
                     className={style.storyButton}
                     onClick={() => {
-                      addRoll(3, 0, myChat, id, player, "Good Odds");
+                      addRoll({
+                        diceCount: 3,
+                        thornsCount: 0,
+                        myChat: myChat,
+                        id: id,
+                        player: player,
+                        odds: "Good Odds",
+                      });
                     }}
                   >
                     Good
@@ -528,7 +537,14 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                   <button
                     className={style.storyButton}
                     onClick={() => {
-                      addRoll(2, 0, myChat, id, player, "Even Odds");
+                      addRoll({
+                        diceCount: 3,
+                        thornsCount: 0,
+                        myChat: myChat,
+                        id: id,
+                        player: player,
+                        odds: "Even Odds",
+                      });
                     }}
                   >
                     Even
@@ -536,7 +552,14 @@ export const PoolBoard = ({ chat, myChat, id, pools, player }: Props) => {
                   <button
                     className={style.storyButton}
                     onClick={() => {
-                      addRoll(1, 0, myChat, id, player, "Bad Odds");
+                      addRoll({
+                        diceCount: 3,
+                        thornsCount: 0,
+                        myChat: myChat,
+                        id: id,
+                        player: player,
+                        odds: "Bad Odds",
+                      });
                     }}
                   >
                     Bad
@@ -709,16 +732,33 @@ export const ChatBoard = ({ chat, myChat, role, id, player }: Props) => {
                   ))
               : ""}
           </div>
-          <input
-            className={style.chatField}
-            value={text}
-            onChange={(evt) => {
-              setText(evt.target.value);
-            }}
-            onKeyDown={(e) => {
-              handleKeyDown(e);
-            }}
-          ></input>
+          <div className={style.chatInputContainer}>
+            <input
+              className={style.chatField}
+              value={text}
+              onChange={(evt) => {
+                setText(evt.target.value);
+              }}
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            ></input>
+            {role === "GM" && (
+              <button
+                onClick={() => {
+                  if (
+                    confirm(
+                      "Are you sure you want to clear all the chat messages?"
+                    ) == true
+                  ) {
+                    clearChat();
+                  }
+                }}
+              >
+                Clear
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

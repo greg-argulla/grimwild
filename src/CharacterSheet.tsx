@@ -102,7 +102,13 @@ export const FieldStat = ({
       <button
         className={style.statButton}
         onClick={() => {
-          addRoll(value, marked ? 1 : 0, myChat, id, player);
+          addRoll({
+            diceCount: value,
+            thornsCount: marked ? 1 : 0,
+            myChat,
+            id,
+            player,
+          });
           onChangeMark(false);
           onRoll();
         }}
