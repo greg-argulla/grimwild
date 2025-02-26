@@ -93,12 +93,17 @@ export type Chat = {
   initialOutcome: string;
   outcome: string;
   thornEffect: string[];
+  gmRoll?: boolean;
 };
 
 export type Pool = {
   id: number;
   name: string;
   value: number;
+};
+
+export type GMData = {
+  suspense: string;
 };
 
 export const setMetadata = (metadata: Metadata) => {
@@ -121,6 +126,7 @@ function App() {
   const [cookiesNotEnabled, setCookiesNotEnabled] = useState<boolean>(false);
   const [player, setPlayer] = useState<Player | null>(null);
   const [timeoutID, setTimeoutID] = useState<number | null>(null);
+  const [gmData, setGMData] = useState<GMData>({ suspense: "0" });
   const [tab, setTab] = useState<
     "playerList" | "chat" | "character" | "path" | "pool"
   >("chat");
@@ -274,6 +280,11 @@ function App() {
             setChatToCheckChanges(currentChat);
           }
 
+          if (metadata["grimwild.gm.extension/metadata"]) {
+            const gmData = metadata["grimwild.gm.extension/metadata"] as GMData;
+            setGMData(gmData);
+          }
+
           setIsOBRReady(true);
           setTimeout(() => {
             var objDiv = document.getElementById("chatbox");
@@ -317,6 +328,11 @@ function App() {
         if (metadata["grimwild.extension/metadata"]) {
           const currentChat = await createChatArray(metadata);
           setChatToCheckChanges(currentChat);
+        }
+
+        if (metadata["grimwild.gm.extension/metadata"]) {
+          const gmData = metadata["grimwild.gm.extension/metadata"] as GMData;
+          setGMData(gmData);
         }
 
         setIsOBRReady(true);
@@ -369,6 +385,9 @@ function App() {
 
         const poolListGet = await createPoolList(metadata);
         setPoolList(poolListGet);
+
+        const gmData = metadata["grimwild.gm.extension/metadata"] as GMData;
+        setGMData(gmData);
 
         if ((await OBR.player.getRole()) === "GM") {
           saveLocal();
@@ -536,6 +555,8 @@ function App() {
           id={id}
           pools={poolList}
           player={player}
+          gmData={gmData}
+          players={playerList}
         />
       )}
 
@@ -547,6 +568,8 @@ function App() {
           id={id}
           pools={poolList}
           player={player}
+          gmData={gmData}
+          players={playerList}
         />
       )}
     </div>

@@ -386,7 +386,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  height: 326px;
+  height: 360px;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none;
   overflow-x: hidden;

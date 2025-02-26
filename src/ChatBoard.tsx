@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { setMetadata, type Chat, type Player, type Pool } from "./App";
+import { GMData, setMetadata, type Chat, type Player, type Pool } from "./App";
 import OBR from "@owlbear-rodeo/sdk";
 
 import style from "./App.module.css";
@@ -28,6 +28,8 @@ type Props = {
   id: string; // Player Id
   pools: Pool[];
   player: Player;
+  gmData: GMData;
+  players: Player[];
 };
 
 const diceImg = [d61, d62, d63, d64, d65, d66];
@@ -57,6 +59,37 @@ const getRollColor = (outcome: string) => {
   }
   return color;
 };
+
+//Table lists GM Crucibles
+
+function rollCrucible() {
+  const firstTables = [
+    ["Tough", "Quiet", "Precarious", "Wild", "Mysterious", "Rustic"],
+    ["Muffled", "Aged", "Romantic", "Menacing", "Puzzling", "Eerie"],
+    ["Broken", "Distant", "Dwindling", "Perilous", "Bleak", "Tense"],
+    ["Forgotten", "Hidden", "Abundant", "Withered", "Chaotic", "Looming"],
+    ["Festive", "Lost", "Immense", "Serene", "Vibrant", "Flickering"],
+    ["Rugged", "Sacred", "Splintered", "Relentless", "Tangled", "Twisted"],
+  ];
+  const secondTables = [
+    ["Journey", "Juncture", "Rift", "Scheme", "Nexus", "Team"],
+    ["Tremor", "Debris", "Symbol", "Scar", "Archive", "Chasm"],
+    ["Sanctuary", "Betrayal", "Trail", "Wasteland", "Help", "Mystery"],
+    ["Peak", "Threshold", "Boundary", "Beacon", "Secret", "Wall"],
+    ["Territory", "Rumor", "Standoff", "Strife", "Maze", "Pact"],
+    ["Dilemma", "Tradition", "Jackpot", "Omen", "Deception", "Illusion"],
+  ];
+  // Select a random sub-array from each main array
+  const firstRow = firstTables[Math.floor(Math.random() * firstTables.length)];
+  const secondRow =
+    secondTables[Math.floor(Math.random() * secondTables.length)];
+
+  // Select a random word from each chosen sub-array
+  const firstWord = firstRow[Math.floor(Math.random() * firstRow.length)];
+  const secondWord = secondRow[Math.floor(Math.random() * secondRow.length)];
+
+  return `${firstWord} ${secondWord}`;
+}
 
 const generateRandomNumber = (end: number) => {
   var range = end;
@@ -186,8 +219,6 @@ export const addRoll = async ({
   setMetadata({
     "grimwild.extension/metadata": metadataChange,
   });
-  // setTab("chat");
-  // setUnreadCount(0);
 
   setTimeout(() => {
     var objDiv = document.getElementById("chatbox");
@@ -317,9 +348,79 @@ export const PoolInstance = ({
   );
 };
 
-export const PoolBoard = ({ chat, myChat, id, pools, player, role }: Props) => {
+export const PoolBoard = ({
+  chat,
+  myChat,
+  id,
+  pools,
+  player,
+  role,
+  gmData,
+  players,
+}: Props) => {
   const [diceCount, setDiceCount] = useState<number | null>(0);
   const [thornsCount, setThornCount] = useState<number | null>(0);
+
+  const updateSuspense = async (value: string) => {
+    const metadataData = await OBR.scene.getMetadata();
+    const metadata = metadataData["grimwild.gm.extension/metadata"] as Record<
+      string,
+      any
+    >;
+    const metadataChange = { ...metadata, suspense: value };
+
+    setMetadata({
+      "grimwild.gm.extension/metadata": metadataChange,
+    });
+  };
+
+  const addCrucibleRoll = async () => {
+    const phrase = rollCrucible();
+    const newMessage = {
+      id: Date.now(),
+      user: role === "GM" ? "GM" : player.name,
+      description: `- Crucible - <br><b>${phrase}</b>`,
+      gmRoll: true,
+    };
+
+    const newChat = [...myChat, newMessage];
+
+    const metadataGet = await OBR.scene.getMetadata();
+    const metadata = metadataGet["grimwild.extension/metadata"] as Record<
+      string,
+      any
+    >;
+    let metadataChange = { ...metadata };
+    metadataChange[id] = newChat;
+
+    setMetadata({
+      "grimwild.extension/metadata": metadataChange,
+    });
+  };
+
+  const addRandomPlayer = async () => {
+    const randomPlayer = players[Math.floor(Math.random() * players.length)];
+    const newMessage = {
+      id: Date.now(),
+      user: role === "GM" ? "GM" : player.name,
+      description: `- You've been targeted - <br><b>${randomPlayer.name}</b>`,
+      gmRoll: true,
+    };
+
+    const newChat = [...myChat, newMessage];
+
+    const metadataGet = await OBR.scene.getMetadata();
+    const metadata = metadataGet["grimwild.extension/metadata"] as Record<
+      string,
+      any
+    >;
+    let metadataChange = { ...metadata };
+    metadataChange[id] = newChat;
+
+    setMetadata({
+      "grimwild.extension/metadata": metadataChange,
+    });
+  };
 
   const addPool = async (value?: number) => {
     const poolGet: Pool = { id: Date.now(), name: "", value: value || 0 };
@@ -437,158 +538,210 @@ export const PoolBoard = ({ chat, myChat, id, pools, player, role }: Props) => {
 
   return (
     <div className={classNames(style.Sheet)}>
-      <div className={style.fieldRow}>
-        <div className={classNames(style.fieldColumn)}>
-          <div className={style.header}>Rolls</div>
-          <div className={classNames(style.fieldColumn)}>
-            <div
-              className={classNames(style.fieldRow)}
-              style={{ alignItems: "center" }}
-            >
-              <div
-                className={style.fieldContainer}
-                style={{
-                  alignItems: "flex-end",
-                  flexGrow: 1,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+      <div className={classNames(style.fieldColumn)}>
+        <div
+          className={classNames(style.fieldRow)}
+          style={{ alignItems: "flex-end", justifyContent: "space-between" }}
+        >
+          <div
+            className={style.statContainer}
+            style={{
+              alignItems: "center",
+              flexGrow: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              height: 78,
+              width: 150,
+            }}
+          >
+            <div className={style.fieldStatContainerSmall}>
+              <b>Suspense</b>
+              <input
+                className={style.fieldStat}
+                type="number"
+                value={gmData === null ? "" : gmData.suspense}
+                onChange={(e) => {
+                  updateSuspense(e.target.value);
                 }}
+              ></input>
+            </div>
+            <div
+              className={style.fieldStatContainerSmall}
+              style={{ marginLeft: 6 }}
+            >
+              <button
+                onClick={() => {
+                  addRandomPlayer();
+                }}
+                style={{ width: "4.2rem" }}
               >
-                <div className={style.fieldStatContainerSmall}>
-                  <b>Dice</b>
-                  <input
-                    className={style.fieldStat}
-                    type="number"
-                    value={diceCount === null ? "" : diceCount}
-                    onClick={() => {
-                      setDiceCount(null);
-                    }}
-                    onBlur={() => {
-                      if (diceCount === null) {
-                        setDiceCount(0);
-                      }
-                    }}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const num = parseInt(val.charAt(val.length - 1));
-                      setDiceCount(!isNaN(num) ? num : null);
-                    }}
-                  ></input>
-                </div>
-                <div className={style.fieldStatContainerSmall}>
-                  <b>Thorns</b>
-                  <input
-                    className={style.fieldStat}
-                    type="number"
-                    value={thornsCount === null ? "" : thornsCount}
-                    onClick={() => {
-                      setThornCount(null);
-                    }}
-                    onBlur={() => {
-                      if (thornsCount === null) {
-                        setThornCount(0);
-                      }
-                    }}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const num = parseInt(val.charAt(val.length - 1));
-                      setThornCount(!isNaN(num) ? num : null);
-                    }}
-                  ></input>
-                </div>
-                <div className={style.fieldStatContainerSmall}>
-                  <button
-                    onClick={() => {
-                      addRoll({
-                        diceCount: diceCount ?? 0,
-                        thornsCount: thornsCount ?? 0,
-                        myChat: myChat,
-                        id: id,
-                        player: player,
-                        setValue: (value) => {
-                          setDiceCount(value);
-                        },
-                        role: role,
-                      });
-                    }}
-                    style={{ width: "4rem" }}
-                  >
-                    Pool
-                  </button>
-                  <button
-                    onClick={() => {
-                      addRoll({
-                        diceCount: diceCount ?? 0,
-                        thornsCount: thornsCount ?? 0,
-                        myChat: myChat,
-                        id: id,
-                        player: player,
-                        role: role,
-                      });
-                    }}
-                    style={{ width: "4rem" }}
-                  >
-                    Roll
-                  </button>
-                </div>
-              </div>
-              <div
-                className={style.statContainer}
-                style={{ alignItems: "center" }}
+                PC
+              </button>
+              <button
+                onClick={() => {
+                  addCrucibleRoll();
+                }}
+                style={{ width: "4.2rem" }}
               >
-                <div className={style.fieldStatContainerSmall}>
-                  <button
-                    className={style.storyButton}
-                    onClick={() => {
-                      addRoll({
-                        diceCount: 3,
-                        thornsCount: 0,
-                        myChat: myChat,
-                        id: id,
-                        player: player,
-                        odds: "Good Odds",
-                        role: role,
-                      });
-                    }}
-                  >
-                    Good
-                  </button>
-                  <button
-                    className={style.storyButton}
-                    onClick={() => {
-                      addRoll({
-                        diceCount: 3,
-                        thornsCount: 0,
-                        myChat: myChat,
-                        id: id,
-                        player: player,
-                        odds: "Even Odds",
-                        role: role,
-                      });
-                    }}
-                  >
-                    Even
-                  </button>
-                  <button
-                    className={style.storyButton}
-                    onClick={() => {
-                      addRoll({
-                        diceCount: 3,
-                        thornsCount: 0,
-                        myChat: myChat,
-                        id: id,
-                        player: player,
-                        odds: "Bad Odds",
-                        role: role,
-                      });
-                    }}
-                  >
-                    Bad
-                  </button>
-                </div>
-              </div>
+                Crucible
+              </button>
             </div>
           </div>
+          <div
+            className={style.statContainer}
+            style={{ alignItems: "center", justifyContent: "space-between" }}
+          >
+            <b>Story</b>
+            <div
+              className={style.fieldStatContainerSmall}
+              style={{ marginLeft: 8 }}
+            >
+              <button
+                className={style.storyButton}
+                onClick={() => {
+                  addRoll({
+                    diceCount: 3,
+                    thornsCount: 0,
+                    myChat: myChat,
+                    id: id,
+                    player: player,
+                    odds: "Good Odds",
+                    role: role,
+                  });
+                }}
+              >
+                Good
+              </button>
+              <button
+                className={style.storyButton}
+                onClick={() => {
+                  addRoll({
+                    diceCount: 3,
+                    thornsCount: 0,
+                    myChat: myChat,
+                    id: id,
+                    player: player,
+                    odds: "Even Odds",
+                    role: role,
+                  });
+                }}
+              >
+                Even
+              </button>
+              <button
+                className={style.storyButton}
+                onClick={() => {
+                  addRoll({
+                    diceCount: 3,
+                    thornsCount: 0,
+                    myChat: myChat,
+                    id: id,
+                    player: player,
+                    odds: "Bad Odds",
+                    role: role,
+                  });
+                }}
+              >
+                Bad
+              </button>
+            </div>
+          </div>
+
+          <div
+            className={style.statContainer}
+            style={{
+              alignItems: "center",
+              flexGrow: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              height: 78,
+            }}
+          >
+            <div className={style.fieldStatContainerSmall}>
+              <b>Dice</b>
+              <input
+                className={style.fieldStat}
+                type="number"
+                value={diceCount === null ? "" : diceCount}
+                onClick={() => {
+                  setDiceCount(null);
+                }}
+                onBlur={() => {
+                  if (diceCount === null) {
+                    setDiceCount(0);
+                  }
+                }}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  const num = parseInt(val.charAt(val.length - 1));
+                  setDiceCount(!isNaN(num) ? num : null);
+                }}
+              ></input>
+            </div>
+            <div className={style.fieldStatContainerSmall}>
+              <b>Thorns</b>
+              <input
+                className={style.fieldStat}
+                type="number"
+                value={thornsCount === null ? "" : thornsCount}
+                onClick={() => {
+                  setThornCount(null);
+                }}
+                onBlur={() => {
+                  if (thornsCount === null) {
+                    setThornCount(0);
+                  }
+                }}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  const num = parseInt(val.charAt(val.length - 1));
+                  setThornCount(!isNaN(num) ? num : null);
+                }}
+              ></input>
+            </div>
+            <div className={style.fieldStatContainerSmall}>
+              <button
+                onClick={() => {
+                  addRoll({
+                    diceCount: diceCount ?? 0,
+                    thornsCount: thornsCount ?? 0,
+                    myChat: myChat,
+                    id: id,
+                    player: player,
+                    setValue: (value) => {
+                      setDiceCount(value);
+                    },
+                    role: role,
+                  });
+                }}
+                style={{ width: "4rem" }}
+              >
+                Pool
+              </button>
+              <button
+                onClick={() => {
+                  addRoll({
+                    diceCount: diceCount ?? 0,
+                    thornsCount: thornsCount ?? 0,
+                    myChat: myChat,
+                    id: id,
+                    player: player,
+                    role: role,
+                  });
+                }}
+                style={{ width: "4rem" }}
+              >
+                Roll
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className={style.fieldRow}
+        style={{ justifyContent: "space-between" }}
+      >
+        <div className={classNames(style.fieldColumn)}>
           <div className={style.header}>Pools</div>
           <div className={style.poolContainer}>
             {pools.map((pool) => {
@@ -637,7 +790,7 @@ export const PoolBoard = ({ chat, myChat, id, pools, player, role }: Props) => {
             </button>
           </div>
         </div>
-        <div className={style.chatBox}>
+        <div className={style.chatBox} style={{ height: 420 }}>
           <div
             id="chatbox"
             className={classNames(style.chatScrollable)}
@@ -649,7 +802,8 @@ export const PoolBoard = ({ chat, myChat, id, pools, player, role }: Props) => {
                   .filter((chat) => {
                     return (
                       (chat.dice && chat.dice.length > 0) ||
-                      (chat.thorns && chat.thorns.length > 0)
+                      (chat.thorns && chat.thorns.length > 0) ||
+                      chat.gmRoll
                     );
                   })
                   .map((chat) => (
