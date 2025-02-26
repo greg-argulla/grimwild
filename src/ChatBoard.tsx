@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { GMData, setMetadata, type Chat, type Player, type Pool } from "./App";
 import OBR from "@owlbear-rodeo/sdk";
