@@ -796,7 +796,7 @@ export const PoolBoard = ({
           <div
             id="chatbox"
             className={classNames(style.chatScrollable)}
-            style={{ width: 170 }}
+            style={{ width: 155 }}
           >
             {chat.length
               ? chat
