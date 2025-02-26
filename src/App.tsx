@@ -136,7 +136,7 @@ function App() {
 
   useEffect(() => {
     console.log(window.location.href);
-    setChatOnly(window.location.href.indexOf("/chat") > 1);
+    setChatOnly(window.location.href.indexOf("/chatpopover") > 1);
   }, []);
 
   const createPlayerList = async (metadata: Metadata) => {
@@ -498,7 +498,7 @@ function App() {
   const openChatOnly = async () => {
     await OBR.popover.open({
       id: "chat/popover",
-      url: "/chat",
+      url: "/chatpopover",
       height: 600,
       width: 300,
       anchorOrigin: { horizontal: "RIGHT", vertical: "BOTTOM" },
