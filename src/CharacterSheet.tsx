@@ -102,9 +102,25 @@ export const FieldStat = ({
       <button
         className={style.statButton}
         onClick={() => {
+          let thornCount = 0;
+
+          if (marked) {
+            thornCount++;
+          }
+          if (
+            player.bloodied &&
+            (label === "Brawling" || label === "Agility")
+          ) {
+            thornCount++;
+          }
+
+          if (player.rattled && (label === "Wits" || label === "Presence")) {
+            thornCount++;
+          }
+
           addRoll({
             diceCount: value,
-            thornsCount: marked ? 1 : 0,
+            thornsCount: thornCount,
             myChat,
             id,
             player: player.name,
@@ -381,7 +397,7 @@ export const CharacterSheet = ({
     <div className={classNames(style.Sheet, style.scrollable)}>
       <div className={style.header}>CHARACTER</div>
       <img src={line} />
-      <div className={style.fieldRow}>
+      <div className={classNames(style.fieldRow, style.fieldFullWidth)}>
         <div className={classNames(style.fieldColumn, style.fieldFullWidth)}>
           <Field
             label="Name"
