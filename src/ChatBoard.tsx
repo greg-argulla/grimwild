@@ -146,6 +146,16 @@ export const addRoll = async ({
     thornEffect.push(odds);
   }
 
+  if (outcome === "Critical") {
+    thornEffect.push(
+      "Add greater effect, secondary effect, or setup a follow-up."
+    );
+  }
+
+  if (outcome === "Disaster") {
+    thornEffect.push("Double the risk.");
+  }
+
   if (setValue) {
     thornEffect.push(`${diceCount} ➜ ${newValue}`);
     setValue(newValue);
@@ -388,6 +398,10 @@ export const PoolBoard = ({ chat, myChat, id, pools, player, role }: Props) => {
     const newValue = pool.value - toDrop;
 
     const thornEffect = [pool.name, `${pool.value} ➜ ${newValue}`];
+
+    if (pool.value === newValue) {
+      thornEffect.push("Take secondary effect");
+    }
 
     const newMessage = {
       id: Date.now(),
