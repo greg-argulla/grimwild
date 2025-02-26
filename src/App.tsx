@@ -135,6 +135,7 @@ function App() {
   const [poolList, setPoolList] = useState<Pool[]>([]);
 
   useEffect(() => {
+    console.log(window.location.href);
     setChatOnly(window.location.href.indexOf("/chat") > 1);
   }, []);
 
