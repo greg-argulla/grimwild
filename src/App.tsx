@@ -249,6 +249,7 @@ function App() {
         metadataLastUpdate < metadataStored.dateNow
       ) {
         await setMetadata({
+          ...metadata,
           "grimwild.character.extension/metadata":
             metadataStored["grimwild.character.extension/metadata"],
           "grimwild.pool.extension/metadata":
