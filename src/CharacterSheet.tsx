@@ -201,96 +201,74 @@ export const FieldCheckDetails = ({
   );
 };
 
-export const TraitField = ({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (event: string) => void;
-}) => {
-  return (
-    <select
-      onChange={(e) => {
-        onChange(e.target.value);
-      }}
-      value={value}
-    >
-      <option value="Brave">Brave</option>
-      <option value="Caring">Caring</option>
-      <option value="Confident">Confident</option>
-      <option value="Curious">Curious</option>
-      <option value="Gentle">Gentle</option>
-      <option value="Honest">Honest</option>
-      <option value="Honorable">Honorable</option>
-      <option value="Persistent">Persistent</option>
-      <option value="Quiet">Quiet</option>
-      <option value="Protective">Protective</option>
-      <option value="Rash">Rash</option>
-      <option value="Stubborn">Stubborn</option>
-    </select>
-  );
-};
+const TraitOptions = [
+  "Brave",
+  "Caring",
+  "Confident",
+  "Curious",
+  "Gentle",
+  "Honest",
+  "Honorable",
+  "Persistent",
+  "Quiet",
+  "Protective",
+  "Rash",
+  "Stubborn",
+];
 
-export const DesireField = ({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (event: string) => void;
-}) => {
-  return (
-    <select
-      onChange={(e) => {
-        onChange(e.target.value);
-      }}
-      value={value}
-    >
-      <option value="Justice">Justice</option>
-      <option value="Glory">Glory</option>
-      <option value="Harmony">Harmony</option>
-      <option value="Honor">Honor</option>
-      <option value="Knowledge">Knowledge</option>
-      <option value="Love">Love</option>
-      <option value="Power">Power</option>
-      <option value="Renown">Renown</option>
-      <option value="Thrills">Thrills</option>
-      <option value="Wealth">Wealth</option>
-      <option value="Wisdom">Wisdom</option>
-    </select>
-  );
-};
+const DesireOptions = [
+  "Justice",
+  "Glory",
+  "Harmony",
+  "Honor",
+  "Knowledge",
+  "Love",
+  "Power",
+  "Renown",
+  "Thrills",
+  "Wealth",
+  "Wisdom",
+];
 
-export const IntensityField = ({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (event: string) => void;
-}) => {
-  return (
-    <select
-      onChange={(e) => {
-        onChange(e.target.value);
-      }}
-      value={value}
-    >
-      <option value="Deep">Deep</option>
-      <option value="Complex">Complex</option>
-      <option value="Growing">Growing</option>
-      <option value="Lowkey">Lowkey</option>
-      <option value="Playful">Playful</option>
-      <option value="Tense">Tense</option>
-    </select>
-  );
-};
+const IntensityOptions = [
+  "Deep",
+  "Complex",
+  "Growing",
+  "Lowkey",
+  "Playful",
+  "Tense",
+];
 
-export const NatureField = ({
+const NatureOptions = [
+  "Affection",
+  "Camaraderie",
+  "Curiosity",
+  "Doubts",
+  "Respect",
+  "Rivalry",
+];
+
+export const CustomSelectField = ({
   value,
   onChange,
+  options,
 }: {
   value: string;
   onChange: (event: string) => void;
+  options: string[];
 }) => {
+  if (!options.includes(value) && value !== "") {
+    return (
+      <input
+        className={style.fieldSmall}
+        value={value}
+        onChange={(e) => {
+          onChange(e.target.value);
+        }}
+      ></input>
+    );
+  }
+
   return (
     <select
       onChange={(e) => {
@@ -298,12 +276,10 @@ export const NatureField = ({
       }}
       value={value}
     >
-      <option value="Affection">Affection</option>
-      <option value="Camaraderie">Camaraderie</option>
-      <option value="Curiosity">Curiosity</option>
-      <option value="Doubts">Doubts</option>
-      <option value="Respect">Respect</option>
-      <option value="Rivalry">Rivalry</option>
+      {options.map((item) => (
+        <option value={item}>{item}</option>
+      ))}
+      <option value="Custom">Custom</option>
     </select>
   );
 };
@@ -329,17 +305,19 @@ export const BondField = ({
           }}
           value={bond.name}
         ></input>
-        <IntensityField
+        <CustomSelectField
           value={bond.intensity}
           onChange={(value) => {
             onChange({ ...bond, intensity: value });
           }}
+          options={IntensityOptions}
         />
-        <NatureField
+        <CustomSelectField
           value={bond.nature}
           onChange={(value) => {
             onChange({ ...bond, nature: value });
           }}
+          options={NatureOptions}
         />
         <button
           className={style.statButton}
@@ -712,24 +690,27 @@ export const CharacterSheet = ({
         <div className={classNames(style.fieldColumn)} style={{ fontSize: 15 }}>
           <div className={classNames(style.fieldRowNoSpread)}>
             <div className={style.fieldStatLabel}>2 you are</div>
-            <TraitField
+            <CustomSelectField
               value={player.trait1}
               onChange={(value) => {
                 updatePlayer({ ...player, trait1: value });
               }}
+              options={TraitOptions}
             />
-            <TraitField
+            <CustomSelectField
               value={player.trait2}
               onChange={(value) => {
                 updatePlayer({ ...player, trait2: value });
               }}
+              options={TraitOptions}
             />
             <div className={style.fieldStatLabel}>1 you're really not</div>
-            <TraitField
+            <CustomSelectField
               value={player.notTrait}
               onChange={(value) => {
                 updatePlayer({ ...player, notTrait: value });
               }}
+              options={TraitOptions}
             />
           </div>
         </div>
@@ -738,24 +719,27 @@ export const CharacterSheet = ({
         <div className={classNames(style.fieldColumn)} style={{ fontSize: 15 }}>
           <div className={classNames(style.fieldRowNoSpread)}>
             <div className={style.fieldStatLabel}>2 you want</div>
-            <DesireField
+            <CustomSelectField
               value={player.desire1}
               onChange={(value) => {
                 updatePlayer({ ...player, desire1: value });
               }}
+              options={DesireOptions}
             />
-            <DesireField
+            <CustomSelectField
               value={player.desire2}
               onChange={(value) => {
                 updatePlayer({ ...player, desire2: value });
               }}
+              options={DesireOptions}
             />
             <div className={style.fieldStatLabel}>1 you really don't</div>
-            <DesireField
+            <CustomSelectField
               value={player.notDesire}
               onChange={(value) => {
                 updatePlayer({ ...player, notDesire: value });
               }}
+              options={DesireOptions}
             />
           </div>
         </div>

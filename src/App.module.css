@@ -108,6 +108,7 @@ select {
   padding: 0.25rem;
   color: #9d2024;
   font-weight: 500;
+  text-align: center;
 }
 
 .header {
@@ -209,11 +210,10 @@ select {
   border-radius: 0.25rem;
   width: 5rem;
   height: 1.5rem;
-  font-size: 12px;
   text-align: center;
   background-color: #edeae3;
   color: #9d2024;
-  font-family: "Tiller";
+  font-weight: 500;
   border: 1.25px #4c3b29 solid;
 }
 
@@ -222,11 +222,10 @@ select {
   border-radius: 0.25rem;
   width: 23.5rem;
   height: 1.5rem;
-  font-size: 10px;
   text-align: center;
   background-color: #edeae3;
   color: #9d2024;
-  font-family: "Tiller";
+  font-weight: 500;
   border: 1.25px #4c3b29 solid;
 }
 
