@@ -110,14 +110,11 @@ export const FieldStat = ({
           if (marked) {
             thornCount++;
           }
-          if (
-            player.bloodied &&
-            (label === "Brawling" || label === "Agility")
-          ) {
+          if (player.bloodied) {
             thornCount++;
           }
 
-          if (player.rattled && (label === "Wits" || label === "Presence")) {
+          if (player.rattled) {
             thornCount++;
           }
 
