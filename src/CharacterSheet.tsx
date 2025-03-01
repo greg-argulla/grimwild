@@ -107,15 +107,18 @@ export const FieldStat = ({
         onClick={() => {
           let thornCount = 0;
 
-          if (marked) {
-            thornCount++;
-          }
           if (player.bloodied) {
             thornCount++;
+          } else if (marked && (label === "Brawling" || label === "Agility")) {
+            thornCount++;
+            onChangeMark(false);
           }
 
           if (player.rattled) {
             thornCount++;
+          } else if (marked && (label === "Wits" || label === "Presence")) {
+            thornCount++;
+            onChangeMark(false);
           }
 
           addRoll({
@@ -126,7 +129,7 @@ export const FieldStat = ({
             player: player.name,
             role: "PLAYER",
           });
-          onChangeMark(false);
+
           onRoll();
         }}
       >
