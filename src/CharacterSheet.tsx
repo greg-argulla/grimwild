@@ -37,18 +37,20 @@ export const TextArea = ({
   onChange,
   rows = 4,
   value,
+  width = 200,
 }: {
   label: string;
   onChange: (value: string) => void;
   rows?: number;
   value: string;
+  width?: number;
 }) => {
   return (
     <div className={style.fieldContainer}>
       <div className={style.fieldLabel}>{label}</div>
       <textarea
         className={style.field}
-        style={{ width: 200 }}
+        style={{ width: width }}
         rows={rows}
         onChange={(e) => {
           onChange(e.target.value);
@@ -832,6 +834,7 @@ export const CharacterSheet = ({
           updatePlayer({ ...player, bio: value });
         }}
         value={player.bio}
+        width={460}
       ></TextArea>
     </div>
   );
