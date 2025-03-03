@@ -834,7 +834,7 @@ export const CharacterSheet = ({
           updatePlayer({ ...player, bio: value });
         }}
         value={player.bio}
-        width={460}
+        width={450}
       ></TextArea>
     </div>
   );
