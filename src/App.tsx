@@ -448,7 +448,7 @@ function App() {
   if (!isOBRReady) {
     return (
       <div className={styles.global}>
-        <div className={classNames(styles.Sheet, styles.scrollable)}>
+        <div className={classNames(styles.scrollable, styles.Sheet)}>
           <div className={styles.header}>No Scene found.</div>
           <div>
             You need to load a scene to start adding/updating characters. If a

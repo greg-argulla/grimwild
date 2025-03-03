@@ -377,7 +377,7 @@ export const CharacterSheet = ({
   onRoll: () => void;
 }) => {
   return (
-    <div className={classNames(style.Sheet, style.scrollable)}>
+    <div className={classNames(style.scrollable, style.Sheet)}>
       <div className={style.header}>CHARACTER</div>
       <img src={line} />
       <div className={classNames(style.fieldRow, style.fieldFullWidth)}>

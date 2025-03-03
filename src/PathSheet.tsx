@@ -511,7 +511,7 @@ export const PathList = ({
 
   if (openPath && selectedPath === "") {
     return (
-      <div className={classNames(style.Sheet, style.scrollable)}>
+      <div className={classNames(style.scrollable, style.Sheet)}>
         <div className={style.fieldRowNoSpread}>
           <div className={style.header}>SELECT PATH TO CHOOSE TALENT</div>
           <div style={{ marginLeft: "auto" }}>
@@ -539,7 +539,7 @@ export const PathList = ({
   if (selectedPath !== "") {
     return (
       <div
-        className={classNames(style.Sheet, style.scrollable, style.fieldColumn)}
+        className={classNames(style.scrollable, style.Sheet, style.fieldColumn)}
       >
         <TalentList
           path={selectedPath as Player["path"]}
@@ -556,7 +556,7 @@ export const PathList = ({
   }
 
   return (
-    <div className={classNames(style.Sheet, style.scrollable)}>
+    <div className={classNames(style.scrollable, style.Sheet)}>
       {player.path !== "" ? (
         <>
           <div className={style.fieldRowNoSpread}>
