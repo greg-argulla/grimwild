@@ -618,7 +618,7 @@ export const PoolBoard = ({
                 className={style.storyButton}
                 onClick={() => {
                   addRoll({
-                    diceCount: 3,
+                    diceCount: 2,
                     thornsCount: 0,
                     myChat: myChat,
                     id: id,
@@ -634,7 +634,7 @@ export const PoolBoard = ({
                 className={style.storyButton}
                 onClick={() => {
                   addRoll({
-                    diceCount: 3,
+                    diceCount: 1,
                     thornsCount: 0,
                     myChat: myChat,
                     id: id,
