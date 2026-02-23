@@ -5,7 +5,7 @@
 
   "coreTalent": {
     "name": "BARDSONG",
-    "description": "<b>Each session</b>, you can sing <b>3 bardsongs</b>, rolling Presence. Sing one to pull off a <i>potent feat of emotional influence</i>, like <i>eliciting a vex response in an NPC, buffing a group of allies, or inflicting hindrances on enemies</i>. You can also sing one to <b>interrupt</b> an impact move. A bardsong's effect flows from its composition. Choose a <b>style</b>, <b>tune</b>, and <b>impact</b> (below) that matches the effect.<br><br><b>Each session</b>, you can also sing <b>3 melodies</b>, spur-of-the-moment tunes without specific composition. Spend them to: <b>clear a mark</b>—<b>heal rattled</b>—<b>assist without risk</b>. These don't require a roll. You cannot affect yourself.<br><br><b>GROWTH:</b> Every 3 levels, gain +1 bardsong and +1 melody per session.",
+    "description": "Each session, you can sing <b>3 bardsongs</b>, rolling Presence. Sing one to pull off a <i>potent feat of emotional influence</i>, like <i>eliciting a vex response in an NPC, buffing a group of allies, or inflicting hindrances on enemies</i>. You can also sing one to <b>interrupt</b> an impact move. A bardsong's effect flows from its composition. Choose a <b>style</b>, <b>tune</b>, and <b>impact</b> (below) that matches the effect.<br><br>Each session, you can also sing <b>3 melodies</b>, spur-of-the-moment tunes without specific composition. Spend them to: <i>assist without risk</i>—<i>calm or intensify a vex response</i>—<i>clear a mark</i>. These don't require a roll. You cannot affect yourself.<br><br><b>GROWTH:</b> Every 3 levels, gain +1 bardsong and +1 melody per session.",
     "trackers": [
       { "name": "Bardsongs", "type": "checkbox" },
       { "name": "", "type": "checkbox" },

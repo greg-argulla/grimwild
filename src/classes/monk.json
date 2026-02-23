@@ -32,7 +32,7 @@
     },
     {
       "name": "Healing Hands",
-      "description": "You can heal the bloodied pool of an ally. When you do, roll Presence as a defense roll against being bloodied—you take their pain onto yourself and must fend it off."
+      "description": "You can heal an ally that is bloodied. This automatically works, but you must make a Presence defense roll against being bloodied—you take their pain onto yourself and must fend it off."
     },
     {
       "name": "Lightning Reflexes",
@@ -44,7 +44,7 @@
     },
     {
       "name": "Primordial Forces",
-      "description": "Choose an element: Air—Earth—Fire—Water. You can cast cantrips with that element, useful as <i>set dressing</i> and <i>cantrip utility</i>. On a critical using your element, charge it (mark its box). Spend it to pull off a <b>potent feat of force or movement</b> empowered by the element.<br><br><i>Special: You can take this again, gaining all elements. On a critical, charge two elements.</i>",
+      "description": "Choose an element: <i>Air—Earth—Fire—Water</i>. You can cast cantrips with that element, useful as <i>set dressing</i> and <i>cantrip utility</i>. On a critical using your element, charge it (mark its box). Spend it to pull off a <b>potent feat of force or movement</b> empowered by the element.<br><br><i>Special: You can take this again, gaining all elements. On a critical, charge two elements.</i>",
       "trackers": [
         { "name": "Air", "type": "checkbox" },
         { "name": "Earth", "type": "checkbox" },

@@ -29,7 +29,7 @@
     },
     {
       "name": "HEALER",
-      "description": "When you heal someone, through treatment or magic, they drop 2d before rolling the pool. If it depletes from your care, <b>take spark</b>."
+      "description": "You take +1d when you heal someone, with magic or treatment. On a critical, both of you <b>take spark</b>."
     },
     {
       "name": "IRON WILL",

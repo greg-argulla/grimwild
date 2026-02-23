@@ -19,8 +19,12 @@
   ],
   "pathTalent": [
     {
+      "name": "AWAKEN",
+      "description": "Once per scene, you may awaken a living natural feature—plants, animals, insects, fungi, or the like—within or nearby the scene. It gains awareness and purpose, forming a <b>3d power pool</b> you can direct, guided by its nature. One time only, you can make this a ritual-level effect."
+    },
+    {
       "name": "HERBALISM",
-      "description": "Before each session, use the Herbalism Crucible to make two herb names (<i>snakeberry, blastbane</i>). You have <i>1 minor potion of one and 1 major potion of the other</i>. The name is the touchstone. They lose effect after the session. One time only, you can have 1 mythic potion (<i>choose after rolling</i>).<br><br><table><tr><td>choke</td><td>pearl</td><td>white</td><td>dream</td><td>mist</td><td>zap</td></tr><tr><td>sticky</td><td>stone</td><td>sun</td><td>feather</td><td>coal</td><td>blood</td></tr><tr><td>black</td><td>moon</td><td>devil</td><td>wild</td><td>freeze</td><td>blast</td></tr><tr><td>smoke</td><td>snake</td><td>honey</td><td>mirror</td><td>sting</td><td>ink</td></tr><tr><td>shriek</td><td>mimic</td><td>goat</td><td>worm</td><td>steel</td><td>stink</td></tr><tr><td>giggle</td><td>needle</td><td>night</td><td>swell</td><td>faerie</td><td>flame</td></tr></table><br><table><tr><td>cap</td><td>lily</td><td>thistle</td><td>pod</td><td>stem</td><td>petal</td></tr><tr><td>wort</td><td>reed</td><td>bell</td><td>bud</td><td>shoot</td><td>pear</td></tr><tr><td>rose</td><td>flower</td><td>leaf</td><td>tongue</td><td>bark</td><td>tuber</td></tr><tr><td>bush</td><td>root</td><td>wood</td><td>berry</td><td>funnel</td><td>vine</td></tr><tr><td>shroom</td><td>spine</td><td>grass</td><td>lace</td><td>moss</td><td>seed</td></tr><tr><td>sprout</td><td>shade</td><td>thorn</td><td>bane</td><td>branch</td><td>weed</td></tr></table>",
+      "description": "Before each session, use the Herbalism Crucible to make two herb names (<i>snakeberry, blastbane</i>). You have <i>1 minor potion of one and 1 major potion of the other</i>. The name is the touchstone. They lose effect after the session. One time only, you can have 1 mythic potion (<i>choose after rolling</i>).<br><br><table><tr><td>choke</td><td>star</td><td>sun</td><td>dream</td><td>mist</td><td>zap</td></tr><tr><td>sticky</td><td>stone</td><td>moon</td><td>feather</td><td>soot</td><td>blast</td></tr><tr><td>wool</td><td>dust</td><td>devil</td><td>wild</td><td>freeze</td><td>blood</td></tr><tr><td>smoke</td><td>snake</td><td>honey</td><td>mirror</td><td>sting</td><td>ink</td></tr><tr><td>shriek</td><td>mimic</td><td>goat</td><td>worm</td><td>steel</td><td>skunk</td></tr><tr><td>giggle</td><td>needle</td><td>night</td><td>swell</td><td>faerie</td><td>dragon</td></tr></table><br><table><tr><td>cap</td><td>lily</td><td>thistle</td><td>pod</td><td>stem</td><td>petal</td></tr><tr><td>wort</td><td>reed</td><td>bell</td><td>bud</td><td>shoot</td><td>bean</td></tr><tr><td>rose</td><td>flower</td><td>leaf</td><td>tongue</td><td>bark</td><td>tuber</td></tr><tr><td>bush</td><td>root</td><td>wood</td><td>berry</td><td>funnel</td><td>vine</td></tr><tr><td>shroom</td><td>spine</td><td>grass</td><td>lace</td><td>moss</td><td>seed</td></tr><tr><td>sprout</td><td>shade</td><td>thorn</td><td>bane</td><td>branch</td><td>weed</td></tr></table>",
       "trackers": [
         { "name": "Herb 1", "type": "fieldSmall" },
         { "name": "", "type": "checkbox" },
@@ -42,10 +46,6 @@
         { "name": "Water", "type": "checkbox" },
         { "name": "Deep Bond", "type": "checkbox" }
       ]
-    },
-    {
-      "name": "REGROWTH",
-      "description": "When you heal bloodied, drop 1d then roll it. You can also give yourself treatment if you have <b>time</b>, no roll required."
     },
     {
       "name": "TRUE SHAPE",

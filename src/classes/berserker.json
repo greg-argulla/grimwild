@@ -31,7 +31,7 @@
     },
     {
       "name": "Flesh Wounds",
-      "description": "When you take physical damage, only a disaster can drop you. You can get bloodied multiple times. Each extra time inflicts +1t on rolls and increases your heal pool by 3d. These extra thorns can never be ignored (<i>e.g., Frenzy and Oathsworn talents</i>).",
+      "description": "When you take physical damage, only a disaster can drop you. You can get bloodied multiple times. Each extra time inflicts +1t on rolls. These extra thorns can never be ignored (<i>e.g., Frenzy and Oathsworn talents</i>) and they also apply thorns to any attempt to heal you.",
       "trackers": [
         { "name": "Wounds", "type": "checkbox" },
         { "name": "", "type": "checkbox" },
@@ -46,7 +46,7 @@
     },
     {
       "name": "Joyful Warrior",
-      "description": "On a critical or when bloodied in battle, you <b>take spark</b> and can: <b>heal an ally's rattled pool</b>—<i>bring a dropped (not dead) ally back into the scene</i>."
+      "description": "On a critical or when bloodied in battle, you <b>take spark</b> and can: <i>clear one mark from each ally</i>—<i>bring a dropped (not dead) ally back into the scene</i>."
     },
     {
       "name": "Mighty",
