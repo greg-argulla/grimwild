@@ -63,12 +63,6 @@ export type Player = {
 
   experience: number;
 
-  healingBloodied: number;
-  healingRattled: number;
-
-  droppedBloodied: boolean;
-  droppedRattled: boolean;
-
   trait1: string;
   trait2: string;
   notTrait: string;

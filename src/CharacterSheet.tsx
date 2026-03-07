@@ -501,49 +501,6 @@ export const CharacterSheet = ({
             Setup
           </div>
         </div>
-        <div className={classNames(style.fieldColumn, style.statContainer)}>
-          <b>Healing</b>
-          <FieldStatSmall
-            label={"Bloodied"}
-            onChange={(value) => {
-              updatePlayer({ ...player, healingBloodied: value });
-            }}
-            value={player.healingBloodied}
-          />
-          <div className={style.fieldStatContainerSmall}>
-            <div className={style.fieldStatLabel}>Dropped</div>
-            <input
-              type="checkbox"
-              checked={player.droppedBloodied}
-              onChange={() => {
-                updatePlayer({
-                  ...player,
-                  droppedBloodied: !player.droppedBloodied,
-                });
-              }}
-            />
-          </div>
-          <FieldStatSmall
-            label={"Rattled"}
-            onChange={(value) => {
-              updatePlayer({ ...player, healingRattled: value });
-            }}
-            value={player.healingRattled}
-          />
-          <div className={style.fieldStatContainerSmall}>
-            <div className={style.fieldStatLabel}>Dropped</div>
-            <input
-              type="checkbox"
-              checked={player.droppedRattled}
-              onChange={() => {
-                updatePlayer({
-                  ...player,
-                  droppedRattled: !player.droppedRattled,
-                });
-              }}
-            />
-          </div>
-        </div>
         <div className={classNames(style.fieldColumn)}>
           <div className={classNames(style.fieldColumn, style.statContainer)}>
             <div className={classNames(style.fieldRow)}>
